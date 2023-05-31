@@ -26,7 +26,6 @@ styled components
 admin ska vara i ett context, har en boolean, när den är true har man tillgång till allt
 för att komma till inloggning skriver man /admin efter url
 
-
 Pages
 - startsida 
 - bokningssida för kund
@@ -46,12 +45,26 @@ Bokningssida kund
 - sökformulär avboka
 - visa bokning att avboka
 
-Admin inloggning
-- inloggningsformulär
-- utloggning?
-
 Bokningssida admin
 - knappar hämta bokningar och sök bokning
 - visar alla bokningar
 - sökformulär
 - visar valda bokning - för både sökresultatet och den valda bokningen
+
+
+Guest:
+{
+    guestId:
+    name: 
+    email: 
+    phoneNumber: 
+}
+
+Booking:
+{
+    bokningsId
+    gästId
+    antalgäster
+    bokad
+}
+
