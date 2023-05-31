@@ -17,3 +17,7 @@ exports.deleteBookingById = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+exports.getBookingById = async (req, res) => {
+  return res.send("GetBookingById");
+};
