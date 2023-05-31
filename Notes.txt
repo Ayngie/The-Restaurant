@@ -68,7 +68,6 @@ Booking:
     antalgäster
     date
     time
-    booked
 }
 
 
