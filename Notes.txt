@@ -15,7 +15,6 @@ admin kan söka hämta alla bokningar eller söka på bokningsid och Namn.
 Sedan får admin klicka bokningen som ska ändras och får upp alternativ avboka eller ändra.
 Ändra: måste hämta alla bokningar igen för att kontrollera att bordet är tillgängligt
 
-
 <Bokningssida> // vår page
 	<sök> // ange antal och datum
 	<välj bokning>
@@ -24,13 +23,21 @@ Sedan får admin klicka bokningen som ska ändras och får upp alternativ avboka
 Context och reducers
 styled components
 
--startsida 
--bokningssida för kund
--login för admin
--bokningssida för admin
+admin ska vara i ett context, har en boolean, när den är true har man tillgång till allt
+för att komma till inloggning skriver man /admin efter url
+
+
+Pages
+- startsida 
+- bokningssida för kund
+- login för admin
+- bokningssida för admin
 - kontaktsida
 
 Komponenter:
+
+Startsida
+Kontaktsida
 
 Bokningssida kund
 - knappar ny bokning och hantera bokning
@@ -39,3 +46,12 @@ Bokningssida kund
 - sökformulär avboka
 - visa bokning att avboka
 
+Admin inloggning
+- inloggningsformulär
+- utloggning?
+
+Bokningssida admin
+- knappar hämta bokningar och sök bokning
+- visar alla bokningar
+- sökformulär
+- visar valda bokning - för både sökresultatet och den valda bokningen
