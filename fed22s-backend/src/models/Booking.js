@@ -4,7 +4,7 @@ const Guest = require("./Guest");
 const BookingSchema = new mongoose.Schema(
   {
     numberOfGuests: {
-      type: String,
+      type: Number,
       required: true,
     },
     date: {
