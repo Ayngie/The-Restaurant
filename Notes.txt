@@ -68,3 +68,17 @@ Booking:
     bokad
 }
 
+
+Datum och tider:
+lisa borta 5/6 - eftemiddag
+angelica borta 7/6 - eftermiddag
+per borta 9/6 - eftermiddag
+
+Standups varje dag 9.30
+
+ledig nationaldag
+
+Branches:
+En för backend
+En för frontend
+i dom skapar vi en branch för varje grej
