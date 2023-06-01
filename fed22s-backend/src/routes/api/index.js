@@ -5,6 +5,6 @@ const bookingRoutes = require("./bookingRoutes");
 const adminRoutes = require("./adminRoutes");
 
 router.use("/bookings", bookingRoutes);
-router.use("/adminRoutes", adminRoutes);
+router.use("/adminroutes", adminRoutes);
 
 module.exports = router;
