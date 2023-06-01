@@ -12,7 +12,7 @@ export const NavBar = () => {
             <Link to={"/"}>Hem</Link>
           </StyledListItem>
           <StyledListItem>
-            <Link to={"/bookings"}>Boka</Link>
+            <Link to={"/booking"}>Boka</Link>
           </StyledListItem>
           <StyledListItem>
             <Link to={"/contact"}>Kontakt</Link>
