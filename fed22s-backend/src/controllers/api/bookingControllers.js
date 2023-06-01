@@ -1,23 +1,59 @@
 const Booking = require("../../models/Booking");
+const Guest = require("../../models/Guest");
+const { NotFoundError, BadRequestError } = require("../../utils/errors");
 
-//getAllBookings
-exports.getAllBookings = async (req, res) => {
-  return res.send("getAllBookings");
+exports.getAllBookings = async (req, res, next) => {
+  const bookings = await Booking.find();
+  if (!bookings) throw new NotFoundError("Det finns inga bokningar 😢");
+  return res.send(bookings);
 };
-//createBooking
-exports.createBooking = async (req, res) => {
-  return res.send("createBooking");
+
+exports.createBooking = async (req, res, next) => {
+  const {
+    numberOfGuest,
+    date,
+    time,
+    guest: { name, email, phoneNumber },
+  } = req.body;
+
+  if (!numberOfGuest || !date || !time) throw new BadRequestError("Ajajaj");
+
+  const newGuest = {
+    name: name,
+    email: email,
+    phoneNumber: phoneNumber,
+  };
+
+  const guest = await Guest.create(newGuest);
+
+  const newBooking = {
+    numberOfGuests: numberOfGuest,
+    date: date,
+    time: time,
+    guest: guest,
+  };
+  const booking = await Booking.create(newBooking);
+
+  return res.status(201).json(booking);
 };
-//deleteBookingById
-exports.deleteBookingById = async (req, res) => {
-  try {
-    return res.send("deleteBookingById");
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: error.message });
-  }
+
+exports.deleteBookingById = async (req, res, next) => {
+  const bookingId = req.params.bookingId;
+
+  const bookingToDelete = await Booking.findById(bookingId);
+  if (!bookingToDelete)
+    throw new NotFoundError("Den här bokningen finns inte...");
+
+  await bookingToDelete.deleteOne();
+
+  return res.status(204).send("Bokningen borttagen!");
 };
 
 exports.getBookingById = async (req, res) => {
-  return res.send("GetBookingById");
+  const bookingId = req.params.bookingId;
+  const booking = await Booking.findById(bookingId).populate({ path: "guest" });
+
+  if (!booking) throw new NotFoundError("Den här bokningen finns inte...");
+
+  return res.status(200).json(booking);
 };
