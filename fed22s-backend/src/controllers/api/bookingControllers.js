@@ -3,7 +3,8 @@ const Guest = require("../../models/Guest");
 const { NotFoundError, BadRequestError } = require("../../utils/errors");
 
 exports.getAllBookings = async (req, res, next) => {
-  const bookings = await Booking.find();
+  const date = req.query.s;
+  const bookings = await Booking.find({ date: date }).populate("guest");
   if (!bookings) throw new NotFoundError("Det finns inga bokningar 😢");
   return res.send(bookings);
 };
