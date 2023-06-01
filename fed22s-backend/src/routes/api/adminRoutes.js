@@ -8,7 +8,7 @@ const {
 } = require("../../controllers/api/adminControllers");
 
 router.get("/", getAllBookings);
-router.put("/:id", updateBookingById);
-router.delete("/:id", deleteBookingById);
+router.put("/:bookingId", updateBookingById);
+router.delete("/:bookingId", deleteBookingById);
 
 module.exports = router;
