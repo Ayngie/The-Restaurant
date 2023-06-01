@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import { NavBar } from "./NavBar";
 import { Footer } from "./Footer";
-import { MainWrapper } from "./styled/MainWrapper";
+import { MainWrapper } from "./styled/wrappers/MainWrapper";
 
 export const Layout = () => {
   return (
