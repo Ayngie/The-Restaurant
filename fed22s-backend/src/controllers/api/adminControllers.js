@@ -1,21 +1,37 @@
 const Booking = require("../../models/Booking");
+const { NotFoundError } = require("../../utils/errors");
 
-//getAllBookings
 exports.getAllBookings = async (req, res) => {
-  // const bookings = await Booking.find();
-  return res.send("getAllBookings");
+  const date = req.query.s;
+  const booking = await Booking.find({ date: date }).populate("guest");
+
+  if (!booking.length)
+    throw new NotFoundError("Det finns ingen bokning den här dagen...");
+
+  return res.status(200).json(booking);
 };
 
-//updateBookingById
 exports.updateBookingById = async (req, res) => {
-  return res.send("updateBookingById");
+  // update numberOfGuest
+  const bookingId = req.params.bookingId;
+  const updateNumberOfGuest = req.body.numberOfGuest;
+  const booking = await Booking.findByIdAndUpdate(
+    bookingId,
+    { numberOfGuests: updateNumberOfGuest },
+    { new: true }
+  );
+
+  return res.send(booking);
 };
-//deleteBookingById
+
 exports.deleteBookingById = async (req, res) => {
-  try {
-    return res.send("deleteBookingById");
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: error.message });
-  }
+  const bookingId = req.params.bookingId;
+
+  const bookingToDelete = await Booking.findById(bookingId);
+  if (!bookingToDelete)
+    throw new NotFoundError("Den här bokningen finns inte...");
+
+  await bookingToDelete.deleteOne();
+
+  return res.status(204).send("Bokningen borttagen!");
 };
