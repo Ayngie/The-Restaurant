@@ -9,16 +9,13 @@ export const NavBar = () => {
       <StyledNavBar>
         <StyledNavList>
           <StyledListItem>
-            {/* <Link to={"/"}>Hem</Link> */}
-            Hem
+            <Link to={"/"}>Hem</Link>
           </StyledListItem>
           <StyledListItem>
-            Boka
-            {/* <Link to={"/bookings"}>Boka</Link> */}
+            <Link to={"/bookings"}>Boka</Link>
           </StyledListItem>
           <StyledListItem>
-            Kontakt
-            {/* <Link to={"/contact"}>Kontakt</Link> */}
+            <Link to={"/contact"}>Kontakt</Link>
           </StyledListItem>
         </StyledNavList>
       </StyledNavBar>
