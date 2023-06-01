@@ -1,3 +1,9 @@
+import { ChooseBooking } from "../ChooseBooking";
+
 export const Booking = () => {
-  return <>Booking!!!</>;
+  return (
+    <>
+      <ChooseBooking></ChooseBooking>
+    </>
+  );
 };
