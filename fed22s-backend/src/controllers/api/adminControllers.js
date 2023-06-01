@@ -1,5 +1,5 @@
 const Booking = require("../../models/Booking");
-const { NotFoundError } = require("../../utils/errors");
+const { NotFoundError, BadRequestError } = require("../../utils/errors");
 
 exports.getAllBookings = async (req, res) => {
   const date = req.query.s;
@@ -14,7 +14,10 @@ exports.getAllBookings = async (req, res) => {
 exports.updateBookingById = async (req, res) => {
   // update numberOfGuest
   const bookingId = req.params.bookingId;
+  if (!bookingId) throw new NotFoundError("Den här boknings finns inte...");
   const updateNumberOfGuest = req.body.numberOfGuest;
+  if (!updateNumberOfGuest)
+    throw new BadRequestError("Du måste ange ett antal...");
   const booking = await Booking.findByIdAndUpdate(
     bookingId,
     { numberOfGuests: updateNumberOfGuest },
