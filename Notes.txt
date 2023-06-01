@@ -40,17 +40,17 @@ Startsida
 Kontaktsida
 
 Bokningssida kund
-- knappar ny bokning och hantera bokning
-- sökformulär lediga bokningar
-- visa lediga tider
+- knappar ny bokning och hantera bokning - 
+- sökformulär lediga bokningar - 
+- visa lediga tider -
 - sökformulär avboka
-- visa bokning att avboka
+- visa bokning att avboka -
 
 Bokningssida admin
 - knappar hämta bokningar och sök bokning
 - visar alla bokningar
-- sökformulär
-- visar valda bokning - för både sökresultatet och den valda bokningen
+- sökformulär - 
+- visar valda bokning - för både sökresultatet och den valda bokningen - 
 
 
 Guest:
