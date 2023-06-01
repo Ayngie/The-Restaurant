@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         element: <Admin></Admin>,
         children: [
           {
-            path: "/:id",
+            path: "/admin/:id",
             element: <HandleBooking></HandleBooking>,
           },
         ],
