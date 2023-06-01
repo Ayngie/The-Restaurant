@@ -9,8 +9,8 @@ const {
 } = require("../../controllers/api/bookingControllers");
 
 router.get("/", getAllBookings);
-router.get("/:id", getBookingById);
+router.get("/:bookingId", getBookingById);
 router.post("/", createBooking);
-router.delete("/:id", deleteBookingById);
+router.delete("/:bookingId", deleteBookingById);
 
 module.exports = router;
