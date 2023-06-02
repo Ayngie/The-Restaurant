@@ -1,4 +1,5 @@
 const Booking = require("../../models/Booking");
+const Guest = require("../../models/Guest");
 const { NotFoundError, BadRequestError } = require("../../utils/errors");
 
 exports.getAllBookings = async (req, res) => {
@@ -12,19 +13,41 @@ exports.getAllBookings = async (req, res) => {
 };
 
 exports.updateBookingById = async (req, res) => {
-  // update numberOfGuest
   const bookingId = req.params.bookingId;
-  if (!bookingId) throw new NotFoundError("Den här boknings finns inte...");
-  const updateNumberOfGuest = req.body.numberOfGuest;
-  if (!updateNumberOfGuest)
-    throw new BadRequestError("Du måste ange ett antal...");
-  const booking = await Booking.findByIdAndUpdate(
-    bookingId,
-    { numberOfGuests: updateNumberOfGuest },
-    { new: true }
+  const bookingUpdateId = { _id: bookingId };
+
+  const bookingIdForGuest = await Booking.findById(bookingId);
+  if (!bookingIdForGuest)
+    throw new NotFoundError("Denna bokning finns inte...");
+  const guestUpdateId = { _id: bookingIdForGuest.guest };
+
+  const booking = {
+    numberOfGuests: req.body.numberOfGuests,
+    date: req.body.date,
+    time: req.body.time,
+  };
+
+  const guest = {
+    name: req.body.guest.name,
+    email: req.body.guest.email,
+    phoneNumber: req.body.guest.phoneNumber,
+  };
+
+  const guestUpdated = await Guest.findOneAndUpdate(guestUpdateId, guest, {
+    new: true,
+  });
+
+  const bookingUpdated = await Booking.findOneAndUpdate(
+    bookingUpdateId,
+    booking,
+    {
+      new: true,
+    }
   );
 
-  return res.send(booking);
+  const response = {};
+
+  return res.json(bookingUpdated);
 };
 
 exports.deleteBookingById = async (req, res) => {
@@ -34,6 +57,9 @@ exports.deleteBookingById = async (req, res) => {
   if (!bookingToDelete)
     throw new NotFoundError("Den här bokningen finns inte...");
 
+  const guestToDelete = await Guest.findById(bookingToDelete.guest);
+
+  await guestToDelete.deleteOne();
   await bookingToDelete.deleteOne();
 
   return res.status(204).send("Bokningen borttagen!");
