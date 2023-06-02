@@ -45,9 +45,20 @@ exports.updateBookingById = async (req, res) => {
     }
   );
 
-  const response = {};
+  const response = {
+    id: bookingId,
+    numberOfGuests: booking.numberOfGuests,
+    date: booking.date,
+    time: booking.time,
+    guest: {
+      id: guestUpdateId._id,
+      name: guest.name,
+      email: guest.email,
+      phoneNumber: guest.phoneNumber,
+    },
+  };
 
-  return res.json(bookingUpdated);
+  return res.status(201).json(response);
 };
 
 exports.deleteBookingById = async (req, res) => {
