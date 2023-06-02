@@ -45,6 +45,9 @@ exports.deleteBookingById = async (req, res, next) => {
   if (!bookingToDelete)
     throw new NotFoundError("Den här bokningen finns inte...");
 
+  const guestToDelete = await Guest.findById(bookingToDelete.guest);
+
+  await guestToDelete.deleteOne();
   await bookingToDelete.deleteOne();
 
   return res.status(204).send("Bokningen borttagen!");
