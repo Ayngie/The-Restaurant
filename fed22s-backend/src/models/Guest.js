@@ -16,7 +16,7 @@ const GuestSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );
 
