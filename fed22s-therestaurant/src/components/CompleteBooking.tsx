@@ -1,35 +1,56 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { IGuest, defaultGuest } from "../models/IGuest";
 import { ColumnWrapper, RowWrapper } from "./styled/Wrappers";
 import { NormalButton, WarningButton } from "./styled/StyledButtons";
+import { createBooking } from "../services/bookingService";
+import { IBooking, defaultBooking } from "../models/IBooking";
+
+interface ICompleteBookingProps {
+  numberOfGuests?: number;
+}
 
 export const CompleteBooking = () => {
   const [guest, setGuest] = useState<IGuest>(defaultGuest);
-  const [noOfGuests, setNoOfGuests] = useState<number>(0);
+  const [booking, setBooking] = useState<IBooking>(defaultBooking);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
 
     if (e.target.type === "text") {
       setGuest({ ...guest, [name]: e.target.value });
+      setBooking({
+        ...booking,
+        guest: { ...booking.guest, [name]: e.target.value },
+      });
     }
     if (e.target.type === "email") {
       setGuest({ ...guest, [name]: e.target.value });
+      setBooking({
+        ...booking,
+        guest: { ...booking.guest, [name]: e.target.value },
+      });
     }
     if (e.target.type === "tel") {
       setGuest({ ...guest, [name]: e.target.value });
+      setBooking({
+        ...booking,
+        guest: { ...booking.guest, [name]: e.target.value },
+      });
     }
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    console.log("Guest:", guest);
+    console.log("Booking:", booking);
 
     setGuest(defaultGuest);
-
-    //Anropa
   };
+
+  useEffect(() => {
+    //Anropa createBooking och skicka med newGuest
+    createBooking(booking);
+  }, [booking]);
 
   return (
     <>
@@ -62,6 +83,8 @@ export const CompleteBooking = () => {
             <WarningButton>Avbryt</WarningButton>
           </RowWrapper>
         </ColumnWrapper>
+
+        <p>{JSON.stringify(booking)}</p>
       </form>
     </>
   );
