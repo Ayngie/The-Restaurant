@@ -3,8 +3,9 @@ import { IGuest, defaultGuest } from "../models/IGuest";
 import { ColumnWrapper, RowWrapper } from "./styled/Wrappers";
 import { NormalButton, WarningButton } from "./styled/StyledButtons";
 
-export const GuestInfoForm = () => {
+export const CompleteBooking = () => {
   const [guest, setGuest] = useState<IGuest>(defaultGuest);
+  const [noOfGuests, setNoOfGuests] = useState<number>(0);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -26,6 +27,8 @@ export const GuestInfoForm = () => {
     console.log("Guest:", guest);
 
     setGuest(defaultGuest);
+
+    //Anropa
   };
 
   return (

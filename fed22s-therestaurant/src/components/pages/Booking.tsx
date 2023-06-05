@@ -1,5 +1,5 @@
 import { ChooseBooking } from "../ChooseBooking";
-import { GuestInfoForm } from "../GuestInfoForm";
+import { CompleteBooking } from "../CompleteBooking";
 import { ColumnWrapper } from "../styled/Wrappers";
 
 export const Booking = () => {
@@ -9,7 +9,7 @@ export const Booking = () => {
     <>
       <ColumnWrapper>
         <ChooseBooking></ChooseBooking>
-        {timeToFillOutForm && <GuestInfoForm></GuestInfoForm>}
+        {timeToFillOutForm && <CompleteBooking></CompleteBooking>}
       </ColumnWrapper>
     </>
   );
