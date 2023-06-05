@@ -3,7 +3,7 @@ import Calendar from "react-calendar";
 import { Value } from "react-calendar/dist/cjs/shared/types";
 
 export const ShowCalendar = () => {
-  const [date, setDate] = useState<Value>();
+  const [date, setDate] = useState<Value>(new Date());
 
   const formatDate = Number(date);
 
