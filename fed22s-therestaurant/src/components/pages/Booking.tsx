@@ -5,7 +5,6 @@ export const Booking = () => {
   return (
     <>
       <ChooseBooking></ChooseBooking>
-      <ShowCalendar></ShowCalendar>
     </>
   );
 };
