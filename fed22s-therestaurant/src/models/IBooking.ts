@@ -1,4 +1,4 @@
-import { IGuest } from "./IGuest";
+import { IGuest, defaultGuest } from "./IGuest";
 
 export interface IBooking {
   _id?: string;
@@ -7,3 +7,10 @@ export interface IBooking {
   time: string;
   guest: IGuest;
 }
+
+export const defaultBooking: IBooking = {
+  numberOfGuests: 0,
+  date: "",
+  time: "",
+  guest: defaultGuest,
+};
