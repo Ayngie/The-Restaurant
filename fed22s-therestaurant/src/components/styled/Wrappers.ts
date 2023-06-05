@@ -18,6 +18,8 @@ export const RowWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+
   @media screen and (min-width: 1200px) {
     flex-direction: row;
     justify-content: center;
