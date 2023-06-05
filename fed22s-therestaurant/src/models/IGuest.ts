@@ -3,3 +3,10 @@ export interface IGuest {
   email: string;
   phoneNumber: string;
 }
+
+export const defaultGuest: IGuest = {
+  name: "",
+  email: "",
+  phoneNumber: "",
+};
+
