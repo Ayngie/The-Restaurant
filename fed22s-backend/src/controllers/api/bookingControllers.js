@@ -11,24 +11,25 @@ exports.getAllBookings = async (req, res, next) => {
 
 exports.createBooking = async (req, res, next) => {
   const {
-    numberOfGuest,
+    numberOfGuests,
     date,
     time,
     guest: { name, email, phoneNumber },
   } = req.body;
 
-  if (!numberOfGuest || !date || !time) throw new BadRequestError("Ajajaj");
+  // Fixa errors!
+  if (!numberOfGuests || !date || !time) throw new BadRequestError("Ajajaj");
 
   const newGuest = {
     name: name,
     email: email,
     phoneNumber: phoneNumber,
   };
-
+  // KOLLA om gästen redan finns. Med hjälp av email.
   const guest = await Guest.create(newGuest);
 
   const newBooking = {
-    numberOfGuests: numberOfGuest,
+    numberOfGuests: numberOfGuests,
     date: date,
     time: time,
     guest: guest,
@@ -46,7 +47,7 @@ exports.deleteBookingById = async (req, res, next) => {
     throw new NotFoundError("Den här bokningen finns inte...");
 
   const guestToDelete = await Guest.findById(bookingToDelete.guest);
-
+  // Kolla om gästen har någon annan bokning.
   await guestToDelete.deleteOne();
   await bookingToDelete.deleteOne();
 
