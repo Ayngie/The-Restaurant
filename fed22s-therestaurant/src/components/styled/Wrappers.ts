@@ -30,3 +30,7 @@ export const ColumnWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const CalendarWrapper = styled.div`
+  padding: 10%;
+`;
