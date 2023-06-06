@@ -32,5 +32,5 @@ export const ColumnWrapper = styled.div`
 `;
 
 export const CalendarWrapper = styled.div`
-  padding: 10%;
+  padding: 5% 10% 5% 10%;
 `;
