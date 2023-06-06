@@ -1,10 +1,16 @@
 import { ChooseBooking } from "../ChooseBooking";
-import { ShowCalendar } from "../ShowCalendar";
+import { CompleteBooking } from "../CompleteBooking";
+import { ColumnWrapper } from "../styled/Wrappers";
 
 export const Booking = () => {
+  const timeToFillOutForm: boolean = true; //satt på true nu för att kunna visa komponent tills vidare...
+
   return (
     <>
-      <ChooseBooking></ChooseBooking>
+      <ColumnWrapper>
+        <ChooseBooking></ChooseBooking>
+        {timeToFillOutForm && <CompleteBooking></CompleteBooking>}
+      </ColumnWrapper>
     </>
   );
 };
