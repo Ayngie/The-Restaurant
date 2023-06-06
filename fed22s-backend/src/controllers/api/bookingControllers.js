@@ -25,8 +25,12 @@ exports.createBooking = async (req, res, next) => {
     email: email,
     phoneNumber: phoneNumber,
   };
-  // KOLLA om gästen redan finns. Med hjälp av email.
-  const guest = await Guest.create(newGuest);
+
+  let guest = await Guest.findOne({ email: email });
+  console.log(guest);
+  if (!guest) {
+    guest = await Guest.create(newGuest);
+  }
 
   const newBooking = {
     numberOfGuests: numberOfGuests,
