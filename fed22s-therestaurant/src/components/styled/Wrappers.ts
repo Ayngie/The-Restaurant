@@ -31,5 +31,9 @@ export const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+   gap: 10px;
+`;
+
+export const CalendarWrapper = styled.div`
+  padding: 5% 10% 5% 10%;
 `;
