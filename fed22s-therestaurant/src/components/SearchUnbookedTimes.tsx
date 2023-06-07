@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { NumberOfGuests } from "./NumberOfGuests";
 import { ShowCalendar } from "./ShowCalendar";
-import { CalendarWrapper, ColumnWrapper } from "./styled/Wrappers";
+import { CalendarWrapper, ColumnWrapper, RowWrapper } from "./styled/Wrappers";
+import Dropdown, { Option } from "react-dropdown";
+import "react-dropdown/style.css";
 
 export const SearchUnbookedTimes = () => {
   const [numberOfGuests, setNumberOfGuests] = useState("");
@@ -15,14 +17,32 @@ export const SearchUnbookedTimes = () => {
     setClickedDate(value);
   };
   console.log(clickedDate);
+
+  const options = ["18:00", "22:00"];
+  const defaultOption = options[0];
+
+  const handleChange = (option: Option) => {
+    console.log("handleChange", option.value);
+  };
+
   return (
     <>
-      <ColumnWrapper>
+      <RowWrapper>
         <CalendarWrapper>
           <ShowCalendar getDate={getDate}></ShowCalendar>
         </CalendarWrapper>
-        <NumberOfGuests getNumberOfGuests={getNumberOfGuests}></NumberOfGuests>
-      </ColumnWrapper>
+        <ColumnWrapper>
+          <Dropdown
+            options={options}
+            onChange={handleChange}
+            value={defaultOption}
+            placeholder="Välj tid"
+          />
+          <NumberOfGuests
+            getNumberOfGuests={getNumberOfGuests}
+          ></NumberOfGuests>
+        </ColumnWrapper>
+      </RowWrapper>
     </>
   );
 };
