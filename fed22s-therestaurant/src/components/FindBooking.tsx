@@ -1,3 +1,3 @@
 export const FindBooking = () => {
-  return <></>;
+  return <>FindBooking!!!</>;
 };

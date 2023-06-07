@@ -2,10 +2,12 @@ import { useState } from "react";
 import Calendar from "react-calendar";
 import { Value } from "react-calendar/dist/cjs/shared/types";
 
-export const ShowCalendar = () => {
-  const [date, setDate] = useState<Value>(new Date());
+interface IGetDate {
+  getDate(date: string): void;
+}
 
-  const formatDate = Number(date);
+export const ShowCalendar = ({ getDate }: IGetDate) => {
+  const [date, setDate] = useState<Value>(new Date());
 
   const onClick = (
     nextValue: Value,
@@ -14,13 +16,15 @@ export const ShowCalendar = () => {
     setDate(nextValue);
   };
 
+  const formatDate = Number(date);
   const clickedDate = new Intl.DateTimeFormat("sv-EU", {
     year: "numeric",
     month: "numeric",
     day: "numeric",
   }).format(formatDate);
 
-  console.log(clickedDate, "test");
+  getDate(clickedDate);
+
   return (
     <>
       <Calendar onChange={onClick} value={date} minDate={new Date()} />
