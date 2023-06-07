@@ -12,7 +12,7 @@ export const getBookingsByDate = async (date: string): Promise<IBooking[]> => {
   return await get<IBooking[]>(`/?s=${date}`);
 };
 
-export const getBookingById = async (id: number): Promise<IBooking> => {
+export const getBookingById = async (id: string): Promise<IBooking> => {
   return await get<IBooking>(`/${id}`);
 };
 
