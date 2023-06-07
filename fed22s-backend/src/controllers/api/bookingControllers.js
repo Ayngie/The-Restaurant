@@ -5,8 +5,8 @@ const { NotFoundError, BadRequestError } = require("../../utils/errors");
 exports.getAllBookings = async (req, res, next) => {
   const date = req.query.s;
   const bookings = await Booking.find({ date: date }).populate("guest");
-  if (!bookings) throw new NotFoundError("Det finns inga bokningar 😢");
-  return res.send(bookings);
+  if (!bookings.length) throw new NotFoundError("Det finns inga bokningar 😢");
+  return res.status(200).json(bookings);
 };
 
 exports.createBooking = async (req, res, next) => {
@@ -46,16 +46,21 @@ exports.createBooking = async (req, res, next) => {
 exports.deleteBookingById = async (req, res, next) => {
   const bookingId = req.params.bookingId;
 
-  const bookingToDelete = await Booking.findById(bookingId);
-  if (!bookingToDelete)
-    throw new NotFoundError("Den här bokningen finns inte...");
+  const booking = await Booking.findById(bookingId).populate("guest");
+  if (!booking) throw new NotFoundError("Den här bokningen finns inte...");
 
-  const guestToDelete = await Guest.findById(bookingToDelete.guest);
-  // Kolla om gästen har någon annan bokning.
-  await guestToDelete.deleteOne();
-  await bookingToDelete.deleteOne();
+  const bookingToDelete = await Booking.countDocuments({
+    guest: booking.guest._id,
+  });
 
-  return res.status(204).send("Bokningen borttagen!");
+  if (bookingToDelete === 1) {
+    await Guest.findByIdAndDelete(booking.guest);
+    await Booking.findByIdAndDelete(bookingId);
+  } else {
+    await Booking.findByIdAndDelete(bookingId);
+  }
+
+  return res.sendStatus(204);
 };
 
 exports.getBookingById = async (req, res) => {

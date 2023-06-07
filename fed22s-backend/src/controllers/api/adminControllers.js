@@ -64,14 +64,19 @@ exports.updateBookingById = async (req, res) => {
 exports.deleteBookingById = async (req, res) => {
   const bookingId = req.params.bookingId;
 
-  const bookingToDelete = await Booking.findById(bookingId);
-  if (!bookingToDelete)
-    throw new NotFoundError("Den här bokningen finns inte...");
+  const booking = await Booking.findById(bookingId).populate("guest");
+  if (!booking) throw new NotFoundError("Den här bokningen finns inte...");
 
-  const guestToDelete = await Guest.findById(bookingToDelete.guest);
+  const bookingToDelete = await Booking.countDocuments({
+    guest: booking.guest._id,
+  });
 
-  await guestToDelete.deleteOne();
-  await bookingToDelete.deleteOne();
+  if (bookingToDelete === 1) {
+    await Guest.findByIdAndDelete(booking.guest);
+    await Booking.findByIdAndDelete(bookingId);
+  } else {
+    await Booking.findByIdAndDelete(bookingId);
+  }
 
-  return res.status(204).send("Bokningen borttagen!");
+  return res.sendStatus(204);
 };
