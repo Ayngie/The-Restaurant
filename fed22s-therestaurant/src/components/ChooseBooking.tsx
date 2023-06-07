@@ -1,24 +1,21 @@
-import { useState } from "react";
-import { ShowCalendar } from "./ShowCalendar";
 import { NormalButton } from "./styled/StyledButtons";
-import { CalendarWrapper, ColumnWrapper, RowWrapper } from "./styled/Wrappers";
+import { ColumnWrapper, RowWrapper } from "./styled/Wrappers";
 
-export const ChooseBooking = () => {
-  const [newBooking, setNewBooking] = useState(false);
-  const showCalendar = () => {
-    setNewBooking(true);
+interface ICreateNewBooking {
+  createNewBooking(userInput: boolean): void;
+}
+
+export const ChooseBooking = ({ createNewBooking }: ICreateNewBooking) => {
+  const handleClick = () => {
+    createNewBooking(true);
   };
-
   return (
     <>
       <ColumnWrapper>
         <RowWrapper>
-          <NormalButton onClick={showCalendar}>Ny bokning</NormalButton>
+          <NormalButton onClick={handleClick}>Ny bokning</NormalButton>
           <NormalButton>Sök din bokning</NormalButton>
         </RowWrapper>
-        <CalendarWrapper>
-          {newBooking ? <ShowCalendar></ShowCalendar> : <></>}
-        </CalendarWrapper>
       </ColumnWrapper>
     </>
   );

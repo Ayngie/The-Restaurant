@@ -7,7 +7,7 @@ export const MainWrapper = styled.main`
   justify-content: center;
 
   background-color: pink;
-  height: 90vh;
+  min-height: 90vh;
   @media screen and (min-width: 1200px) {
     flex-direction: row;
     justify-content: center;
@@ -31,7 +31,7 @@ export const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-   gap: 10px;
+  gap: 10px;
 `;
 
 export const CalendarWrapper = styled.div`
