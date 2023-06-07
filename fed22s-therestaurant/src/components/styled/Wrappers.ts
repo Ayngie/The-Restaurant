@@ -23,7 +23,6 @@ export const RowWrapper = styled.div`
   @media screen and (min-width: 1200px) {
     flex-direction: row;
     justify-content: center;
-    width: 30%;
   }
 `;
 
@@ -35,5 +34,5 @@ export const ColumnWrapper = styled.div`
 `;
 
 export const CalendarWrapper = styled.div`
-  padding: 5% 10% 5% 10%;
+  padding: 5%;
 `;
