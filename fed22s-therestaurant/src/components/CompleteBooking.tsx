@@ -30,10 +30,12 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     console.log("Data", data);
-    console.log("Booking:", booking);
 
     setBooking({
       ...booking,
+      numberOfGuests: 6,
+      date: "2023-06-24",
+      time: "18:00",
       guest: {
         ...booking.guest,
         name: data.name,
@@ -41,9 +43,11 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
         phoneNumber: data.phoneNumber,
       },
     });
+    // createBooking(booking);
 
     // setGuest(defaultGuest);
   };
+  console.log("Booking:", booking);
   console.log(errors);
 
   // const handleSubmit = (e: FormEvent) => {
@@ -84,11 +88,14 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
     console.log("Avbryt");
   };
 
+  const postData = async () => {
+    await createBooking(booking);
+    console.log("postData");
+  };
+
   useEffect(() => {
-    //Anropa createBooking och skicka med nya bokningen:
-    // createBooking(booking);
     console.log("useEffect");
-  }, [booking]);
+  }, []);
 
   return (
     <>
@@ -137,6 +144,9 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
 
         <p>{JSON.stringify(booking)}</p>
       </form>
+      <NormalButton type="button" onClick={postData}>
+        Spara bokning
+      </NormalButton>
     </>
   );
 };
