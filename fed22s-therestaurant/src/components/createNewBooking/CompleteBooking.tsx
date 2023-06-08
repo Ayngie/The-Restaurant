@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ColumnWrapper, RowWrapper } from ".././styled/Wrappers";
 import { NormalButton, WarningButton } from ".././styled/StyledButtons";
 import { createBooking } from "../../services/bookingService";
@@ -8,6 +8,7 @@ import { IGuest } from "../../models/IGuest";
 
 interface ICompleteBookingProps {
   sendBooking(guest: IGuest): void;
+  postBooking(): void;
 }
 
 type FormValues = {
@@ -16,7 +17,12 @@ type FormValues = {
   phoneNumber: string;
 };
 
-export const CompleteBooking = ({ sendBooking }: ICompleteBookingProps) => {
+export const CompleteBooking = ({
+  sendBooking,
+  postBooking,
+}: ICompleteBookingProps) => {
+  const [isSubmit, setIsSubmit] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -25,6 +31,7 @@ export const CompleteBooking = ({ sendBooking }: ICompleteBookingProps) => {
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    setIsSubmit(true);
     console.log("Data", data);
     const guest: IGuest = {
       name: data.name,
@@ -32,11 +39,26 @@ export const CompleteBooking = ({ sendBooking }: ICompleteBookingProps) => {
       phoneNumber: data.phoneNumber,
     };
     sendBooking(guest);
-    reset();
+
+    // reset();
   };
+  useEffect(() => {
+    if (isSubmit) {
+      const submit = async () => {
+        try {
+          await postBooking();
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsSubmit(false);
+        }
+      };
+      submit();
+    }
+  }, [isSubmit, postBooking]);
 
   const handleCancel = () => {
-    console.log("Avbryt");
+    console.log("avbryt yo");
   };
 
   return (
@@ -70,7 +92,9 @@ export const CompleteBooking = ({ sendBooking }: ICompleteBookingProps) => {
             })}
           />
           <RowWrapper>
-            <NormalButton type="submit">Boka</NormalButton>
+            <NormalButton type="submit" disabled={isSubmit}>
+              Boka
+            </NormalButton>
             <WarningButton type="button" onClick={handleCancel}>
               Avbryt
             </WarningButton>
