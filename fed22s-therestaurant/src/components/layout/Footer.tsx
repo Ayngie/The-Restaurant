@@ -1,4 +1,4 @@
-import { StyledFooterWrapper } from "./styled/footer/StyledFooterWrapper";
+import { StyledFooterWrapper } from "../styled/footer/StyledFooterWrapper";
 
 const html = (
   <>

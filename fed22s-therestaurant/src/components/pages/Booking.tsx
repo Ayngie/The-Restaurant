@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ChooseBooking } from "../ChooseBooking";
-import { CompleteBooking } from "../CompleteBooking";
+import { CompleteBooking } from "../createNewBooking/CompleteBooking";
 import { ColumnWrapper } from "../styled/Wrappers";
-import { SearchUnbookedTimes } from "../SearchUnbookedTimes";
+import { SearchUnbookedTimes } from "../createNewBooking/SearchUnbookedTimes";
 
 export const Booking = () => {
   const timeToFillOutForm: boolean = true; //satt på true nu för att kunna visa komponent tills vidare...

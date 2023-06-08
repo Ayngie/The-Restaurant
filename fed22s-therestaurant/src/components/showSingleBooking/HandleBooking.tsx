@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { FindBooking } from "./FindBooking";
 import { ShowBooking } from "./ShowBooking";
-import { IBooking, defaultBooking } from "../models/IBooking";
-import { deleteBooking, getBookingById } from "../services/bookingService";
+import { IBooking, defaultBooking } from "../../models/IBooking";
+import { deleteBooking, getBookingById } from "../../services/bookingService";
 
 export const HandleBooking = () => {
   const [showBooking, setShowBooking] = useState(false);

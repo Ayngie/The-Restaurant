@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { NumberOfGuests } from "./NumberOfGuests";
 import { ShowCalendar } from "./ShowCalendar";
-import { CalendarWrapper, RowWrapper } from "./styled/Wrappers";
+import { CalendarWrapper, RowWrapper } from "../styled/Wrappers";
 import Dropdown, { Option } from "react-dropdown";
 import "react-dropdown/style.css";
-import { NormalButton } from "./styled/StyledButtons";
-import { getBookingsByDate } from "../services/bookingService";
+import { NormalButton } from "../styled/StyledButtons";
+import { getBookingsByDate } from "../../services/bookingService";
 
 export const SearchUnbookedTimes = () => {
   const [numberOfGuests, setNumberOfGuests] = useState("");

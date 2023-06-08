@@ -1,5 +1,5 @@
-import { IBooking } from "../models/IBooking";
-import { NormalButton, WarningButton } from "./styled/StyledButtons";
+import { IBooking } from "../../models/IBooking";
+import { NormalButton, WarningButton } from "../styled/StyledButtons";
 
 interface IBookingProps {
   booking: IBooking;

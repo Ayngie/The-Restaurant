@@ -1,7 +1,7 @@
-import { NormalButton } from "./styled/StyledButtons";
-import { StyledInput } from "./styled/StyledInput";
+import { NormalButton } from "../styled/StyledButtons";
+import { StyledInput } from "../styled/StyledInput";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { ColumnWrapper } from "./styled/Wrappers";
+import { ColumnWrapper } from "../styled/Wrappers";
 import Dropdown, { Option } from "react-dropdown";
 
 interface IGetNumberOfGuests {
