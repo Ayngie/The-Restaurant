@@ -51,6 +51,7 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
   console.log(errors);
 
   const handleCancel = () => {
+    reset();
     console.log("Avbryt");
   };
 
