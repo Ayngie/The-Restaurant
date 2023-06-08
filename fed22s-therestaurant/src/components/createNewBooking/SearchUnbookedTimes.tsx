@@ -2,44 +2,36 @@ import { useState } from "react";
 import { NumberOfGuests } from "./NumberOfGuests";
 import { ShowCalendar } from "./ShowCalendar";
 import { CalendarWrapper, RowWrapper } from "../styled/Wrappers";
-import Dropdown, { Option } from "react-dropdown";
+import Dropdown, { Group, Option } from "react-dropdown";
 import "react-dropdown/style.css";
 import { NormalButton } from "../styled/StyledButtons";
 import { getBookingsByDate } from "../../services/bookingService";
 
 export const SearchUnbookedTimes = () => {
-  const [numberOfGuests, setNumberOfGuests] = useState("");
-  const getNumberOfGuests = (value: string) => {
-    setNumberOfGuests(value);
+  const [bookingInfo, setBookingInfo] = useState({
+    guests: 0,
+    date: "",
+    time: "",
+  });
+
+  const getNumberOfGuests = (value: number) => {
+    setBookingInfo({ ...bookingInfo, guests: value });
   };
 
-  const [clickedDate, setClickedDate] = useState("");
   const getDate = (value: string) => {
-    setClickedDate(value);
+    setBookingInfo({ ...bookingInfo, date: value });
   };
 
   const options = ["18:00", "22:00"];
   const defaultOption = options[0];
 
-  const [bookingInfo, setBookingInfo] = useState({
-    guests: "",
-    date: "",
-    time: "",
-  });
-
-  const [clickedTime, setClickedTime] = useState(defaultOption);
   const handleChange = (option: Option) => {
-    setClickedTime(option.value);
+    setBookingInfo({ ...bookingInfo, time: option.value });
   };
-  console.log("setBookinginfo", bookingInfo);
 
-  const handleSearch = () => {
-    setBookingInfo({
-      guests: numberOfGuests,
-      date: clickedDate,
-      time: clickedTime,
-    });
-    getBookingsByDate(bookingInfo.date);
+  const handleSearch = async () => {
+    let response = await getBookingsByDate(bookingInfo.date);
+    console.log(response);
   };
 
   return (
@@ -52,9 +44,9 @@ export const SearchUnbookedTimes = () => {
         <NumberOfGuests getNumberOfGuests={getNumberOfGuests}></NumberOfGuests>
         <label>Sittning:</label>
         <Dropdown
-          options={options}
           onChange={handleChange}
-          value={defaultOption}
+          options={options}
+          value={"Välj tid"}
           placeholder="Välj tid"
         />
       </RowWrapper>
