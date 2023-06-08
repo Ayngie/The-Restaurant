@@ -19,10 +19,10 @@ export const checkBookedTables = (
         tables.tablesAtSix += tables.tablesAtSix + 2;
       }
 
-      if (tables.tablesAtSix >= 15) {
-        return "Det är tyvärr fullt den här tiden!";
+      if (tables.tablesAtSix > 15) {
+        // console.log("det är fullt på bord vid sex");
       } else {
-        console.log("Det är ledigt.");
+        //console.log("det är ledigt på bord vid sex");
       }
     }
 
@@ -34,10 +34,10 @@ export const checkBookedTables = (
         tables.tablesAtNine += tables.tablesAtNine + 2;
       }
 
-      if (tables.tablesAtNine >= 15) {
-        console.log("det är fulllttt");
+      if (tables.tablesAtNine > 15) {
+        // console.log("det är fullt på bord vid nio");
       } else {
-        console.log("Det är ledigt.");
+        // console.log("det är ledigt på bord vid nio");
         //anropa funktion
       }
     }
