@@ -4,11 +4,10 @@ import { ColumnWrapper, RowWrapper } from ".././styled/Wrappers";
 import { NormalButton, WarningButton } from ".././styled/StyledButtons";
 import { createBooking } from "../../services/bookingService";
 import { IBooking, defaultBooking } from "../../models/IBooking";
+import { IGuest } from "../../models/IGuest";
 
 interface ICompleteBookingProps {
-  numberOfGuests?: number;
-  date?: string;
-  time?: string;
+  sendBooking(guest: IGuest): void;
 }
 
 type FormValues = {
@@ -17,9 +16,7 @@ type FormValues = {
   phoneNumber: string;
 };
 
-export const CompleteBooking = ({}: ICompleteBookingProps) => {
-  const [booking, setBooking] = useState<IBooking>(defaultBooking);
-
+export const CompleteBooking = ({ sendBooking }: ICompleteBookingProps) => {
   const {
     register,
     handleSubmit,
@@ -29,38 +26,18 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     console.log("Data", data);
-
-    setBooking({
-      ...booking,
-      numberOfGuests: 6,
-      date: "2023-06-24",
-      time: "18:00",
-      guest: {
-        ...booking.guest,
-        name: data.name,
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-      },
-    });
-    // createBooking(booking);
-
+    const guest: IGuest = {
+      name: data.name,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+    };
+    sendBooking(guest);
     reset();
   };
-  console.log("Booking:", booking);
-  console.log(errors);
 
   const handleCancel = () => {
     console.log("Avbryt");
   };
-
-  const postData = async () => {
-    await createBooking(booking);
-    console.log("postData");
-  };
-
-  // useEffect(() => {
-  //   console.log("useEffect");
-  // }, []);
 
   return (
     <>
@@ -93,18 +70,13 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
             })}
           />
           <RowWrapper>
-            <NormalButton type="submit">Spara</NormalButton>
+            <NormalButton type="submit">Boka</NormalButton>
             <WarningButton type="button" onClick={handleCancel}>
               Avbryt
             </WarningButton>
           </RowWrapper>
         </ColumnWrapper>
-
-        <p>{JSON.stringify(booking)}</p>
       </form>
-      <NormalButton type="button" onClick={postData}>
-        Spara bokning
-      </NormalButton>
     </>
   );
 };
