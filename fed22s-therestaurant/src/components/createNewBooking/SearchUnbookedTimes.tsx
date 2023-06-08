@@ -15,7 +15,7 @@ interface ISendBookingProps {
 
 export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
   const [bookingInfo, setBookingInfo] = useState({
-    guests: 0,
+    numberOfGuests: 0,
     date: "",
     time: "",
   });
@@ -25,7 +25,7 @@ export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
   const [showError, setShowError] = useState<boolean>(false);
 
   const getNumberOfGuests = (value: number) => {
-    setBookingInfo({ ...bookingInfo, guests: value });
+    setBookingInfo({ ...bookingInfo, numberOfGuests: value });
   };
 
   const getDate = (value: string) => {
@@ -43,7 +43,7 @@ export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
     let response = await getBookingsByDate(bookingInfo.date);
     let bookedTables = checkBookedTables(
       response,
-      bookingInfo.guests,
+      bookingInfo.numberOfGuests,
       bookingInfo.time
     );
 
@@ -53,7 +53,7 @@ export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
     }
     //annars - kolla antal bord som ska bokas
     let doWeHaveABooking = checkAvailableTables(
-      bookingInfo.guests,
+      bookingInfo.numberOfGuests,
       bookedTables
     );
     if (!doWeHaveABooking) {
