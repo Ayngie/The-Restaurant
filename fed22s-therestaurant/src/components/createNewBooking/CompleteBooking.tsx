@@ -4,6 +4,7 @@ import { ColumnWrapper, RowWrapper } from ".././styled/Wrappers";
 import { NormalButton, WarningButton } from ".././styled/StyledButtons";
 import { createBooking } from "../../services/bookingService";
 import { IBooking, defaultBooking } from "../../models/IBooking";
+import { StyledInput } from "../styled/input/StyledInput";
 
 interface ICompleteBookingProps {
   numberOfGuests?: number;
@@ -67,7 +68,7 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
       <h3>Vänligen fyll i dina kontaktuppgifter:</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ColumnWrapper>
-          <input
+          <StyledInput
             type="text"
             placeholder="Namn (för- och efternamn):"
             id="name"
@@ -77,13 +78,13 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
               pattern: /^[A-Ö][a-ö]+\s[A-Ö][a-ö]+$/,
             })}
           />
-          <input
+          <StyledInput
             type="email"
             placeholder="E-post:"
             id="email"
             {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
           />
-          <input
+          <StyledInput
             type="tel"
             placeholder="Telefonnummer:"
             id="phoneNumber"
