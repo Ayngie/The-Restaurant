@@ -1,9 +1,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import { ColumnWrapper, RowWrapper } from "./styled/Wrappers";
-import { NormalButton, WarningButton } from "./styled/StyledButtons";
-import { createBooking } from "../services/bookingService";
-import { IBooking, defaultBooking } from "../models/IBooking";
+import { ColumnWrapper, RowWrapper } from ".././styled/Wrappers";
+import { NormalButton, WarningButton } from ".././styled/StyledButtons";
+import { createBooking } from "../../services/bookingService";
+import { IBooking, defaultBooking } from "../../models/IBooking";
 
 interface ICompleteBookingProps {
   numberOfGuests?: number;
