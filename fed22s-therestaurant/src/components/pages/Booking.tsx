@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChooseBooking } from "../ChooseBooking";
 import { CompleteBooking } from "../createNewBooking/CompleteBooking";
-import { ColumnWrapper } from "../styled/Wrappers";
+import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import { SearchUnbookedTimes } from "../createNewBooking/SearchUnbookedTimes";
 import { IBooking, defaultBooking } from "../../models/IBooking";
 import { IGuest } from "../../models/IGuest";
 import { createBooking } from "../../services/bookingService";
-import { NormalButton } from "../styled/StyledButtons";
+import { NormalButton, WarningButton } from "../styled/StyledButtons";
 
 export const Booking = () => {
   const [booking, setBooking] = useState<IBooking>(defaultBooking);
-  const [timeToFillOutForm, SetTimeToFillOutForm] = useState(true);
+  const [timeToFillOutForm, SetTimeToFillOutForm] = useState(false);
   const [clickedNewBooking, setClickedNewBooking] = useState(false);
+  const [bookingSubmitted, setBookingSubmitted] = useState(false);
+
   const createNewBooking = (showForm: boolean) => {
     setClickedNewBooking(showForm);
   };
+
   const dateForBooking = (details: IBooking) => {
     console.log("details to send: ", details);
     setBooking({
@@ -23,8 +26,11 @@ export const Booking = () => {
       date: details.date,
       time: details.time,
     });
+    SetTimeToFillOutForm(true);
   };
+
   const guestForDate = (guest: IGuest) => {
+    console.log("guest to send: ", guest);
     setBooking({
       ...booking,
       guest: {
@@ -35,10 +41,19 @@ export const Booking = () => {
       },
     });
   };
-
   const postBooking = async () => {
-    await createBooking(booking);
+    console.log(booking);
+    try {
+      await createBooking(booking);
+      setBookingSubmitted(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    // här kan vi göra något efter bokningen är gjord.
+  }, []);
 
   return (
     <>
@@ -49,8 +64,10 @@ export const Booking = () => {
         )}
         {timeToFillOutForm && (
           <>
-            <CompleteBooking sendBooking={guestForDate}></CompleteBooking>
-            <NormalButton onClick={postBooking}>Boka</NormalButton>
+            <CompleteBooking
+              sendBooking={guestForDate}
+              postBooking={postBooking}
+            ></CompleteBooking>
           </>
         )}
       </ColumnWrapper>
