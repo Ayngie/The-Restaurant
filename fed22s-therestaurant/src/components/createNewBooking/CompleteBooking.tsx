@@ -136,7 +136,8 @@ export const CompleteBooking = ({
           )}
           {errors.phoneNumber?.type === "pattern" && (
             <StyledErrorParagraph role="alert">
-              Oops! Du behöver ange ett nummer i formatet +46705552222.
+              Oops! Du behöver ange ett nummer i formatet +46705552222 alt.
+              0705552222.
             </StyledErrorParagraph>
           )}
 
