@@ -7,6 +7,7 @@ import { IBooking, defaultBooking } from "../../models/IBooking";
 import { IGuest } from "../../models/IGuest";
 import { createBooking } from "../../services/bookingService";
 import { NormalButton, WarningButton } from "../styled/StyledButtons";
+import { Loader } from "../styled/Loader";
 
 export const Booking = () => {
   const [booking, setBooking] = useState<IBooking>(defaultBooking);
@@ -57,6 +58,7 @@ export const Booking = () => {
   return (
     <>
       <ColumnWrapper>
+        <Loader></Loader>
         <ChooseBooking createNewBooking={createNewBooking}></ChooseBooking>
         {clickedNewBooking && (
           <SearchUnbookedTimes
