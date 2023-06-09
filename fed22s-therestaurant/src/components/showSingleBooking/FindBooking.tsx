@@ -5,7 +5,7 @@ interface FormValues {
 }
 
 interface IBookingIdProps {
-  searchBooking(idToSearch: string): void;
+  searchBooking(idToSearch: string): Promise<void>;
 }
 
 export const FindBooking = ({ searchBooking }: IBookingIdProps) => {
