@@ -59,14 +59,8 @@ export const CompleteBooking = ({
   }, [isSubmit, postBooking]);
 
   const handleCancel = () => {
-
     reset();
     console.log("Avbryt");
-  };
-
-  const postData = async () => {
-    await createBooking(booking);
-    console.log("postData");
   };
 
   return (
