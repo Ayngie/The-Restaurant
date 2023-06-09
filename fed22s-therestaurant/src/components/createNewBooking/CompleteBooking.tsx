@@ -1,15 +1,15 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ColumnWrapper, RowWrapper } from ".././styled/Wrappers";
 import { NormalButton, WarningButton } from ".././styled/StyledButtons";
 import { createBooking } from "../../services/bookingService";
 import { IBooking, defaultBooking } from "../../models/IBooking";
+import { IGuest } from "../../models/IGuest";
 import { StyledInput } from "../styled/input/StyledInput";
 
 interface ICompleteBookingProps {
-  numberOfGuests?: number;
-  date?: string;
-  time?: string;
+  sendBooking(guest: IGuest): void;
+  postBooking(): Promise<void>;
 }
 
 type FormValues = {
@@ -18,8 +18,11 @@ type FormValues = {
   phoneNumber: string;
 };
 
-export const CompleteBooking = ({}: ICompleteBookingProps) => {
-  const [booking, setBooking] = useState<IBooking>(defaultBooking);
+export const CompleteBooking = ({
+  sendBooking,
+  postBooking,
+}: ICompleteBookingProps) => {
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const {
     register,
@@ -29,28 +32,34 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    setIsSubmit(true);
     console.log("Data", data);
+    const guest: IGuest = {
+      name: data.name,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+    };
+    sendBooking(guest);
 
-    setBooking({
-      ...booking,
-      numberOfGuests: 6,
-      date: "2023-06-24",
-      time: "18:00",
-      guest: {
-        ...booking.guest,
-        name: data.name,
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-      },
-    });
-    // createBooking(booking);
-
-    reset();
+    // reset();
   };
-  console.log("Booking:", booking);
-  console.log(errors);
+  useEffect(() => {
+    if (isSubmit) {
+      const submit = async () => {
+        try {
+          await postBooking();
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsSubmit(false);
+        }
+      };
+      submit();
+    }
+  }, [isSubmit, postBooking]);
 
   const handleCancel = () => {
+
     reset();
     console.log("Avbryt");
   };
@@ -59,10 +68,6 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
     await createBooking(booking);
     console.log("postData");
   };
-
-  // useEffect(() => {
-  //   console.log("useEffect");
-  // }, []);
 
   return (
     <>
@@ -95,18 +100,15 @@ export const CompleteBooking = ({}: ICompleteBookingProps) => {
             })}
           />
           <RowWrapper>
-            <NormalButton type="submit">Spara</NormalButton>
+            <NormalButton type="submit" disabled={isSubmit}>
+              Boka
+            </NormalButton>
             <WarningButton type="button" onClick={handleCancel}>
               Avbryt
             </WarningButton>
           </RowWrapper>
         </ColumnWrapper>
-
-        <p>{JSON.stringify(booking)}</p>
       </form>
-      <NormalButton type="button" onClick={postData}>
-        Spara bokning
-      </NormalButton>
     </>
   );
 };
