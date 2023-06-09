@@ -12,11 +12,13 @@ import { checkAvailableTables } from "../../helpers/checkAvailableTables";
 interface ISendBookingProps {
   sendDate(booking: object): void;
   showForm(show: boolean): void;
+  showLoader(show: boolean): void;
 }
 
 export const SearchUnbookedTimes = ({
   sendDate,
   showForm,
+  showLoader,
 }: ISendBookingProps) => {
   const [bookingInfo, setBookingInfo] = useState({
     numberOfGuests: 0,
@@ -44,6 +46,7 @@ export const SearchUnbookedTimes = ({
   };
 
   const handleSearch = async () => {
+    showLoader(true);
     showForm(false);
     setRestarantIsFullyBooked(false);
     let response = await getBookingsByDate(bookingInfo.date);
@@ -70,11 +73,13 @@ export const SearchUnbookedTimes = ({
 
       setRestarantIsFullyBooked(true);
       //inte visas
+      showLoader(false);
       showForm(false);
     }
     if (doWeHaveABooking === true) {
       console.log("dkldkldjd");
       sendDate(bookingInfo);
+      showLoader(false);
       //visa
       showForm(true);
     }
