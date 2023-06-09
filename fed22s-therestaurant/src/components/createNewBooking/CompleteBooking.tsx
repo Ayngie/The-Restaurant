@@ -8,7 +8,7 @@ import { IGuest } from "../../models/IGuest";
 
 interface ICompleteBookingProps {
   sendBooking(guest: IGuest): void;
-  postBooking(): void;
+  postBooking(): Promise<void>;
 }
 
 type FormValues = {
