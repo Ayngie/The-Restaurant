@@ -15,16 +15,16 @@ export enum ActionType {
 export const AdminReducer = (bookings: IBooking[], action: IAction) => {
   switch (action.type) {
     case ActionType.GET: {
-      return;
+      return bookings;
     }
     case ActionType.GETBYID: {
-      return;
+      return bookings;
     }
     case ActionType.UPDATE: {
-      return;
+      return bookings;
     }
     case ActionType.REMOVE: {
-      return;
+      return bookings;
     }
     default:
       break;
