@@ -2,10 +2,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { ColumnWrapper, RowWrapper } from ".././styled/Wrappers";
 import { NormalButton, WarningButton } from ".././styled/StyledButtons";
-import { createBooking } from "../../services/bookingService";
-import { IBooking, defaultBooking } from "../../models/IBooking";
 import { IGuest } from "../../models/IGuest";
 import { StyledInput } from "../styled/input/StyledInput";
+import { StyledErrorParagraph } from "../styled/input/StyledErrorParagraph";
 
 interface ICompleteBookingProps {
   sendBooking(guest: IGuest): void;
@@ -75,24 +74,73 @@ export const CompleteBooking = ({
             {...register("name", {
               required: true,
               maxLength: 150,
-              pattern: /^[A-Ö][a-ö]+\s[A-Ö][a-ö]+$/,
+              pattern:
+                /[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])+\s*[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])+\s*[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])$/,
             })}
+            aria-invalid={errors.name ? "true" : "false"}
           />
+          {errors.name?.type === "required" && (
+            <StyledErrorParagraph role="alert">
+              Oops! Namnfältet får inte vara tomt.
+            </StyledErrorParagraph>
+          )}
+          {errors.name?.type === "maxLength" && (
+            <StyledErrorParagraph role="alert">
+              Oops! Namn får max vara 150 tecken.
+            </StyledErrorParagraph>
+          )}
+          {errors.name?.type === "pattern" && (
+            <StyledErrorParagraph role="alert">
+              Oops! Du måste fylla i förnamn + efternamn (minst 2 bokstäver, ej
+              otillåtna karaktärer).
+            </StyledErrorParagraph>
+          )}
+
           <StyledInput
             type="email"
             placeholder="E-post:"
             id="email"
-            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+            {...register("email", {
+              required: true,
+              pattern: /^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/i,
+            })}
+            aria-invalid={errors.email ? "true" : "false"}
           />
+          {errors.email?.type === "required" && (
+            <StyledErrorParagraph role="alert">
+              {" "}
+              Oops! Epost-fältet får inte vara tomt.
+            </StyledErrorParagraph>
+          )}
+          {errors.email?.type === "pattern" && (
+            <StyledErrorParagraph role="alert">
+              Oops! Felaktigt epost-format.
+            </StyledErrorParagraph>
+          )}
+
           <StyledInput
             type="tel"
             placeholder="Telefonnummer:"
             id="phoneNumber"
             {...register("phoneNumber", {
               required: true,
-              pattern: /^(([+]46)\s*(7)|07)[02369]\s*(\d{4})\s*(\d{3})$/,
+              pattern: /^(\+?46|0)7\d{8}$/,
             })}
+            aria-invalid={errors.phoneNumber ? "true" : "false"}
           />
+          {errors.phoneNumber?.type === "required" && (
+            <StyledErrorParagraph role="alert">
+              {" "}
+              Oops! Telefonnummer-fältet får inte vara tomt.
+            </StyledErrorParagraph>
+          )}
+          {errors.phoneNumber?.type === "pattern" && (
+            <StyledErrorParagraph role="alert">
+              Oops! Du behöver ange ett nummer i formatet +46705552222 alt.
+              0705552222.
+            </StyledErrorParagraph>
+          )}
+
           <RowWrapper>
             <NormalButton type="submit" disabled={isSubmit}>
               Boka
