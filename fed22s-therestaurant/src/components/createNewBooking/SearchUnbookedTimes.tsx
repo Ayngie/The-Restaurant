@@ -40,6 +40,7 @@ export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
   };
 
   const handleSearch = async () => {
+    setRestarantIsFullyBooked(false);
     let response = await getBookingsByDate(bookingInfo.date);
     let bookedTables = checkBookedTables(
       response,
