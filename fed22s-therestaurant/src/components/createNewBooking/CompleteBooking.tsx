@@ -5,6 +5,7 @@ import { NormalButton, WarningButton } from ".././styled/StyledButtons";
 import { createBooking } from "../../services/bookingService";
 import { IBooking, defaultBooking } from "../../models/IBooking";
 import { IGuest } from "../../models/IGuest";
+import { StyledInput } from "../styled/input/StyledInput";
 
 interface ICompleteBookingProps {
   sendBooking(guest: IGuest): void;
@@ -58,7 +59,14 @@ export const CompleteBooking = ({
   }, [isSubmit, postBooking]);
 
   const handleCancel = () => {
-    console.log("avbryt yo");
+
+    reset();
+    console.log("Avbryt");
+  };
+
+  const postData = async () => {
+    await createBooking(booking);
+    console.log("postData");
   };
 
   return (
@@ -66,7 +74,7 @@ export const CompleteBooking = ({
       <h3>Vänligen fyll i dina kontaktuppgifter:</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ColumnWrapper>
-          <input
+          <StyledInput
             type="text"
             placeholder="Namn (för- och efternamn):"
             id="name"
@@ -76,13 +84,13 @@ export const CompleteBooking = ({
               pattern: /^[A-Ö][a-ö]+\s[A-Ö][a-ö]+$/,
             })}
           />
-          <input
+          <StyledInput
             type="email"
             placeholder="E-post:"
             id="email"
             {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
           />
-          <input
+          <StyledInput
             type="tel"
             placeholder="Telefonnummer:"
             id="phoneNumber"
