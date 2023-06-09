@@ -11,6 +11,7 @@ export const StyledInput = styled.input`
   background-position: center bottom, center calc(100% - 1px);
   background-repeat: no-repeat;
   background-size: 0 2px, 100% 1px;
+  color: hotpink;
 
   &::placeholder {
     color: plum;
@@ -22,6 +23,13 @@ export const StyledInput = styled.input`
     outline: none;
     background-size: 100% 2px, 100% 1px;
     transition-duration: 0.3s;
-    color: #525252;
+  }
+  &:active {
+    color: red;
+  }
+
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+    -webkit-text-fill-color: hotpink;
   }
 `;
