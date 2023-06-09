@@ -11,9 +11,13 @@ import { checkAvailableTables } from "../../helpers/checkAvailableTables";
 
 interface ISendBookingProps {
   sendDate(booking: object): void;
+  showForm(show: boolean): void;
 }
 
-export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
+export const SearchUnbookedTimes = ({
+  sendDate,
+  showForm,
+}: ISendBookingProps) => {
   const [bookingInfo, setBookingInfo] = useState({
     numberOfGuests: 0,
     date: "",
@@ -22,7 +26,7 @@ export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
 
   const [restarantIsFullyBooked, setRestarantIsFullyBooked] =
     useState<boolean>(false);
-  const [showError, setShowError] = useState<boolean>(false);
+  // const [showError, setShowError] = useState<boolean>(false);
 
   const getNumberOfGuests = (value: number) => {
     setBookingInfo({ ...bookingInfo, numberOfGuests: value });
@@ -33,13 +37,14 @@ export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
   };
 
   const options = ["18:00", "21:00"];
-  const defaultOption = options[0];
+  // const defaultOption = options[0];
 
   const handleChange = (option: Option) => {
     setBookingInfo({ ...bookingInfo, time: option.value });
   };
 
   const handleSearch = async () => {
+    showForm(false);
     setRestarantIsFullyBooked(false);
     let response = await getBookingsByDate(bookingInfo.date);
     let bookedTables = checkBookedTables(
@@ -48,6 +53,7 @@ export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
       bookingInfo.time
     );
 
+    console.log("bookedTables", bookedTables);
     //om bookedTables == 15 -> säg att är fullt...
     if (bookedTables == 15) {
       setRestarantIsFullyBooked(true);
@@ -57,11 +63,20 @@ export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
       bookingInfo.numberOfGuests,
       bookedTables
     );
-    if (!doWeHaveABooking) {
+
+    console.log("doWeHaveABooking", doWeHaveABooking);
+    if (doWeHaveABooking === false) {
+      console.log("false......");
+
       setRestarantIsFullyBooked(true);
+      //inte visas
+      showForm(false);
     }
-    if (doWeHaveABooking) {
+    if (doWeHaveABooking === true) {
+      console.log("dkldkldjd");
       sendDate(bookingInfo);
+      //visa
+      showForm(true);
     }
   };
 
@@ -83,7 +98,7 @@ export const SearchUnbookedTimes = ({ sendDate }: ISendBookingProps) => {
       </RowWrapper>
       <NormalButton onClick={handleSearch}>Sök</NormalButton>
       {restarantIsFullyBooked && (
-        <p>Det är tyvärr fullt kl {bookingInfo.time}. Prova igen!</p>
+        <p>Det är tyvärr fullt den tiden du valde. Prova igen!</p>
       )}
     </>
   );
