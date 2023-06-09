@@ -26,7 +26,6 @@ export const Booking = () => {
       date: details.date,
       time: details.time,
     });
-    SetTimeToFillOutForm(true);
   };
 
   const guestForDate = (guest: IGuest) => {
@@ -41,7 +40,7 @@ export const Booking = () => {
       },
     });
   };
-  const postBooking = async () => {
+  const postBooking = async (): Promise<void> => {
     console.log(booking);
     try {
       await createBooking(booking);
@@ -60,14 +59,15 @@ export const Booking = () => {
       <ColumnWrapper>
         <ChooseBooking createNewBooking={createNewBooking}></ChooseBooking>
         {clickedNewBooking && (
-          <SearchUnbookedTimes sendDate={dateForBooking}></SearchUnbookedTimes>
+          <SearchUnbookedTimes
+            sendDate={dateForBooking}
+            showForm={SetTimeToFillOutForm}></SearchUnbookedTimes>
         )}
         {timeToFillOutForm && (
           <>
             <CompleteBooking
               sendBooking={guestForDate}
-              postBooking={postBooking}
-            ></CompleteBooking>
+              postBooking={postBooking}></CompleteBooking>
           </>
         )}
       </ColumnWrapper>
