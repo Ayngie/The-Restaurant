@@ -4,12 +4,13 @@ const { NotFoundError, BadRequestError } = require("../../utils/errors");
 
 exports.getAllBookings = async (req, res) => {
   const date = req.query.s;
-  const booking = await Booking.find({ date: date }).populate("guest");
+  const bookings = await Booking.find({ date: date }).populate("guest");
 
-  if (!booking.length)
-    throw new NotFoundError("Det finns ingen bokning den här dagen...");
-
-  return res.status(200).json(booking);
+  if (bookings.length === 0) {
+    return res.status(200).send([]);
+  } else {
+    return res.status(200).json(bookings);
+  }
 };
 
 exports.updateBookingById = async (req, res) => {
