@@ -3,6 +3,7 @@ import { AdminContext } from "../../contexts/AdminContext";
 import { useContext, useEffect, useState } from "react";
 import { IBooking } from "../../models/IBooking";
 import { ShowSingleBooking } from "../admin/ShowSingleBooking";
+import { ColumnWrapper } from "../styled/Wrappers";
 
 export const AdminHandleBooking = () => {
   const { id } = useParams();
@@ -21,9 +22,11 @@ export const AdminHandleBooking = () => {
 
   return (
     <>
-      <ShowSingleBooking></ShowSingleBooking>
-      <p>{booking?.date}</p>
-      <p>hej</p>
+      <ColumnWrapper>
+        <ShowSingleBooking></ShowSingleBooking>
+        <p>{booking?.date}</p>
+        <p>hej</p>
+      </ColumnWrapper>
     </>
   );
 };
