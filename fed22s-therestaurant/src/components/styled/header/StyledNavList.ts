@@ -4,4 +4,5 @@ export const StyledNavList = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: row;
+  text-decoration: none;
 `;
