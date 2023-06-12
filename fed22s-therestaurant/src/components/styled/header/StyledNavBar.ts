@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const StyledNavList = styled.ul`
-  list-style: none;
+export const StyledNavBar = styled.nav`
   display: flex;
   flex-direction: row;
+  flex-direction: row-reverse;
 `;
