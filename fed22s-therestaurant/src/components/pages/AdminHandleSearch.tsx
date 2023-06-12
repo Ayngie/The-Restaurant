@@ -2,10 +2,11 @@ import { useEffect, useReducer } from "react";
 import { AdminContext } from "../../contexts/AdminContext";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 import { AdminReducer } from "../../reducers/AdminReducer";
+import { SearchBooking } from "../admin/SearchBooking";
+import { ColumnWrapper } from "../styled/Wrappers";
+import { ShowCalendar } from "../createNewBooking/ShowCalendar";
 
-import { Outlet } from "react-router";
-
-export const Admin = () => {
+export const AdminHandleSearch = () => {
   const [bookings, dispatch] = useReducer(AdminReducer, []);
 
   useEffect(() => {
@@ -15,7 +16,9 @@ export const Admin = () => {
     <>
       <AdminContext.Provider value={bookings}>
         <AdminDispatchContext.Provider value={dispatch}>
-          <Outlet></Outlet>
+          <ColumnWrapper>
+            <SearchBooking></SearchBooking>
+          </ColumnWrapper>
         </AdminDispatchContext.Provider>
       </AdminContext.Provider>
     </>
