@@ -8,6 +8,8 @@ export const MainWrapper = styled.main`
 
   background-color: pink;
   min-height: 90vh;
+
+  font-family: "Nunito Sans", sans-serif;
   @media screen and (min-width: 1200px) {
     flex-direction: row;
     justify-content: center;
