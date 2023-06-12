@@ -4,6 +4,7 @@ import { NormalButton } from "../styled/StyledButtons";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 import { ActionType } from "../../reducers/AdminReducer";
 import { getBookingsByDate } from "../../services/adminService";
+import { CalendarWrapper } from "../styled/Wrappers";
 
 export const SearchBookedTimes = () => {
   const dispatch = useContext(AdminDispatchContext);
@@ -17,7 +18,9 @@ export const SearchBookedTimes = () => {
 
   return (
     <>
-      <ShowCalendar getDate={getBookingsForDate}></ShowCalendar>
+      <CalendarWrapper>
+        <ShowCalendar getDate={getBookingsForDate}></ShowCalendar>
+      </CalendarWrapper>
     </>
   );
 };
