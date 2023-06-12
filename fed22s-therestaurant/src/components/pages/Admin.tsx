@@ -8,9 +8,6 @@ import { Outlet } from "react-router";
 export const Admin = () => {
   const [bookings, dispatch] = useReducer(AdminReducer, []);
 
-  useEffect(() => {
-    // Hämta alla bokningar här.
-  }, []);
   return (
     <>
       <AdminContext.Provider value={bookings}>
