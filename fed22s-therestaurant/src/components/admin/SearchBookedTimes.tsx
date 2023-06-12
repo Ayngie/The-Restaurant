@@ -3,23 +3,21 @@ import { ShowCalendar } from "../createNewBooking/ShowCalendar";
 import { NormalButton } from "../styled/StyledButtons";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 import { ActionType } from "../../reducers/AdminReducer";
+import { getBookingsByDate } from "../../services/adminService";
 
 export const SearchBookedTimes = () => {
   const dispatch = useContext(AdminDispatchContext);
   const [clickedDate, setClickedDate] = useState("");
 
-  const getDate = async (date: string) => {
-    await setClickedDate(date);
-    // console.log(date);
-    // dispatch({ type: ActionType.GETBOOKINGSBYDATE, payload: date });
+  const getBookingsForDate = async (date: string) => {
+    const bookingsFromAPI = await getBookingsByDate(date);
+    const bookings = JSON.stringify(bookingsFromAPI);
+    dispatch({ type: ActionType.GETBOOKINGSBYDATE, payload: bookings });
   };
-
-  const handleClick = () => {};
-  //       <NormalButton onClick={handleClick}></NormalButton>
 
   return (
     <>
-      <ShowCalendar getDate={getDate}></ShowCalendar>
+      <ShowCalendar getDate={getBookingsForDate}></ShowCalendar>
     </>
   );
 };
