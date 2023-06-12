@@ -4,7 +4,7 @@ import { FindBooking } from "../showSingleBooking/FindBooking";
 import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import { SearchBookedTimes } from "./SearchBookedTimes";
 
-export const AdminSearchBooking = () => {
+export const SearchBooking = () => {
   const [date, setDate] = useState("");
 
   const searchForBooking = (id: string) => {
