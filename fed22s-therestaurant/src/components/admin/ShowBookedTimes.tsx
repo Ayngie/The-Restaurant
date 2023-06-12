@@ -5,11 +5,10 @@ import { NormalButton } from "../styled/StyledButtons";
 
 export const ShowBookedTimes = () => {
   const bookings = useContext(AdminContext);
-  console.log(bookings);
 
   const html = (
     <>
-      {bookings.length > 0 ? (
+      {bookings.length >= 1 ? (
         <table>
           <thead>
             <tr>
@@ -36,7 +35,7 @@ export const ShowBookedTimes = () => {
           </tbody>
         </table>
       ) : (
-        " "
+        <p>Det finns inga bokningar den här dagen</p>
       )}
     </>
   );
