@@ -15,6 +15,7 @@ export const ShowSingleBooking = ({
   showUpdateForm,
 }: IShowSingleBooking) => {
   const dispatch = useContext(AdminDispatchContext);
+  const formattedDate = singleBooking?.date.slice(0, 10);
 
   const updateBooking = () => {
     showUpdateForm(true);
@@ -37,13 +38,12 @@ export const ShowSingleBooking = ({
       <ColumnWrapper>
         <ColumnWrapper>
           <div>
-            <h3> Bokning:</h3>
-            <p>Namn: {singleBooking?.guest.name}</p>
-            <p>Epost: {singleBooking?.guest.email}</p>
-            <p>Tel: {singleBooking?.guest.phoneNumber}</p>
-            <p>Datum: {singleBooking?.date}</p>
+            <h3> Bokning för: {singleBooking?.guest.name}</h3>
+            <p>Datum: {formattedDate}</p>
             <p>Tid: {singleBooking?.time}</p>
             <p>Antal gäster: {singleBooking?.numberOfGuests}</p>
+            <p>Epost: {singleBooking?.guest.email}</p>
+            <p>Tel: {singleBooking?.guest.phoneNumber}</p>
             <p>Bokningsid: {singleBooking?._id}</p>
           </div>
         </ColumnWrapper>
