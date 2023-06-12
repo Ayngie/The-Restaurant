@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
-import { HandleBooking } from "./components/showSingleBooking/HandleBooking";
 import { Home } from "./components/pages/Home";
 import { Booking } from "./components/pages/Booking";
 import { Contact } from "./components/pages/Contact";
 import { Admin } from "./components/pages/Admin";
+import { AdminHandleBooking } from "./components/pages/AdminHandleBooking";
+import { AdminHandleSearch } from "./components/pages/AdminHandleSearch";
 
 export const router = createBrowserRouter([
   {
@@ -29,8 +30,12 @@ export const router = createBrowserRouter([
         element: <Admin></Admin>,
         children: [
           {
+            path: "/admin",
+            element: <AdminHandleSearch></AdminHandleSearch>,
+          },
+          {
             path: "/admin/:id",
-            element: <HandleBooking></HandleBooking>,
+            element: <AdminHandleBooking></AdminHandleBooking>,
           },
         ],
       },
