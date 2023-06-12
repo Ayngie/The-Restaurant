@@ -6,18 +6,19 @@ export interface IAction {
 }
 
 export enum ActionType {
-  GETBOOKINGS,
-  GETBOOKINGBYID,
+  GETBOOKINGSBYDATE,
+  GETBOOKINGBYIDWITHAPI,
+  GETBOOKINGBYIDFROMCONTEXT,
   UPDATEBOOKING,
   REMOVEBOOKING,
 }
 
 export const AdminReducer = (bookings: IBooking[], action: IAction) => {
   switch (action.type) {
-    case ActionType.GETBOOKINGS: {
+    case ActionType.GETBOOKINGSBYDATE: {
       return JSON.parse(action.payload);
     }
-    case ActionType.GETBOOKINGBYID: {
+    case ActionType.GETBOOKINGBYIDFROMCONTEXT: {
       return bookings.map((booking) => {
         if (booking._id === action.payload) {
           return booking;
@@ -25,6 +26,9 @@ export const AdminReducer = (bookings: IBooking[], action: IAction) => {
           return;
         }
       });
+    }
+    case ActionType.GETBOOKINGBYIDWITHAPI: {
+      return JSON.parse(action.payload);
     }
     case ActionType.UPDATEBOOKING: {
       return bookings;
