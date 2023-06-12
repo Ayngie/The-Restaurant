@@ -21,7 +21,8 @@ export const CompleteBooking = ({
   sendBooking,
   postBooking,
 }: ICompleteBookingProps) => {
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {
     register,
@@ -31,7 +32,7 @@ export const CompleteBooking = ({
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    setIsSubmit(true);
+    setIsSubmitting(true);
     console.log("Data", data);
     const guest: IGuest = {
       name: data.name,
@@ -43,19 +44,20 @@ export const CompleteBooking = ({
     // reset();
   };
   useEffect(() => {
-    if (isSubmit) {
+    if (isSubmitting) {
       const submit = async () => {
         try {
           await postBooking();
         } catch (error) {
           console.error(error);
         } finally {
-          setIsSubmit(false);
+          setIsSubmitting(false);
+          setIsSubmitted(true);
         }
       };
       submit();
     }
-  }, [isSubmit, postBooking]);
+  }, [isSubmitting, postBooking]);
 
   const handleCancel = () => {
     reset();
@@ -142,7 +144,7 @@ export const CompleteBooking = ({
           )}
 
           <RowWrapper>
-            <NormalButton type="submit" disabled={isSubmit}>
+            <NormalButton type="submit" disabled={isSubmitted}>
               Boka
             </NormalButton>
             <WarningButton type="button" onClick={handleCancel}>

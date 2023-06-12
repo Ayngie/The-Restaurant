@@ -17,15 +17,19 @@ export const Booking = () => {
   const [clickedHandleBooking, setClickedHandleBooking] = useState(false);
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+  const [showOptions, setShowOptions] = useState(true);
 
   const createNewBooking = (showForm: boolean) => {
     setClickedNewBooking(showForm);
     setClickedHandleBooking(false);
+    setShowOptions(false);
   };
 
   const handleBooking = (showSearchField: boolean) => {
     setClickedHandleBooking(showSearchField);
     setClickedNewBooking(false);
+    SetTimeToFillOutForm(false);
+    setShowOptions(false);
   };
 
   const dateForBooking = (details: IBooking) => {
@@ -62,16 +66,25 @@ export const Booking = () => {
 
   useEffect(() => {
     // här kan vi göra något efter bokningen är gjord.
-  }, []);
+    if (bookingSubmitted) {
+      setClickedNewBooking(false);
+
+      SetTimeToFillOutForm(false);
+    }
+  }, [bookingSubmitted]);
 
   return (
     <>
       <ColumnWrapper>
-        <ChooseBooking
-          createNewBooking={createNewBooking}
-          handleBooking={handleBooking}></ChooseBooking>
+        {showOptions && (
+          <ChooseBooking
+            createNewBooking={createNewBooking}
+            handleBooking={handleBooking}></ChooseBooking>
+        )}
+
         {clickedHandleBooking && <HandleBooking></HandleBooking>}
-        {clickedNewBooking && (
+
+        {clickedNewBooking && !timeToFillOutForm && (
           <SearchUnbookedTimes
             sendDate={dateForBooking}
             showForm={SetTimeToFillOutForm}
@@ -80,10 +93,26 @@ export const Booking = () => {
         {showLoader && <Loader></Loader>}
         {timeToFillOutForm && (
           <>
+            <div>
+              <h3>Du vill boka för {booking.numberOfGuests} personer:</h3>
+              <p>Datum: {booking.date}</p>
+              <p>Tid: {booking.time}</p>
+            </div>
+
             <CompleteBooking
               sendBooking={guestForDate}
               postBooking={postBooking}></CompleteBooking>
           </>
+        )}
+        {bookingSubmitted && (
+          <div>
+            <div>
+              <h3> Tack för din bokning {booking.guest.name}! </h3>
+              <p>Antal gäster: {booking.numberOfGuests}</p>
+              <p>Datum: {booking.date}</p>
+              <p>Tid: {booking.time}</p>
+            </div>
+          </div>
         )}
       </ColumnWrapper>
     </>
