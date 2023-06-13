@@ -1,4 +1,5 @@
 import { IBooking } from "../models/IBooking";
+import { adminDeleteBooking } from "../services/adminService";
 
 export interface IAction {
   type: ActionType;
@@ -34,7 +35,8 @@ export const AdminReducer = (bookings: IBooking[], action: IAction) => {
       return bookings;
     }
     case ActionType.REMOVEBOOKING: {
-      return bookings;
+      adminDeleteBooking(action.payload);
+      return;
     }
     default:
       break;
