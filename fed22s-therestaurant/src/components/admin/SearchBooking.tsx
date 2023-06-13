@@ -1,17 +1,20 @@
-import { useState } from "react";
-import { ShowCalendar } from "../createNewBooking/ShowCalendar";
+import { useContext, useState } from "react";
 import { FindBooking } from "../showSingleBooking/FindBooking";
 import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import { SearchBookedTimes } from "./SearchBookedTimes";
+import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
+import { ActionType } from "../../reducers/AdminReducer";
+import { adminGetBookingById } from "../../services/adminService";
 
 export const SearchBooking = () => {
-  const [date, setDate] = useState("");
+  const dispatch = useContext(AdminDispatchContext);
 
-  const searchForBooking = (id: string) => {
+  const searchForBooking = async (id: string) => {
+    const bookingFromApi = await adminGetBookingById(id);
+    const booking = JSON.stringify(bookingFromApi);
+    console.log(bookingFromApi);
+    dispatch({ type: ActionType.GETBOOKINGBYIDWITHAPI, payload: booking });
     console.log(id);
-  };
-  const getDate = (gotDate: string) => {
-    console.log(gotDate);
   };
 
   return (
