@@ -8,9 +8,7 @@ import { Header } from "./Header";
 export const Layout = () => {
   return (
     <>
-      <StyledHeader>
-        <Header></Header>
-      </StyledHeader>
+      <Header></Header>
       <MainWrapper>
         <Outlet></Outlet>
       </MainWrapper>
