@@ -1,7 +1,11 @@
 import { useContext } from "react";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 import { NormalButton, WarningButton } from "../styled/StyledButtons";
-import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
+import {
+  ColumnWrapper,
+  RowWrapper,
+  SingleBookingWrapper,
+} from "../styled/Wrappers";
 import { IBooking } from "../../models/IBooking";
 import { ActionType } from "../../reducers/AdminReducer";
 
@@ -43,7 +47,7 @@ export const ShowSingleBooking = ({
     <>
       <ColumnWrapper>
         <ColumnWrapper>
-          <div>
+          <SingleBookingWrapper>
             <h3> Bokning för: {singleBooking.guest.name}</h3>
             <p>Datum: {singleBooking.date.substring(0, 10)}</p>
             <p>Tid: {singleBooking.time}</p>
@@ -51,7 +55,7 @@ export const ShowSingleBooking = ({
             <p>Epost: {singleBooking.guest.email}</p>
             <p>Tel: {singleBooking.guest.phoneNumber}</p>
             <p>Bokningsid: {singleBooking._id}</p>
-          </div>
+          </SingleBookingWrapper>
         </ColumnWrapper>
         <RowWrapper>
           <NormalButton type="button" onClick={updateBooking}>

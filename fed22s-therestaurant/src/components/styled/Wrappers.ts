@@ -97,3 +97,9 @@ export const CalendarWrapper = styled.div`
     color: #8d228d;
   }
 `;
+
+export const SingleBookingWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
