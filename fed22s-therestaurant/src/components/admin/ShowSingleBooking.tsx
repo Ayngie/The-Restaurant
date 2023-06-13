@@ -6,7 +6,7 @@ import { IBooking } from "../../models/IBooking";
 import { ActionType } from "../../reducers/AdminReducer";
 
 interface IShowSingleBooking {
-  singleBooking?: IBooking;
+  singleBooking: IBooking;
   showUpdateForm(show: boolean): void;
   bookingDeleted(show: boolean): void;
 }
@@ -17,7 +17,6 @@ export const ShowSingleBooking = ({
   bookingDeleted,
 }: IShowSingleBooking) => {
   const dispatch = useContext(AdminDispatchContext);
-  const formattedDate = singleBooking?.date.slice(0, 10);
 
   const updateBooking = () => {
     showUpdateForm(true);
@@ -25,7 +24,10 @@ export const ShowSingleBooking = ({
   };
   //delete booking
   const deleteBooking = () => {
-    dispatch({ type: ActionType.REMOVEBOOKING, payload: singleBooking?._id });
+    dispatch({
+      type: ActionType.REMOVEBOOKING,
+      payload: singleBooking._id || "",
+    });
     bookingDeleted(true);
     console.log("Delete");
   };
@@ -42,13 +44,13 @@ export const ShowSingleBooking = ({
       <ColumnWrapper>
         <ColumnWrapper>
           <div>
-            <h3> Bokning för: {singleBooking?.guest.name}</h3>
-            <p>Datum: {formattedDate}</p>
-            <p>Tid: {singleBooking?.time}</p>
-            <p>Antal gäster: {singleBooking?.numberOfGuests}</p>
-            <p>Epost: {singleBooking?.guest.email}</p>
-            <p>Tel: {singleBooking?.guest.phoneNumber}</p>
-            <p>Bokningsid: {singleBooking?._id}</p>
+            <h3> Bokning för: {singleBooking.guest.name}</h3>
+            <p>Datum: {singleBooking.date.substring(0, 10)}</p>
+            <p>Tid: {singleBooking.time}</p>
+            <p>Antal gäster: {singleBooking.numberOfGuests}</p>
+            <p>Epost: {singleBooking.guest.email}</p>
+            <p>Tel: {singleBooking.guest.phoneNumber}</p>
+            <p>Bokningsid: {singleBooking._id}</p>
           </div>
         </ColumnWrapper>
         <RowWrapper>
