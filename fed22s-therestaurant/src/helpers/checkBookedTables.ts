@@ -17,7 +17,7 @@ export const checkBookedTables = (
         tables.tablesAtSix++;
       }
       if (table.numberOfGuests > 6) {
-        tables.tablesAtSix += tables.tablesAtSix + 2;
+        tables.tablesAtSix = tables.tablesAtSix + 2;
       }
 
       if (tables.tablesAtSix > 15) {
@@ -32,7 +32,7 @@ export const checkBookedTables = (
         tables.tablesAtNine++;
       }
       if (table.numberOfGuests > 6) {
-        tables.tablesAtNine += tables.tablesAtNine + 2;
+        tables.tablesAtNine = tables.tablesAtNine + 2;
       }
 
       if (tables.tablesAtNine > 15) {
