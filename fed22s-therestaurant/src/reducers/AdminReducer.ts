@@ -43,6 +43,7 @@ export const AdminReducer = (bookings: IBooking[], action: IAction) => {
           phoneNumber: getBooking.guest.phoneNumber,
         },
       };
+      console.log(bookingInfo);
       updateBooking(bookingInfo, getBooking?._id);
       return bookings;
     }
