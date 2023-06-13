@@ -33,6 +33,7 @@ export const ShowSingleBooking = ({
   //Avbryt
   const handleCancel = () => {
     //skapa lifting state up till admin som döljer AdminHandleBooking komponenten?
+    //Eller bara re-directa url:en till /admin ??
     console.log("Avbryt");
   };
 
