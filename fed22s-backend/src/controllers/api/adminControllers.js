@@ -12,6 +12,14 @@ exports.getAllBookings = async (req, res) => {
     return res.status(200).json(bookings);
   }
 };
+exports.getBookingById = async (req, res) => {
+  const bookingId = req.params.bookingId;
+  const booking = await Booking.findById(bookingId).populate({ path: "guest" });
+
+  if (!booking) throw new NotFoundError("Den här bokningen finns inte...");
+
+  return res.status(200).json(booking);
+};
 
 exports.updateBookingById = async (req, res) => {
   const bookingId = req.params.bookingId;
