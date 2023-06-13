@@ -9,6 +9,7 @@ import { useParams } from "react-router";
 import { AdminContext } from "../../contexts/AdminContext";
 import { ActionType } from "../../reducers/AdminReducer";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
+import { FindBooking } from "./FindBooking";
 
 type FormValues = {
   numberOfGuests: number;
@@ -21,16 +22,47 @@ export const UpdateBooking = () => {
   const bookings = useContext(AdminContext);
   const dispatch = useContext(AdminDispatchContext);
   const [booking, setBooking] = useState<IBooking>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // useEffect(() => {
+  //   if (booking) return;
+
+  //   const findBooking = bookings.find((booking) => booking._id === id);
+  //   if (findBooking) {
+  //     setBooking(findBooking);
+  //   }
+  //   console.log(findBooking);
+  // }, [booking, id]);
+
+  const findBooking = bookings.find((booking) => booking._id === id);
   useEffect(() => {
-    if (booking) return;
-
-    const findBooking = bookings.find((booking) => booking._id === id);
+    if (findBooking === undefined) {
+      //meddelande
+    }
     if (findBooking) {
       setBooking(findBooking);
     }
-    console.log(findBooking);
-  }, [booking, id]);
+
+    if (isSubmitting) {
+      const submit = async () => {
+        try {
+          console.log("dispatch");
+
+          dispatch({
+            type: ActionType.UPDATEBOOKING,
+            payload: JSON.stringify(booking),
+          });
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsSubmitting(false);
+          setIsSubmitted(true);
+        }
+      };
+      submit();
+    }
+  }, [isSubmitting, dispatch]);
 
   const {
     register,
@@ -40,6 +72,7 @@ export const UpdateBooking = () => {
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
+    setIsSubmitting(true);
     setBooking({
       ...booking,
       numberOfGuests: data.numberOfGuests,
@@ -52,11 +85,7 @@ export const UpdateBooking = () => {
         phoneNumber: data.guest.phoneNumber,
       },
     });
-
-    dispatch({
-      type: ActionType.UPDATEBOOKING,
-      payload: JSON.stringify(booking),
-    });
+    console.log(booking);
   };
   const updateForm = (
     <>
