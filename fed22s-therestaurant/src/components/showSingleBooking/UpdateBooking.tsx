@@ -7,6 +7,7 @@ import { IBooking } from "../../models/IBooking";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AdminContext } from "../../contexts/AdminContext";
+import { ActionType } from "../../reducers/AdminReducer";
 
 type FormValues = {
   numberOfGuests: number;
@@ -36,8 +37,25 @@ export const UpdateBooking = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit = () => {
-    console.log("click");
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    setBooking({
+      ...booking,
+      numberOfGuests: data.numberOfGuests,
+      date: data.date,
+      time: data.time,
+      guest: {
+        ...booking?.guest,
+        name: data.guest.name,
+        email: data.guest.email,
+        phoneNumber: data.guest.phoneNumber,
+      },
+    });
+    console.log(booking);
+
+    dispatch({
+      type: ActionType.UPDATEBOOKING,
+      payload: JSON.stringify(booking),
+    });
   };
   const updateForm = (
     <>
@@ -72,7 +90,7 @@ export const UpdateBooking = () => {
             placeholder="Datum"
             id="date"
             pattern="\d{4}-\d{2}-\d{2}"
-            defaultValue={booking?.date}
+            defaultValue={booking?.date.substring(0, 10)}
             {...register("date", { required: true })}
             aria-invalid={errors.date ? "true" : "false"}
           />
@@ -180,3 +198,6 @@ export const UpdateBooking = () => {
 
   return <>{updateForm}</>;
 };
+function dispatch(arg0: { type: ActionType; payload: string }) {
+  throw new Error("Function not implemented.");
+}
