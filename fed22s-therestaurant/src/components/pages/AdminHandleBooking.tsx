@@ -10,7 +10,10 @@ export const AdminHandleBooking = () => {
   const { id } = useParams();
   const bookings = useContext(AdminContext);
   const [booking, setBooking] = useState<IBooking>();
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [bookingIsDeleted, setBookingIsDeleted] = useState(false);
 
+  //mockdata
   useEffect(() => {
     if (booking) return;
 
@@ -24,7 +27,14 @@ export const AdminHandleBooking = () => {
   return (
     <>
       <ColumnWrapper>
-        <ShowSingleBooking></ShowSingleBooking>
+        {!bookingIsDeleted && (
+          <ShowSingleBooking
+            singleBooking={booking}
+            showUpdateForm={setShowUpdateForm}
+            bookingDeleted={setBookingIsDeleted}
+          ></ShowSingleBooking>
+        )}
+        {bookingIsDeleted && <h3>Bokningen är raderad</h3>}
         <UpdateBooking></UpdateBooking>
       </ColumnWrapper>
     </>
