@@ -4,20 +4,34 @@ import { StyledInput } from "../styled/StyledInput";
 import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import { StyledErrorParagraph } from "../styled/input/StyledErrorParagraph";
 import { IBooking } from "../../models/IBooking";
-
-interface IUpdateBooking {
-  updateBooking: IBooking;
-}
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { AdminContext } from "../../contexts/AdminContext";
+import { ActionType } from "../../reducers/AdminReducer";
+import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 
 type FormValues = {
   numberOfGuests: number;
   date: string;
   time: string;
-  name: string;
-  email: string;
-  phoneNumber: string;
+  guest: { name: string; email: string; phoneNumber: string };
 };
-export const UpdateBooking = (updateBooking: IUpdateBooking) => {
+export const UpdateBooking = () => {
+  const { id } = useParams();
+  const bookings = useContext(AdminContext);
+  const dispatch = useContext(AdminDispatchContext);
+  const [booking, setBooking] = useState<IBooking>();
+
+  useEffect(() => {
+    if (booking) return;
+
+    const findBooking = bookings.find((booking) => booking._id === id);
+    if (findBooking) {
+      setBooking(findBooking);
+    }
+    console.log(findBooking);
+  }, [booking, id]);
+
   const {
     register,
     handleSubmit,
@@ -25,27 +39,41 @@ export const UpdateBooking = (updateBooking: IUpdateBooking) => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit = () => {
-    console.log("click");
-  };
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    setBooking({
+      ...booking,
+      numberOfGuests: data.numberOfGuests,
+      date: data.date,
+      time: data.time,
+      guest: {
+        ...booking?.guest,
+        name: data.guest.name,
+        email: data.guest.email,
+        phoneNumber: data.guest.phoneNumber,
+      },
+    });
 
-  return (
+    dispatch({
+      type: ActionType.UPDATEBOOKING,
+      payload: JSON.stringify(booking),
+    });
+  };
+  const updateForm = (
     <>
       <h3>Ändra bokning</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ColumnWrapper>
-          {/* boknings info */}
           <StyledInput
             type="number"
             placeholder="Antal gäster"
             id="numberOfGuests"
-            // defaultValue={updateBooking.updateBooking.numberOfGuests}
+            defaultValue={booking?.numberOfGuests}
             {...register("numberOfGuests", {
               required: true,
               min: 1,
               max: 90,
             })}
-            aria-invalid={errors.name ? "true" : "false"}
+            aria-invalid={errors.numberOfGuests ? "true" : "false"}
           />
           {errors.numberOfGuests?.type === "required" && (
             <StyledErrorParagraph role="alert">
@@ -62,7 +90,7 @@ export const UpdateBooking = (updateBooking: IUpdateBooking) => {
             placeholder="Datum"
             id="date"
             pattern="\d{4}-\d{2}-\d{2}"
-            // defaultValue={updateBooking.updateBooking.date}
+            defaultValue={booking?.date.substring(0, 10)}
             {...register("date", { required: true })}
             aria-invalid={errors.date ? "true" : "false"}
           />
@@ -76,45 +104,35 @@ export const UpdateBooking = (updateBooking: IUpdateBooking) => {
               Datum ska skrivas YYYY-MM-DD
             </StyledErrorParagraph>
           )}
-          <select
-            {...register("time")}
-            // defaultValue={updateBooking.updateBooking.time}
-          >
+          <select {...register("time")} defaultValue={booking?.time}>
             <option value={"18:00"}>18:00</option>
             <option value={"21:00"}>21:00</option>
           </select>
-          {/* <StyledInput
-            type="text"
-            placeholder="Tid"
-            id="time"
-            {...register("time", { required: true })}
-          /> */}
-          {/* gäst info */}
           <StyledInput
             type="text"
             placeholder="Namn (för- och efternamn):"
             id="name"
-            // defaultValue={updateBooking.updateBooking.guest.name}
-            {...register("name", {
+            defaultValue={booking?.guest.name}
+            {...register("guest.name", {
               required: true,
               maxLength: 150,
               pattern:
                 /[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])+\s*[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])+\s*[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])$/,
             })}
-            aria-invalid={errors.name ? "true" : "false"}
+            aria-invalid={errors.guest?.name ? "true" : "false"}
           />
-          {errors.name?.type === "required" && (
+          {errors.guest?.name?.type === "required" && (
             <StyledErrorParagraph role="alert">
               Du måste ange namn
             </StyledErrorParagraph>
           )}
 
-          {errors.name?.type === "maxLength" && (
+          {errors.guest?.name?.type === "maxLength" && (
             <StyledErrorParagraph role="alert">
               Namn får max vara 150 tecken.
             </StyledErrorParagraph>
           )}
-          {errors.name?.type === "pattern" && (
+          {errors.guest?.name?.type === "pattern" && (
             <StyledErrorParagraph role="alert">
               Du måste fylla i förnamn + efternamn (minst 2 bokstäver, ej
               otillåtna karaktärer).
@@ -125,19 +143,19 @@ export const UpdateBooking = (updateBooking: IUpdateBooking) => {
             type="email"
             placeholder="E-post:"
             id="email"
-            // defaultValue={updateBooking.updateBooking.guest.email}
-            {...register("email", {
+            defaultValue={booking?.guest.email}
+            {...register("guest.email", {
               required: true,
               pattern: /^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/i,
             })}
-            aria-invalid={errors.email ? "true" : "false"}
+            aria-invalid={errors.guest?.email ? "true" : "false"}
           />
-          {errors.email?.type === "required" && (
+          {errors.guest?.email?.type === "required" && (
             <StyledErrorParagraph role="alert">
               Epost-fältet får inte vara tomt.
             </StyledErrorParagraph>
           )}
-          {errors.email?.type === "pattern" && (
+          {errors.guest?.email?.type === "pattern" && (
             <StyledErrorParagraph role="alert">
               Felaktigt epost-format.
             </StyledErrorParagraph>
@@ -147,19 +165,19 @@ export const UpdateBooking = (updateBooking: IUpdateBooking) => {
             type="tel"
             placeholder="Telefonnummer:"
             id="phoneNumber"
-            // defaultValue={updateBooking.updateBooking.guest.phoneNumber}
-            {...register("phoneNumber", {
+            defaultValue={booking?.guest?.phoneNumber}
+            {...register("guest.phoneNumber", {
               required: true,
               pattern: /^(\+?46|0)7\d{8}$/,
             })}
-            aria-invalid={errors.phoneNumber ? "true" : "false"}
+            aria-invalid={errors.guest?.phoneNumber ? "true" : "false"}
           />
-          {errors.phoneNumber?.type === "required" && (
+          {errors.guest?.phoneNumber?.type === "required" && (
             <StyledErrorParagraph role="alert">
               Telefonnummer-fältet får inte vara tomt.
             </StyledErrorParagraph>
           )}
-          {errors.phoneNumber?.type === "pattern" && (
+          {errors.guest?.phoneNumber?.type === "pattern" && (
             <StyledErrorParagraph role="alert">
               Du behöver ange ett nummer i formatet +46705552222 alt.
               0705552222.
@@ -170,4 +188,6 @@ export const UpdateBooking = (updateBooking: IUpdateBooking) => {
       </form>
     </>
   );
+
+  return <>{updateForm}</>;
 };

@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { IBooking } from "../../models/IBooking";
 import { ShowSingleBooking } from "../admin/ShowSingleBooking";
 import { ColumnWrapper } from "../styled/Wrappers";
+import { UpdateBooking } from "../showSingleBooking/UpdateBooking";
 
 export const AdminHandleBooking = () => {
   const { id } = useParams();
@@ -30,11 +31,11 @@ export const AdminHandleBooking = () => {
           <ShowSingleBooking
             singleBooking={booking}
             showUpdateForm={setShowUpdateForm}
-            bookingDeleted={setBookingIsDeleted}></ShowSingleBooking>
+            bookingDeleted={setBookingIsDeleted}
+          ></ShowSingleBooking>
         )}
-        {/* <p>{booking?.date}</p>
-        <p>hej</p> */}
         {bookingIsDeleted && <h3>Bokningen är raderad</h3>}
+        <UpdateBooking></UpdateBooking>
       </ColumnWrapper>
     </>
   );

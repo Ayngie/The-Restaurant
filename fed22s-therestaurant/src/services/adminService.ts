@@ -34,7 +34,7 @@ Exempel på hur man kan uppdatera användare.
 await updateBooking(updated, "6480daa0eb1a360858e6b2f9");
 måste skicka in hela boknings samt id:et till bokning
 */
-export const deleteBooking = async (id: string) => {
+export const adminDeleteBooking = async (id: string) => {
   const response = await axios.delete(`${BASE_URL}/${id}`);
   console.log(response.status);
   return response.status;
