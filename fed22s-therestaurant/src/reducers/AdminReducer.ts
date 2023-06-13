@@ -1,5 +1,5 @@
 import { IBooking } from "../models/IBooking";
-import { adminDeleteBooking } from "../services/adminService";
+import { adminDeleteBooking, updateBooking } from "../services/adminService";
 
 export interface IAction {
   type: ActionType;
@@ -32,11 +32,23 @@ export const AdminReducer = (bookings: IBooking[], action: IAction) => {
       return JSON.parse(action.payload);
     }
     case ActionType.UPDATEBOOKING: {
+      const getBooking: IBooking = JSON.parse(action.payload);
+      const bookingInfo: IBooking = {
+        numberOfGuests: getBooking.numberOfGuests,
+        date: getBooking.date,
+        time: getBooking.time,
+        guest: {
+          name: getBooking.guest.name,
+          email: getBooking.guest.email,
+          phoneNumber: getBooking.guest.phoneNumber,
+        },
+      };
+      updateBooking(bookingInfo, getBooking?._id);
       return bookings;
     }
     case ActionType.REMOVEBOOKING: {
       adminDeleteBooking(action.payload);
-      return;
+      return bookings.filter((booking) => booking._id !== action.payload);
     }
     default:
       break;
