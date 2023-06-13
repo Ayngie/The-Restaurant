@@ -13,14 +13,16 @@ export const AdminHandleBooking = () => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [bookingIsDeleted, setBookingIsDeleted] = useState(false);
 
+  console.log("bookings: ", bookings);
+
   //mockdata
   useEffect(() => {
-    // if (booking) return;
+    if (booking.numberOfGuests > 0) return;
+
     const findBooking = bookings.filter((booking) => booking._id === id);
     if (findBooking.length === 1) {
       setBooking(findBooking[0]);
     }
-    console.log(findBooking);
   }, [bookings, booking, id]);
 
   return (
@@ -34,7 +36,7 @@ export const AdminHandleBooking = () => {
           ></ShowSingleBooking>
         )}
         {bookingIsDeleted && <h3>Bokningen är raderad</h3>}
-        <UpdateBooking></UpdateBooking>
+        {showUpdateForm && <UpdateBooking booking={booking}></UpdateBooking>}
       </ColumnWrapper>
     </>
   );
