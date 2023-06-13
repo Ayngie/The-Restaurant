@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledLogo = styled.img`
-  width: 50px;
-  border-radius: 50%;
+  width: 130px;
+  margin: 5px;
+  /* height: 100px; */
 `;
