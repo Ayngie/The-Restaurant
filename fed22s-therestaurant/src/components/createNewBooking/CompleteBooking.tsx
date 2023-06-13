@@ -11,12 +11,6 @@ interface ICompleteBookingProps {
   postBooking(): Promise<void>;
 }
 
-type FormValues = {
-  name: string;
-  email: string;
-  phoneNumber: string;
-};
-
 export const CompleteBooking = ({
   sendBooking,
   postBooking,
@@ -29,9 +23,9 @@ export const CompleteBooking = ({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<IGuest>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<IGuest> = (data) => {
     setIsSubmitting(true);
     console.log("Data", data);
     const guest: IGuest = {
