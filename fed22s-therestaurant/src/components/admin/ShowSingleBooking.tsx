@@ -8,11 +8,13 @@ import { IBooking } from "../../models/IBooking";
 interface IShowSingleBooking {
   singleBooking?: IBooking;
   showUpdateForm(show: boolean): void;
+  bookingDeleted(show: boolean): void;
 }
 
 export const ShowSingleBooking = ({
   singleBooking,
   showUpdateForm,
+  bookingDeleted,
 }: IShowSingleBooking) => {
   const dispatch = useContext(AdminDispatchContext);
   const formattedDate = singleBooking?.date.slice(0, 10);
@@ -24,6 +26,7 @@ export const ShowSingleBooking = ({
   //delete booking
   const deleteBooking = () => {
     // dispatch({ type: ActionType.REMOVEBOOKING, payload: singleBooking._id });
+    bookingDeleted(true);
     console.log("Delete");
   };
 
