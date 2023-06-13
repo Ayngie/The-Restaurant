@@ -9,4 +9,7 @@ export const StyledListItem = styled.li`
     font-weight: 800;
     color: white;
   }
+  &:hover {
+    text-shadow: 0 0 5px #8d228d;
+  }
 `;
