@@ -3,7 +3,7 @@ import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 import { NormalButton, WarningButton } from "../styled/StyledButtons";
 import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import { IBooking } from "../../models/IBooking";
-// import { ActionType } from "../../reducers/AdminReducer";
+import { ActionType } from "../../reducers/AdminReducer";
 
 interface IShowSingleBooking {
   singleBooking?: IBooking;
@@ -25,7 +25,7 @@ export const ShowSingleBooking = ({
   };
   //delete booking
   const deleteBooking = () => {
-    // dispatch({ type: ActionType.REMOVEBOOKING, payload: singleBooking._id });
+    dispatch({ type: ActionType.REMOVEBOOKING, payload: singleBooking?._id });
     bookingDeleted(true);
     console.log("Delete");
   };
