@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { StyledInput } from "../styled/input/StyledInput";
+import { NormalButton } from "../styled/StyledButtons";
 
 interface FormValues {
   id: string;
@@ -34,7 +35,7 @@ export const FindBooking = ({ searchBooking }: IBookingIdProps) => {
           maxLength={24}
           {...register("id")}
         />
-        <button type="submit">Sök</button>
+        <NormalButton type="submit">Sök</NormalButton>
       </form>
     </>
   );
