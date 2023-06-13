@@ -33,34 +33,24 @@ export const AdminReducer = (bookings: IBooking[], action: IAction) => {
     }
     case ActionType.UPDATEBOOKING: {
       const getBooking: IBooking = JSON.parse(action.payload);
-      /*
-      const bookingInfo: IBooking = {
-        numberOfGuests: getBooking.numberOfGuests,
-        date: getBooking.date,
-        time: getBooking.time,
-        guest: {
-          name: getBooking.guest.name,
-          email: getBooking.guest.email,
-          phoneNumber: getBooking.guest.phoneNumber,
-        },
-      };
-      console.log(bookingInfo);
-      updateBooking(bookingInfo, getBooking?._id);
-      */
+
       return bookings.map((booking) => {
         if (booking._id === getBooking._id) {
-          const bookingInfo: IBooking = {
+          return {
+            ...booking,
             numberOfGuests: getBooking.numberOfGuests,
             date: getBooking.date,
             time: getBooking.time,
             guest: {
+              ...booking.guest,
               name: getBooking.guest.name,
               email: getBooking.guest.email,
               phoneNumber: getBooking.guest.phoneNumber,
             },
           };
-          console.log(booking);
-          return bookingInfo;
+          console.log("Reducer: ", getBooking);
+        } else {
+          return getBooking;
         }
       });
     }
