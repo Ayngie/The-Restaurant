@@ -19,14 +19,13 @@ export const FindBooking = ({ searchBooking }: IBookingIdProps) => {
   } = useForm<FormValues>();
 
   const onSubmit = async (data: any) => {
-    // setIdToSearch(data.id);
     searchBooking(data.id);
     reset();
   };
 
   return (
     <>
-      <h3>Hitta din bokning genom att fylla i boknings id:et!</h3>
+      <h3>Hitta bokning genom att fylla i bokningsid!</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <StyledInput
           id="id"
