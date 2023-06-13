@@ -50,8 +50,8 @@ export const AdminHandleBooking = () => {
             showUpdateForm={setShowUpdateForm}
             bookingDeleted={setBookingIsDeleted}></ShowSingleBooking>
         )}
-        <p>{booking?.date}</p>
-        <p>hej</p>
+        {/* <p>{booking?.date}</p>
+        <p>hej</p> */}
         {bookingIsDeleted && <h3>Bokningen är raderad</h3>}
       </ColumnWrapper>
     </>
