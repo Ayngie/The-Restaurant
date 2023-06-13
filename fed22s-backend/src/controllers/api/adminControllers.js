@@ -18,7 +18,7 @@ exports.getBookingById = async (req, res) => {
 
   if (!booking) throw new NotFoundError("Den här bokningen finns inte...");
 
-  return res.status(200).json(booking);
+  return res.status(200).json([booking]);
 };
 
 exports.updateBookingById = async (req, res) => {
