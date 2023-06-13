@@ -12,9 +12,7 @@ export const SearchBooking = () => {
   const searchForBooking = async (id: string) => {
     const bookingFromApi = await adminGetBookingById(id);
     const booking = JSON.stringify(bookingFromApi);
-    console.log(bookingFromApi);
     dispatch({ type: ActionType.GETBOOKINGBYIDWITHAPI, payload: booking });
-    console.log(id);
   };
 
   return (
@@ -25,7 +23,6 @@ export const SearchBooking = () => {
         </ColumnWrapper>
         <ColumnWrapper>
           <h3>Sök på ett datum</h3>
-          {/* SearchBookedTimes ist för showCalendar */}
           <SearchBookedTimes></SearchBookedTimes>
         </ColumnWrapper>
       </RowWrapper>
