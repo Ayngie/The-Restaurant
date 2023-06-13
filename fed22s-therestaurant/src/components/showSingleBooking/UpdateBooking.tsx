@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AdminContext } from "../../contexts/AdminContext";
 import { ActionType } from "../../reducers/AdminReducer";
+import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 
 type FormValues = {
   numberOfGuests: number;
@@ -18,6 +19,7 @@ type FormValues = {
 export const UpdateBooking = () => {
   const { id } = useParams();
   const bookings = useContext(AdminContext);
+  const dispatch = useContext(AdminDispatchContext);
   const [booking, setBooking] = useState<IBooking>();
 
   useEffect(() => {
@@ -50,7 +52,6 @@ export const UpdateBooking = () => {
         phoneNumber: data.guest.phoneNumber,
       },
     });
-    console.log(booking);
 
     dispatch({
       type: ActionType.UPDATEBOOKING,
@@ -62,7 +63,6 @@ export const UpdateBooking = () => {
       <h3>Ändra bokning</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ColumnWrapper>
-          {/* boknings info */}
           <StyledInput
             type="number"
             placeholder="Antal gäster"
@@ -108,13 +108,6 @@ export const UpdateBooking = () => {
             <option value={"18:00"}>18:00</option>
             <option value={"21:00"}>21:00</option>
           </select>
-          {/* <StyledInput
-          type="text"
-          placeholder="Tid"
-          id="time"
-          {...register("time", { required: true })}
-        /> */}
-          {/* gäst info */}
           <StyledInput
             type="text"
             placeholder="Namn (för- och efternamn):"
@@ -198,6 +191,3 @@ export const UpdateBooking = () => {
 
   return <>{updateForm}</>;
 };
-function dispatch(arg0: { type: ActionType; payload: string }) {
-  throw new Error("Function not implemented.");
-}
