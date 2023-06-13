@@ -77,7 +77,7 @@ export const CompleteBooking = ({
               required: true,
               maxLength: 150,
               pattern:
-                /[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])+\s*[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])+\s*[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])$/,
+                /^([a-zA-Z]{1,}\s[a-zA-Z]{1,}[a-zA-Z]{1,30}\s?([a-zA-Z]{1,})?)$/i,
             })}
             aria-invalid={errors.name ? "true" : "false"}
           />
