@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { IBooking } from "../../models/IBooking";
 import { ShowSingleBooking } from "../admin/ShowSingleBooking";
 import { ColumnWrapper } from "../styled/Wrappers";
+import { UpdateBooking } from "../showSingleBooking/UpdateBooking";
 
 export const AdminHandleBooking = () => {
   const { id } = useParams();
@@ -24,8 +25,7 @@ export const AdminHandleBooking = () => {
     <>
       <ColumnWrapper>
         <ShowSingleBooking></ShowSingleBooking>
-        <p>{booking?.date}</p>
-        <p>hej</p>
+        <UpdateBooking></UpdateBooking>
       </ColumnWrapper>
     </>
   );
