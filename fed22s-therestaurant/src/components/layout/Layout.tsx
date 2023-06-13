@@ -3,12 +3,13 @@ import { NavBar } from "./NavBar";
 import { Footer } from "./Footer";
 import { MainWrapper } from "../styled/Wrappers";
 import { StyledHeader } from "../styled/header/StyledHeader";
+import { Header } from "./Header";
 
 export const Layout = () => {
   return (
     <>
       <StyledHeader>
-        <NavBar></NavBar>
+        <Header></Header>
       </StyledHeader>
       <MainWrapper>
         <Outlet></Outlet>
