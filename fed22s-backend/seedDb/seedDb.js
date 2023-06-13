@@ -14,8 +14,8 @@ const populateMongoDbWithMockData = async (connectionString) => {
     await Guest.deleteMany();
     await Booking.deleteMany();
 
-    const guestRes = await Guest.create(mockGuest);
-    const bookingRes = await Booking.create(mockBookings);
+    //const guestRes = await Guest.create(mockGuest);
+    // const bookingRes = await Booking.create(mockBookings);
 
     console.log("It worked yey. Mockdata is now added.");
   } catch (error) {
