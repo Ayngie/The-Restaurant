@@ -1,91 +1,64 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { NormalButton, WarningButton } from "../styled/StyledButtons";
 import { StyledInput } from "../styled/StyledInput";
 import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import { StyledErrorParagraph } from "../styled/input/StyledErrorParagraph";
 import { IBooking } from "../../models/IBooking";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { AdminContext } from "../../contexts/AdminContext";
 import { ActionType } from "../../reducers/AdminReducer";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
-import { FindBooking } from "./FindBooking";
+import { updateBooking } from "../../services/adminService";
 
-type FormValues = {
-  numberOfGuests: number;
-  date: string;
-  time: string;
-  guest: { name: string; email: string; phoneNumber: string };
-};
-export const UpdateBooking = () => {
-  const { id } = useParams();
-  const bookings = useContext(AdminContext);
-  const dispatch = useContext(AdminDispatchContext);
-  const [booking, setBooking] = useState<IBooking>();
+interface IBookingProps {
+  booking: IBooking;
+}
+
+export const UpdateBooking = ({ booking }: IBookingProps) => {
+  const [bookingToUpdate, setBookingToUpdate] = useState<IBooking>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  // useEffect(() => {
-  //   if (booking) return;
-
-  //   const findBooking = bookings.find((booking) => booking._id === id);
-  //   if (findBooking) {
-  //     setBooking(findBooking);
-  //   }
-  //   console.log(findBooking);
-  // }, [booking, id]);
-
-  const findBooking = bookings.find((booking) => booking._id === id);
-  useEffect(() => {
-    if (findBooking === undefined) {
-      //meddelande
-    }
-    if (findBooking) {
-      setBooking(findBooking);
-    }
-
-    if (isSubmitting) {
-      const submit = async () => {
-        try {
-          console.log("dispatch");
-
-          dispatch({
-            type: ActionType.UPDATEBOOKING,
-            payload: JSON.stringify(booking),
-          });
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setIsSubmitting(false);
-          setIsSubmitted(true);
-        }
-      };
-      submit();
-    }
-  }, [isSubmitting, dispatch]);
+  const dispatch = useContext(AdminDispatchContext);
 
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
+    control,
+    getValues,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<IBooking>({ defaultValues: booking });
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  useEffect(() => {
+    setValue("numberOfGuests", booking.numberOfGuests);
+    setValue("date", booking.date.substring(0, 10));
+    setValue("time", booking.time);
+    setValue("guest.name", booking.guest.name);
+    setValue("guest.email", booking.guest.email);
+    setValue("guest.phoneNumber", booking.guest.phoneNumber);
+  }, [isSubmitting]);
+
+  const onSubmit: SubmitHandler<IBooking> = async () => {
+    const values = getValues();
     setIsSubmitting(true);
-    setBooking({
-      ...booking,
-      numberOfGuests: data.numberOfGuests,
-      date: data.date,
-      time: data.time,
+    const updatedBooking: IBooking = {
+      numberOfGuests: values.numberOfGuests,
+      date: values.date,
+      time: values.time,
       guest: {
         ...booking?.guest,
-        name: data.guest.name,
-        email: data.guest.email,
-        phoneNumber: data.guest.phoneNumber,
+        name: values.guest.name,
+        email: values.guest.email,
+        phoneNumber: values.guest.phoneNumber,
       },
+    };
+    console.log("updatedBooking", updatedBooking);
+    dispatch({
+      type: ActionType.UPDATEBOOKING,
+      payload: JSON.stringify(updatedBooking),
     });
-    console.log(booking);
+    const response = await updateBooking(updatedBooking, booking._id || "");
+    console.log(response);
   };
   const updateForm = (
     <>
@@ -96,7 +69,8 @@ export const UpdateBooking = () => {
             type="number"
             placeholder="Antal gäster"
             id="numberOfGuests"
-            defaultValue={booking?.numberOfGuests}
+            // value={booking.numberOfGuests}
+            // defaultValue={booking?.numberOfGuests}
             {...register("numberOfGuests", {
               required: true,
               min: 1,
@@ -114,12 +88,18 @@ export const UpdateBooking = () => {
               Det går inte att boka sällskap större än 90
             </StyledErrorParagraph>
           )}
+          {errors.numberOfGuests?.type === "min" && (
+            <StyledErrorParagraph role="alert">
+              Det går inte att boka bord utan gäster
+            </StyledErrorParagraph>
+          )}
           <StyledInput
             type="text"
             placeholder="Datum"
             id="date"
             pattern="\d{4}-\d{2}-\d{2}"
-            defaultValue={booking?.date.substring(0, 10)}
+            // value={booking.date.substring(0, 10)}
+            // defaultValue={booking.date.substring(0, 10)}
             {...register("date", { required: true })}
             aria-invalid={errors.date ? "true" : "false"}
           />
@@ -133,7 +113,7 @@ export const UpdateBooking = () => {
               Datum ska skrivas YYYY-MM-DD
             </StyledErrorParagraph>
           )}
-          <select {...register("time")} defaultValue={booking?.time}>
+          <select {...register("time")} defaultValue={booking.time}>
             <option value={"18:00"}>18:00</option>
             <option value={"21:00"}>21:00</option>
           </select>
@@ -141,12 +121,11 @@ export const UpdateBooking = () => {
             type="text"
             placeholder="Namn (för- och efternamn):"
             id="name"
-            defaultValue={booking?.guest.name}
             {...register("guest.name", {
               required: true,
               maxLength: 150,
               pattern:
-                /[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])+\s*[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])+\s*[A-Ö][a-ö]*((-|\s)*[A-Ö][a-ö])$/,
+                /^([a-öA-Ö]{1,50}([^'])\s[a-öA-Ö]{1,50}[a-öA-Ö]{1,50}\s?([a-öA-Ö]{1,50})?)$/i,
             })}
             aria-invalid={errors.guest?.name ? "true" : "false"}
           />
@@ -212,7 +191,7 @@ export const UpdateBooking = () => {
               0705552222.
             </StyledErrorParagraph>
           )}
-          <NormalButton type="submit">Boka</NormalButton>
+          <NormalButton type="submit">Uppdatera bokning</NormalButton>
         </ColumnWrapper>
       </form>
     </>
