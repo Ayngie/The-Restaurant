@@ -7,11 +7,15 @@ export const Home = () => {
   return (
     <>
       <ColumnWrapper>
-        <StyledHero></StyledHero>
-        <StyledSection>
+        <StyledHero>
           <h1>Välkommen till Restaurangen!</h1>
+          <p>Text om restaurangen</p>
+        </StyledHero>
+        <StyledSection>
           <Link to={"/booking"}>
-            <NormalButton>Gå till bokningar</NormalButton>
+            <h2>Gå till bokningar</h2>
+            <h2>Visa meny</h2>
+            {/* <NormalButton>Gå till bokningar</NormalButton> */}
           </Link>
         </StyledSection>
       </ColumnWrapper>
