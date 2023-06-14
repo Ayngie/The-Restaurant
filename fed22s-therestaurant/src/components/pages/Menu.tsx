@@ -1,5 +1,10 @@
-import { StyledH1, StyledParagraph } from "../styled/TextStyles";
+import {
+  StyledH1,
+  StyledMenuParagraph,
+  StyledParagraph,
+} from "../styled/TextStyles";
 import { ColumnWrapper } from "../styled/Wrappers";
+import { StyledListItem } from "../styled/menu/StyledListItem";
 
 export const Menu = () => {
   const menuList: string[] = [
@@ -18,19 +23,19 @@ export const Menu = () => {
   const html = (
     <ol>
       {menuList.map((course, index) => (
-        <li key={index}>{course}</li>
+        <StyledListItem key={index}>{course}</StyledListItem>
       ))}
     </ol>
   );
   return (
     <ColumnWrapper>
       <StyledH1>Meny</StyledH1>
-      <StyledParagraph>
+      <StyledMenuParagraph>
         Dessa rätter kombinerar olika smaker och texturer för att skapa en
         varierad och lockande meny för våra gäster. Vi anpassar menyvalet efter
         säsong och tillgänglighet för att garantera de färskaste och bästa
         ingredienserna. Smaklig måltid!
-      </StyledParagraph>
+      </StyledMenuParagraph>
       {html}
     </ColumnWrapper>
   );

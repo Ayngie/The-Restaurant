@@ -5,11 +5,18 @@ export const StyledH1 = styled.h1`
   text-shadow: 2px 2px hotpink;
   text-align: center;
 `;
+
 export const StyledParagraph = styled.p`
   width: 80%;
   color: white;
   text-align: center;
 `;
+
+export const StyledMenuParagraph = styled(StyledParagraph)`
+  color: white;
+  width: 50%;
+`;
+
 export const StyledParagraphMobile = styled(StyledParagraph)`
   font-size: 1.5em;
   display: auto;
@@ -17,6 +24,7 @@ export const StyledParagraphMobile = styled(StyledParagraph)`
     display: none;
   }
 `;
+
 export const StyledParagraphDesktop = styled(StyledParagraph)`
   display: none;
   @media screen and (min-width: 1200px) {
