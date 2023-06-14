@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledListItem = styled.li`
   padding: 5px;
   padding-right: 30px;
+  width: 100%;
   a {
     text-decoration: none;
     font-family: "Open Sans", sans-serif;
