@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FindBooking } from "../showSingleBooking/FindBooking";
 import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import { SearchBookedTimes } from "./SearchBookedTimes";
@@ -7,6 +7,10 @@ import { ActionType } from "../../reducers/AdminReducer";
 import { adminGetBookingById } from "../../services/adminService";
 
 export const SearchBooking = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const dispatch = useContext(AdminDispatchContext);
 
   const searchForBooking = async (id: string) => {
