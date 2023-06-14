@@ -50,7 +50,11 @@ export const SearchUnbookedTimes = ({
   const handleSearch = async () => {
     console.log("bookingInfo", bookingInfo);
 
-    if (bookingInfo.numberOfGuests == 0 || bookingInfo.time == "") {
+    if (
+      bookingInfo.numberOfGuests == 0 ||
+      bookingInfo.time == "" ||
+      bookingInfo.date == ""
+    ) {
       console.log("fyll i alla uppgifter");
       setMsg("Fyll i alla fält");
     } else {
