@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { NumberOfGuests } from "./NumberOfGuests";
 import { ShowCalendar } from "./ShowCalendar";
-import { CalendarWrapper, RowWrapper } from "../styled/Wrappers";
-import Dropdown, { Group, Option } from "react-dropdown";
+import { CalendarWrapper, ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import "react-dropdown/style.css";
 import { NormalButton } from "../styled/StyledButtons";
 import { getBookingsByDate } from "../../services/bookingService";
 import { checkBookedTables } from "../../helpers/checkBookedTables";
 import { checkAvailableTables } from "../../helpers/checkAvailableTables";
+import { ChooseTime } from "./ChooseTime";
 
 interface ISendBookingProps {
   sendDate(booking: object): void;
@@ -29,8 +29,11 @@ export const SearchUnbookedTimes = ({
   const [restarantIsFullyBooked, setRestarantIsFullyBooked] =
     useState<boolean>(false);
   // const [showError, setShowError] = useState<boolean>(false);
+  const [msg, setMsg] = useState("");
 
   const getNumberOfGuests = (value: number) => {
+    console.log("NumberOfGuests", value);
+
     setBookingInfo({ ...bookingInfo, numberOfGuests: value });
   };
 
@@ -38,50 +41,56 @@ export const SearchUnbookedTimes = ({
     setBookingInfo({ ...bookingInfo, date: value });
   };
 
-  const options = ["18:00", "21:00"];
-  // const defaultOption = options[0];
+  const getChoosenTime = (value: string) => {
+    console.log("choosen time", value);
 
-  const handleChange = (option: Option) => {
-    setBookingInfo({ ...bookingInfo, time: option.value });
+    setBookingInfo({ ...bookingInfo, time: value });
   };
 
   const handleSearch = async () => {
-    showLoader(true);
-    showForm(false);
-    setRestarantIsFullyBooked(false);
-    let response = await getBookingsByDate(bookingInfo.date);
-    let bookedTables = checkBookedTables(
-      response,
-      bookingInfo.numberOfGuests,
-      bookingInfo.time
-    );
+    console.log("bookingInfo", bookingInfo);
 
-    console.log("bookedTables", bookedTables);
-    //om bookedTables == 15 -> säg att är fullt...
-    if (bookedTables == 15) {
-      setRestarantIsFullyBooked(true);
-    }
-    //annars - kolla antal bord som ska bokas
-    let doWeHaveABooking = checkAvailableTables(
-      bookingInfo.numberOfGuests,
-      bookedTables
-    );
-
-    console.log("doWeHaveABooking", doWeHaveABooking);
-    if (doWeHaveABooking === false) {
-      console.log("false......");
-
-      setRestarantIsFullyBooked(true);
-      //inte visas
-      showLoader(false);
+    if (bookingInfo.numberOfGuests == 0 || bookingInfo.time == "") {
+      console.log("fyll i alla uppgifter");
+      setMsg("Fyll i alla fält");
+    } else {
+      showLoader(true);
       showForm(false);
-    }
-    if (doWeHaveABooking === true) {
-      console.log("dkldkldjd");
-      sendDate(bookingInfo);
-      showLoader(false);
-      //visa
-      showForm(true);
+      setRestarantIsFullyBooked(false);
+      let response = await getBookingsByDate(bookingInfo.date);
+      let bookedTables = checkBookedTables(
+        response,
+        bookingInfo.numberOfGuests,
+        bookingInfo.time
+      );
+
+      console.log("bookedTables", bookedTables);
+      //om bookedTables == 15 -> säg att är fullt...
+      if (bookedTables == 15) {
+        setRestarantIsFullyBooked(true);
+      }
+      //annars - kolla antal bord som ska bokas
+      let doWeHaveABooking = checkAvailableTables(
+        bookingInfo.numberOfGuests,
+        bookedTables
+      );
+
+      console.log("doWeHaveABooking", doWeHaveABooking);
+      if (doWeHaveABooking === false) {
+        console.log("false......");
+
+        setRestarantIsFullyBooked(true);
+        //inte visas
+        showLoader(false);
+        showForm(false);
+      }
+      if (doWeHaveABooking === true) {
+        console.log("dkldkldjd");
+        sendDate(bookingInfo);
+        showLoader(false);
+        //visa
+        showForm(true);
+      }
     }
   };
 
@@ -91,15 +100,15 @@ export const SearchUnbookedTimes = ({
         <CalendarWrapper>
           <ShowCalendar getDate={getDate}></ShowCalendar>
         </CalendarWrapper>
-
-        <NumberOfGuests getNumberOfGuests={getNumberOfGuests}></NumberOfGuests>
-        <label>Sittning:</label>
-        <Dropdown
-          onChange={handleChange}
-          options={options}
-          value={"Välj tid"}
-          placeholder="Välj tid"
-        />
+        <ColumnWrapper>
+          <RowWrapper>
+            <NumberOfGuests
+              getNumberOfGuests={getNumberOfGuests}
+            ></NumberOfGuests>
+            <ChooseTime getChoosenTime={getChoosenTime}></ChooseTime>
+          </RowWrapper>
+          {msg}
+        </ColumnWrapper>
       </RowWrapper>
       <NormalButton onClick={handleSearch}>Sök</NormalButton>
       {restarantIsFullyBooked && (
