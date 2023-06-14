@@ -48,7 +48,7 @@ export const Home = () => {
             <Link to={"/booking"}>
               <NormalButton>Gå till bokningar</NormalButton>
             </Link>
-            <Link to={"/booking"}>
+            <Link to={"/menu"}>
               <NormalButton>Visa meny</NormalButton>
             </Link>
           </RowWrapper>
