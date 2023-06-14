@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { StyledInput } from "../styled/input/StyledInput";
-import { NormalButton } from "../styled/StyledButtons";
+import { NormalButton, WarningButton } from "../styled/StyledButtons";
 import { useEffect } from "react";
 
 interface FormValues {
@@ -9,9 +9,13 @@ interface FormValues {
 
 interface IBookingIdProps {
   searchBooking(idToSearch: string): void;
+  cancelSearch(): void;
 }
 
-export const FindBooking = ({ searchBooking }: IBookingIdProps) => {
+export const FindBooking = ({
+  searchBooking,
+  cancelSearch,
+}: IBookingIdProps) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -41,6 +45,9 @@ export const FindBooking = ({ searchBooking }: IBookingIdProps) => {
         />
         <NormalButton type="submit">Sök</NormalButton>
       </form>
+      <WarningButton type="button" onClick={cancelSearch}>
+        Tillbaka
+      </WarningButton>
     </>
   );
 };
