@@ -38,6 +38,8 @@ export const CompleteBooking = ({
     // reset();
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     if (isSubmitting) {
       const submit = async () => {
         try {

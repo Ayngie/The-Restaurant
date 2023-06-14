@@ -6,8 +6,13 @@ import {
   RowWrapperStatic,
   StyledImg,
 } from "../styled/Wrappers";
+import { useEffect } from "react";
 
 export const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <ColumnWrapper>

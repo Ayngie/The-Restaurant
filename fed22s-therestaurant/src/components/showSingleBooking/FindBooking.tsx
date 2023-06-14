@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { StyledInput } from "../styled/input/StyledInput";
 import { NormalButton } from "../styled/StyledButtons";
+import { useEffect } from "react";
 
 interface FormValues {
   id: string;
@@ -11,6 +12,10 @@ interface IBookingIdProps {
 }
 
 export const FindBooking = ({ searchBooking }: IBookingIdProps) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const {
     register,
     handleSubmit,

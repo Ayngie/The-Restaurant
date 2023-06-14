@@ -7,8 +7,13 @@ import {
 } from "../styled/TextStyles";
 import { ColumnWrapper } from "../styled/Wrappers";
 import { StyledListItem } from "../styled/menu/StyledListItem";
+import { useEffect } from "react";
 
 export const Menu = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const menuList: string[] = [
     "Färskrökt laxtartar med avokado- och limecrème",
     "Grillade pilgrimsmusslor med parmesanrisotto och balsamicoreduktion",

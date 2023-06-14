@@ -65,6 +65,8 @@ export const Booking = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     // här kan vi göra något efter bokningen är gjord.
     if (bookingSubmitted) {
       setClickedNewBooking(false);
