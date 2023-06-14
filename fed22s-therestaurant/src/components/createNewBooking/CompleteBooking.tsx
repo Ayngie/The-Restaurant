@@ -9,11 +9,17 @@ import { StyledErrorParagraph } from "../styled/input/StyledErrorParagraph";
 interface ICompleteBookingProps {
   sendBooking(guest: IGuest): void;
   postBooking(): Promise<void>;
+  goBackToShowOptions(show: boolean): void;
+  showUnbookedTimes(show: boolean): void;
+  timeToFillOutForm(show: boolean): void;
 }
 
 export const CompleteBooking = ({
   sendBooking,
   postBooking,
+  goBackToShowOptions,
+  showUnbookedTimes,
+  timeToFillOutForm,
 }: ICompleteBookingProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -57,6 +63,9 @@ export const CompleteBooking = ({
 
   const handleCancel = () => {
     reset();
+    goBackToShowOptions(true);
+    showUnbookedTimes(false);
+    timeToFillOutForm(false);
     console.log("Avbryt");
   };
 

@@ -114,6 +114,9 @@ export const Booking = () => {
             <CompleteBooking
               sendBooking={guestForDate}
               postBooking={postBooking}
+              goBackToShowOptions={setShowOptions}
+              showUnbookedTimes={setClickedNewBooking}
+              timeToFillOutForm={SetTimeToFillOutForm}
             ></CompleteBooking>
           </>
         )}

@@ -115,7 +115,12 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
               Datum ska skrivas YYYY-MM-DD
             </StyledErrorParagraph>
           )}
-          <select {...register("time")} defaultValue={booking.time}>
+          <select
+            placeholder="Välj antal gäster"
+            required={true}
+            {...register("time")}
+            defaultValue={booking.time}
+          >
             <option value={"18:00"}>18:00</option>
             <option value={"21:00"}>21:00</option>
           </select>
