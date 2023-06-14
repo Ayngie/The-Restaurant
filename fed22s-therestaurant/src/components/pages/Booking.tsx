@@ -116,7 +116,7 @@ export const Booking = () => {
               postBooking={postBooking}
               goBackToShowOptions={setShowOptions}
               showUnbookedTimes={setClickedNewBooking}
-              timeToFillOutForm={SetTimeToFillOutForm}
+              timeToFillOutForm={setTimeToFillOutForm}
             ></CompleteBooking>
           </>
         )}
