@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { NormalButton } from "../styled/StyledButtons";
 import {
   StyledH1,
   StyledMenuParagraph,
@@ -37,6 +39,9 @@ export const Menu = () => {
         ingredienserna. Smaklig måltid!
       </StyledMenuParagraph>
       {html}
+      <Link to={"/booking"}>
+        <NormalButton>Gå till bokningar</NormalButton>
+      </Link>
     </ColumnWrapper>
   );
 };
