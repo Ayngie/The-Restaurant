@@ -5,11 +5,8 @@ export const MainWrapper = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   background-color: pink;
   min-height: 90vh;
-
-  font-family: "Nunito Sans", sans-serif;
   @media screen and (min-width: 1200px) {
     flex-direction: row;
     justify-content: center;
@@ -28,10 +25,18 @@ export const RowWrapper = styled.div`
   }
 `;
 
+export const RowWrapperStatic = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+`;
+
 export const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   gap: 10px;
 `;
 
