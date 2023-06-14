@@ -4,7 +4,11 @@ import { ShowBooking } from "./ShowBooking";
 import { IBooking, defaultBooking } from "../../models/IBooking";
 import { deleteBooking, getBookingById } from "../../services/bookingService";
 
-export const HandleBooking = () => {
+interface IHandleBookingProps {
+  cancel(): void;
+}
+
+export const HandleBooking = ({ cancel }: IHandleBookingProps) => {
   const [showBooking, setShowBooking] = useState(false);
   const [booking, setBooking] = useState<IBooking>(defaultBooking);
 
@@ -18,12 +22,21 @@ export const HandleBooking = () => {
     console.log(response);
   };
 
+  const cancelSearch = () => {
+    setShowBooking(false);
+    cancel();
+  };
+
   return (
     <>
       {!showBooking ? (
-        <FindBooking searchBooking={searchIdForBooking}></FindBooking>
+        <FindBooking
+          searchBooking={searchIdForBooking}
+          cancelSearch={cancelSearch}
+        ></FindBooking>
       ) : (
         <ShowBooking
+          cancelSearch={cancelSearch}
           booking={booking}
           removeBookingById={removeBooking}
         ></ShowBooking>
