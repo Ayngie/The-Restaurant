@@ -11,13 +11,14 @@ import { updateBooking } from "../../services/adminService";
 
 interface IBookingProps {
   booking: IBooking;
+  guestAbleToBook: number;
 }
 
-export const UpdateBooking = ({ booking }: IBookingProps) => {
+export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
   const [bookingToUpdate, setBookingToUpdate] = useState<IBooking>();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const dispatch = useContext(AdminDispatchContext);
+  const [maxGuests, setMaxGuests] = useState(0);
 
   const {
     register,
@@ -36,11 +37,12 @@ export const UpdateBooking = ({ booking }: IBookingProps) => {
     setValue("guest.name", booking.guest.name);
     setValue("guest.email", booking.guest.email);
     setValue("guest.phoneNumber", booking.guest.phoneNumber);
-  }, [isSubmitting]);
+    setMaxGuests(guestAbleToBook * 6);
+  }, [isSubmitted]);
 
   const onSubmit: SubmitHandler<IBooking> = async () => {
     const values = getValues();
-    setIsSubmitting(true);
+    setIsSubmitted(true);
     const updatedBooking: IBooking = {
       numberOfGuests: values.numberOfGuests,
       date: values.date,
@@ -52,7 +54,6 @@ export const UpdateBooking = ({ booking }: IBookingProps) => {
         phoneNumber: values.guest.phoneNumber,
       },
     };
-    console.log("updatedBooking", updatedBooking);
     dispatch({
       type: ActionType.UPDATEBOOKING,
       payload: JSON.stringify(updatedBooking),
@@ -74,7 +75,7 @@ export const UpdateBooking = ({ booking }: IBookingProps) => {
             {...register("numberOfGuests", {
               required: true,
               min: 1,
-              max: 90,
+              max: maxGuests + booking.numberOfGuests,
             })}
             aria-invalid={errors.numberOfGuests ? "true" : "false"}
           />
@@ -85,7 +86,8 @@ export const UpdateBooking = ({ booking }: IBookingProps) => {
           )}
           {errors.numberOfGuests?.type === "max" && (
             <StyledErrorParagraph role="alert">
-              Det går inte att boka sällskap större än 90
+              Det går inte att boka sällskap större än{" "}
+              {maxGuests + booking.numberOfGuests}
             </StyledErrorParagraph>
           )}
           {errors.numberOfGuests?.type === "min" && (
@@ -191,7 +193,9 @@ export const UpdateBooking = ({ booking }: IBookingProps) => {
               0705552222.
             </StyledErrorParagraph>
           )}
-          <NormalButton type="submit">Uppdatera bokning</NormalButton>
+          <NormalButton type="submit" disabled={isSubmitted}>
+            Uppdatera bokning
+          </NormalButton>
         </ColumnWrapper>
       </form>
     </>
