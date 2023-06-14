@@ -4,7 +4,7 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import { IBooking, defaultBooking } from "../../models/IBooking";
 import { ShowSingleBooking } from "../admin/ShowSingleBooking";
 import { ColumnWrapper } from "../styled/Wrappers";
-import { UpdateBooking } from "../showSingleBooking/UpdateBooking";
+import { UpdateBooking } from "../admin/UpdateBooking";
 import { checkBookedTables } from "../../helpers/checkBookedTables";
 
 export const AdminHandleBooking = () => {
