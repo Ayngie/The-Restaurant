@@ -113,3 +113,16 @@ export const SingleBookingWrapper = styled.div`
   border: 2px solid white;
   border-radius: 10px;
 `;
+
+export const ImageWrapper = styled.div`
+  padding: 10px;
+  width: 60vw;
+
+  @media screen and (min-width: 1200px) {
+    width: 40vw;
+  }
+`;
+
+export const StyledImg = styled.img`
+  width: 100%;
+`;

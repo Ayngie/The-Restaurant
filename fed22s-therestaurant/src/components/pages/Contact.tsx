@@ -1,21 +1,33 @@
 import { Link } from "react-router-dom";
-import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
+import {
+  ColumnWrapper,
+  ImageWrapper,
+  RowWrapper,
+  RowWrapperStatic,
+  StyledImg,
+} from "../styled/Wrappers";
 
 export const Contact = () => {
   return (
     <>
       <ColumnWrapper>
         <h2>Kontakta Restaurangen</h2>
-        <RowWrapper>
+        <RowWrapperStatic>
           <h4>Telefon: </h4>
           <Link to="tel:+4670123456">+4670123456</Link>
-        </RowWrapper>
-        <RowWrapper>
+        </RowWrapperStatic>
+        <RowWrapperStatic>
           <h4>Epost: </h4>
           <Link to="mailto:info@MI.restaurangen.se">
             info@MI.restaurangen.se
           </Link>
-        </RowWrapper>
+        </RowWrapperStatic>
+        <ImageWrapper>
+          <StyledImg
+            src="https://images.pexels.com/photos/1038628/pexels-photo-1038628.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="View from above of phone, computer, earpods and a cup of tea."
+          />
+        </ImageWrapper>
       </ColumnWrapper>
     </>
   );
