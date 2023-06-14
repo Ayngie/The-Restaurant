@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { NormalButton, WarningButton } from "../styled/StyledButtons";
-import { StyledInput } from "../styled/StyledInput";
+import { StyledInput } from "../styled/input/StyledInput";
 import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import { StyledErrorParagraph } from "../styled/input/StyledErrorParagraph";
 import { IBooking } from "../../models/IBooking";
