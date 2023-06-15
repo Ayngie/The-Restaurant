@@ -16,7 +16,11 @@ export enum ActionType {
 export const AdminReducer = (bookings: IBooking[], action: IAction) => {
   switch (action.type) {
     case ActionType.GETBOOKINGSBYDATE: {
-      return JSON.parse(action.payload);
+      const bookingToSort: IBooking[] = JSON.parse(action.payload);
+
+      return [...bookingToSort].sort((a, b) => {
+        return a.time > b.time ? 1 : -1;
+      });
     }
     case ActionType.GETBOOKINGBYIDFROMCONTEXT: {
       return bookings.map((booking) => {
