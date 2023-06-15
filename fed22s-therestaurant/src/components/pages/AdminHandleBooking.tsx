@@ -52,7 +52,7 @@ export const AdminHandleBooking = () => {
         {showUpdateForm && (
           <>
             <h3>Lediga bord vid sex: {freeTables.tablesAtSix}</h3>
-            <h3>Lediga bord vid Nio: {freeTables.tablesAtNine}</h3>
+            <h3>Lediga bord vid nio: {freeTables.tablesAtNine}</h3>
             <UpdateBooking
               updatingBooking={updatingBooking}
               updatedComplete={setShowUpdateForm}
