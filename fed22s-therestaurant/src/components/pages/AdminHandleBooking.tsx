@@ -13,16 +13,18 @@ export const AdminHandleBooking = () => {
   const [booking, setBooking] = useState<IBooking>(defaultBooking);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [bookingIsDeleted, setBookingIsDeleted] = useState(false);
-  const [freeTables, setFreeTables] = useState(0);
+  const [freeTables, setFreeTables] = useState<IBookedTables>({
+    tablesAtSix: 0,
+    tablesAtNine: 0,
+  });
 
   useEffect(() => {
     if (booking.numberOfGuests > 0) {
-      const tables = checkBookedTables(
-        bookings,
-        booking.numberOfGuests,
-        booking.time
-      );
-      setFreeTables(15 - tables);
+      const tables = checkBookedTables(bookings);
+      setFreeTables({
+        tablesAtSix: 15 - tables.tablesAtSix,
+        tablesAtNine: 15 - tables.tablesAtNine,
+      });
     }
     if (booking.numberOfGuests > 0) return;
 
@@ -31,6 +33,10 @@ export const AdminHandleBooking = () => {
       setBooking(findBooking[0]);
     }
   }, [bookings, booking, id]);
+
+  const updatingBooking = (bookingToShow: IBooking) => {
+    setBooking(bookingToShow);
+  };
 
   return (
     <>
@@ -45,8 +51,11 @@ export const AdminHandleBooking = () => {
         {bookingIsDeleted && <h3>Bokningen är raderad</h3>}
         {showUpdateForm && (
           <>
-            <h3>Lediga bord: {freeTables}</h3>
+            <h3>Lediga bord vid sex: {freeTables.tablesAtSix}</h3>
+            <h3>Lediga bord vid nio: {freeTables.tablesAtNine}</h3>
             <UpdateBooking
+              updatingBooking={updatingBooking}
+              updatedComplete={setShowUpdateForm}
               guestAbleToBook={freeTables}
               booking={booking}
             ></UpdateBooking>

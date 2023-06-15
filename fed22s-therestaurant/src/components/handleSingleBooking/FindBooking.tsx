@@ -9,13 +9,9 @@ interface FormValues {
 
 interface IBookingIdProps {
   searchBooking(idToSearch: string): void;
-  cancelSearch(): void;
 }
 
-export const FindBooking = ({
-  searchBooking,
-  cancelSearch,
-}: IBookingIdProps) => {
+export const FindBooking = ({ searchBooking }: IBookingIdProps) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -45,9 +41,6 @@ export const FindBooking = ({
         />
         <NormalButton type="submit">Sök</NormalButton>
       </form>
-      <WarningButton type="button" onClick={cancelSearch}>
-        Tillbaka
-      </WarningButton>
     </>
   );
 };
