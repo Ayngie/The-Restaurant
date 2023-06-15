@@ -8,6 +8,9 @@ import { IGuest } from "../../models/IGuest";
 import { createBooking } from "../../services/bookingService";
 import { Loader } from "../styled/Loader";
 import { HandleBooking } from "../handleSingleBooking/HandleBooking";
+import { StyledPageHeader } from "../styled/TextStyles";
+import { StyledSection } from "../styled/StyledSection";
+
 
 export const Booking = () => {
   const [booking, setBooking] = useState<IBooking>(defaultBooking);
@@ -82,13 +85,14 @@ export const Booking = () => {
   }, [bookingSubmitted]);
 
   return (
-    <>
+    <StyledSection>
       <ColumnWrapper>
+        <StyledPageHeader>Boka</StyledPageHeader>
+
         {showOptions && (
           <ChooseBooking
             createNewBooking={createNewBooking}
-            handleBooking={handleBooking}
-          ></ChooseBooking>
+            handleBooking={handleBooking}></ChooseBooking>
         )}
 
         {clickedHandleBooking && (
@@ -100,7 +104,8 @@ export const Booking = () => {
             sendDate={dateForBooking}
             showForm={setTimeToFillOutForm}
             showLoader={setShowLoader}
-          ></SearchUnbookedTimes>
+            goBackToShowOptions={setShowOptions}
+            newBooking={setClickedNewBooking}></SearchUnbookedTimes>
         )}
         {showLoader && <Loader></Loader>}
         {timeToFillOutForm && (
@@ -116,8 +121,7 @@ export const Booking = () => {
               postBooking={postBooking}
               goBackToShowOptions={setShowOptions}
               showUnbookedTimes={setClickedNewBooking}
-              timeToFillOutForm={setTimeToFillOutForm}
-            ></CompleteBooking>
+              timeToFillOutForm={setTimeToFillOutForm}></CompleteBooking>
           </>
         )}
         {bookingSubmitted && (
@@ -131,6 +135,6 @@ export const Booking = () => {
           </div>
         )}
       </ColumnWrapper>
-    </>
+    </StyledSection>
   );
 };
