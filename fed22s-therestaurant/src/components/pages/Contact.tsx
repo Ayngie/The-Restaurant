@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import {
   ColumnWrapper,
   ImageWrapper,
-  RowWrapper,
   RowWrapperStatic,
   StyledImg,
 } from "../styled/Wrappers";
 import { useEffect } from "react";
+import { StyledLink, StyledPageHeader } from "../styled/TextStyles";
+import { StyledSection } from "../styled/StyledSection";
 
 export const Contact = () => {
   useEffect(() => {
@@ -14,18 +15,18 @@ export const Contact = () => {
   }, []);
 
   return (
-    <>
+    <StyledSection>
       <ColumnWrapper>
-        <h2>Kontakta Restaurangen</h2>
+        <StyledPageHeader>Kontakta Restaurangen</StyledPageHeader>
         <RowWrapperStatic>
           <h4>Telefon: </h4>
-          <Link to="tel:+4670123456">+4670123456</Link>
+          <StyledLink to="tel:+4670123456">+4670123456</StyledLink>
         </RowWrapperStatic>
         <RowWrapperStatic>
           <h4>Epost: </h4>
-          <Link to="mailto:info@MI.restaurangen.se">
+          <StyledLink to="mailto:info@MI.restaurangen.se">
             info@MI.restaurangen.se
-          </Link>
+          </StyledLink>
         </RowWrapperStatic>
         <ImageWrapper>
           <StyledImg
@@ -34,6 +35,6 @@ export const Contact = () => {
           />
         </ImageWrapper>
       </ColumnWrapper>
-    </>
+    </StyledSection>
   );
 };

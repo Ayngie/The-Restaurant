@@ -7,4 +7,5 @@ export const StyledSection = styled.section`
   justify-content: center;
   align-items: center;
   min-height: 50vh;
+  padding-bottom: 10px;
 `;

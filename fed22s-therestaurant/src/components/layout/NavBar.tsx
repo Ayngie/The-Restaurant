@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { StyledNavBar } from "../styled/header/StyledNavBar";
-import { StyledNavList } from "../styled/header/StyledNavList";
-import { StyledListItem } from "../styled/header/StyledListITem";
+import { StyledNavBar } from "../styled/header/DesktopNavbar/StyledNavBar";
+import { StyledNavList } from "../styled/header/DesktopNavbar/StyledNavList";
+import { StyledListItem } from "../styled/header/DesktopNavbar/StyledListITem";
 
 export const NavBar = () => {
   return (

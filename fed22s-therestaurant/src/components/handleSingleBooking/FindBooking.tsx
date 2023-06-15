@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { StyledInput } from "../styled/input/StyledInput";
-import { NormalButton } from "../styled/StyledButtons";
+import { NormalButton, WarningButton } from "../styled/StyledButtons";
 import { useEffect } from "react";
 
 interface FormValues {

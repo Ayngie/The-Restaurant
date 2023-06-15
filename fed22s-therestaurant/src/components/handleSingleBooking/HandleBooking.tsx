@@ -3,8 +3,13 @@ import { FindBooking } from "./FindBooking";
 import { ShowBooking } from "./ShowBooking";
 import { IBooking, defaultBooking } from "../../models/IBooking";
 import { deleteBooking, getBookingById } from "../../services/bookingService";
+import { WarningButton } from "../styled/StyledButtons";
 
-export const HandleBooking = () => {
+interface IHandleBookingProps {
+  cancel(): void;
+}
+
+export const HandleBooking = ({ cancel }: IHandleBookingProps) => {
   const [showBooking, setShowBooking] = useState(false);
   const [booking, setBooking] = useState<IBooking>(defaultBooking);
 
@@ -15,15 +20,25 @@ export const HandleBooking = () => {
 
   const removeBooking = async (id: string) => {
     const response = await deleteBooking(id);
-    console.log(response);
+  };
+
+  const cancelSearch = () => {
+    setShowBooking(false);
+    cancel();
   };
 
   return (
     <>
       {!showBooking ? (
-        <FindBooking searchBooking={searchIdForBooking}></FindBooking>
+        <>
+          <FindBooking searchBooking={searchIdForBooking}></FindBooking>
+          <WarningButton type="button" onClick={cancelSearch}>
+            Tillbaka
+          </WarningButton>
+        </>
       ) : (
         <ShowBooking
+          cancelSearch={cancelSearch}
           booking={booking}
           removeBookingById={removeBooking}
         ></ShowBooking>

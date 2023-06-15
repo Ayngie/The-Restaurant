@@ -6,18 +6,27 @@ import { SearchUnbookedTimes } from "../createNewBooking/SearchUnbookedTimes";
 import { IBooking, defaultBooking } from "../../models/IBooking";
 import { IGuest } from "../../models/IGuest";
 import { createBooking } from "../../services/bookingService";
-import { NormalButton, WarningButton } from "../styled/StyledButtons";
 import { Loader } from "../styled/Loader";
-import { HandleBooking } from "../showSingleBooking/HandleBooking";
+import { HandleBooking } from "../handleSingleBooking/HandleBooking";
+import { StyledPageHeader } from "../styled/TextStyles";
+import { StyledSection } from "../styled/StyledSection";
+
 
 export const Booking = () => {
   const [booking, setBooking] = useState<IBooking>(defaultBooking);
-  const [timeToFillOutForm, SetTimeToFillOutForm] = useState(false);
+  const [timeToFillOutForm, setTimeToFillOutForm] = useState(false);
   const [clickedNewBooking, setClickedNewBooking] = useState(false);
   const [clickedHandleBooking, setClickedHandleBooking] = useState(false);
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [showOptions, setShowOptions] = useState(true);
+
+  const cancelSearch = () => {
+    setShowOptions(true);
+    setClickedNewBooking(false);
+    setClickedHandleBooking(false);
+    setTimeToFillOutForm(false);
+  };
 
   const createNewBooking = (showForm: boolean) => {
     setClickedNewBooking(showForm);
@@ -28,7 +37,7 @@ export const Booking = () => {
   const handleBooking = (showSearchField: boolean) => {
     setClickedHandleBooking(showSearchField);
     setClickedNewBooking(false);
-    SetTimeToFillOutForm(false);
+    setTimeToFillOutForm(false);
     setShowOptions(false);
   };
 
@@ -71,26 +80,32 @@ export const Booking = () => {
     if (bookingSubmitted) {
       setClickedNewBooking(false);
 
-      SetTimeToFillOutForm(false);
+      setTimeToFillOutForm(false);
     }
   }, [bookingSubmitted]);
 
   return (
-    <>
+    <StyledSection>
       <ColumnWrapper>
+        <StyledPageHeader>Boka</StyledPageHeader>
+
         {showOptions && (
           <ChooseBooking
             createNewBooking={createNewBooking}
             handleBooking={handleBooking}></ChooseBooking>
         )}
 
-        {clickedHandleBooking && <HandleBooking></HandleBooking>}
+        {clickedHandleBooking && (
+          <HandleBooking cancel={cancelSearch}></HandleBooking>
+        )}
 
         {clickedNewBooking && !timeToFillOutForm && (
           <SearchUnbookedTimes
             sendDate={dateForBooking}
-            showForm={SetTimeToFillOutForm}
-            showLoader={setShowLoader}></SearchUnbookedTimes>
+            showForm={setTimeToFillOutForm}
+            showLoader={setShowLoader}
+            goBackToShowOptions={setShowOptions}
+            newBooking={setClickedNewBooking}></SearchUnbookedTimes>
         )}
         {showLoader && <Loader></Loader>}
         {timeToFillOutForm && (
@@ -106,7 +121,7 @@ export const Booking = () => {
               postBooking={postBooking}
               goBackToShowOptions={setShowOptions}
               showUnbookedTimes={setClickedNewBooking}
-              timeToFillOutForm={SetTimeToFillOutForm}></CompleteBooking>
+              timeToFillOutForm={setTimeToFillOutForm}></CompleteBooking>
           </>
         )}
         {bookingSubmitted && (
@@ -120,6 +135,6 @@ export const Booking = () => {
           </div>
         )}
       </ColumnWrapper>
-    </>
+    </StyledSection>
   );
 };

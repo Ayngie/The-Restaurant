@@ -1,5 +1,4 @@
 import { IBooking } from "../models/IBooking";
-import { adminDeleteBooking, updateBooking } from "../services/adminService";
 
 export interface IAction {
   type: ActionType;
@@ -33,7 +32,7 @@ export const AdminReducer = (bookings: IBooking[], action: IAction) => {
     }
     case ActionType.UPDATEBOOKING: {
       const getBooking: IBooking = JSON.parse(action.payload);
-
+      console.log(getBooking);
       return bookings.map((booking) => {
         if (booking._id === getBooking._id) {
           return {
@@ -48,14 +47,12 @@ export const AdminReducer = (bookings: IBooking[], action: IAction) => {
               phoneNumber: getBooking.guest.phoneNumber,
             },
           };
-          console.log("Reducer: ", getBooking);
         } else {
-          return getBooking;
+          return booking;
         }
       });
     }
     case ActionType.REMOVEBOOKING: {
-      // adminDeleteBooking(action.payload);
       return bookings.filter((booking) => booking._id !== action.payload);
     }
     default:

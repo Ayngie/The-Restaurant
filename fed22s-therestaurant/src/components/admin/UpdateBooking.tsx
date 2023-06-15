@@ -1,32 +1,41 @@
-import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
-import { NormalButton, WarningButton } from "../styled/StyledButtons";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { NormalButton } from "../styled/StyledButtons";
 import { StyledInput } from "../styled/input/StyledInput";
-import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
+import { ColumnWrapper } from "../styled/Wrappers";
 import { StyledErrorParagraph } from "../styled/input/StyledErrorParagraph";
 import { IBooking } from "../../models/IBooking";
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { ActionType } from "../../reducers/AdminReducer";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 import { updateBooking } from "../../services/adminService";
-import { StyledSelect } from "../styled/StyledSelect";
+import { useParams } from "react-router";
 
 interface IBookingProps {
   booking: IBooking;
-  guestAbleToBook: number;
+  guestAbleToBook: IBookedTables;
+  updatingBooking(bookingUpdated: IBooking): void;
+  updatedComplete(submitted: boolean): void;
 }
 
-export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
-  const [bookingToUpdate, setBookingToUpdate] = useState<IBooking>();
+export const UpdateBooking = ({
+  booking,
+  guestAbleToBook,
+  updatedComplete,
+  updatingBooking,
+}: IBookingProps) => {
+  const { id } = useParams();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const dispatch = useContext(AdminDispatchContext);
+  const [maxGuestsForTables, setMaxGuestsForTables] = useState<IBookedTables>({
+    tablesAtSix: 0,
+    tablesAtNine: 0,
+  });
   const [maxGuests, setMaxGuests] = useState(0);
 
   const {
     register,
     handleSubmit,
-    reset,
     setValue,
-    control,
     getValues,
     formState: { errors },
   } = useForm<IBooking>({ defaultValues: booking });
@@ -38,13 +47,35 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
     setValue("guest.name", booking.guest.name);
     setValue("guest.email", booking.guest.email);
     setValue("guest.phoneNumber", booking.guest.phoneNumber);
-    setMaxGuests(guestAbleToBook * 6);
+
+    if (booking.time === "18:00") {
+      setMaxGuests(guestAbleToBook.tablesAtSix * 6);
+    }
+    if (booking.time === "21:00") {
+      setMaxGuests(guestAbleToBook.tablesAtNine * 6);
+    }
+
+    setMaxGuestsForTables({
+      tablesAtSix: guestAbleToBook.tablesAtSix * 6,
+      tablesAtNine: guestAbleToBook.tablesAtNine * 6,
+    });
   }, [isSubmitted]);
+
+  const updatetime = (e: ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value === "18:00") {
+      setMaxGuests(maxGuestsForTables.tablesAtSix);
+    }
+    if (e.target.value === "21:00") {
+      setMaxGuests(maxGuestsForTables.tablesAtNine);
+    }
+  };
 
   const onSubmit: SubmitHandler<IBooking> = async () => {
     const values = getValues();
     setIsSubmitted(true);
+
     const updatedBooking: IBooking = {
+      _id: id,
       numberOfGuests: values.numberOfGuests,
       date: values.date,
       time: values.time,
@@ -55,13 +86,17 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
         phoneNumber: values.guest.phoneNumber,
       },
     };
+
     dispatch({
       type: ActionType.UPDATEBOOKING,
       payload: JSON.stringify(updatedBooking),
     });
+
+    updatingBooking(updatedBooking);
     const response = await updateBooking(updatedBooking, booking._id || "");
-    console.log(response);
+    updatedComplete(isSubmitted);
   };
+
   const updateForm = (
     <>
       <h3>Ändra bokning</h3>
@@ -71,16 +106,13 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
             type="number"
             placeholder="Antal gäster"
             id="numberOfGuests"
-            // value={booking.numberOfGuests}
-            // defaultValue={booking?.numberOfGuests}
             {...register("numberOfGuests", {
               required: true,
               min: 1,
               max: maxGuests + booking.numberOfGuests,
             })}
             aria-invalid={errors.numberOfGuests ? "true" : "false"}
-          />{" "}
-          {}
+          />
           {errors.numberOfGuests?.type === "required" && (
             <StyledErrorParagraph role="alert">
               Du måste ange antal gäster
@@ -102,8 +134,6 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
             placeholder="Datum"
             id="date"
             pattern="\d{4}-\d{2}-\d{2}"
-            // value={booking.date.substring(0, 10)}
-            // defaultValue={booking.date.substring(0, 10)}
             {...register("date", { required: true })}
             aria-invalid={errors.date ? "true" : "false"}
           />
@@ -117,15 +147,16 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
               Datum ska skrivas YYYY-MM-DD
             </StyledErrorParagraph>
           )}
-          <StyledSelect
-            placeholder="Ange tid"
+          <select
+            placeholder="Välj antal gäster"
             required={true}
             {...register("time")}
             defaultValue={booking.time}
+            onChange={(e) => updatetime(e)}
           >
             <option value={"18:00"}>18:00</option>
             <option value={"21:00"}>21:00</option>
-          </StyledSelect>
+          </select>
           <StyledInput
             type="text"
             placeholder="Namn (för- och efternamn):"
@@ -143,6 +174,7 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
               Du måste ange namn
             </StyledErrorParagraph>
           )}
+
           {errors.guest?.name?.type === "maxLength" && (
             <StyledErrorParagraph role="alert">
               Namn får max vara 150 tecken.
@@ -154,6 +186,7 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
               otillåtna karaktärer).
             </StyledErrorParagraph>
           )}
+
           <StyledInput
             type="email"
             placeholder="E-post:"
@@ -175,6 +208,7 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
               Felaktigt epost-format.
             </StyledErrorParagraph>
           )}
+
           <StyledInput
             type="tel"
             placeholder="Telefonnummer:"
