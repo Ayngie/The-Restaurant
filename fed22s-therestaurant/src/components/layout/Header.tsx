@@ -4,14 +4,18 @@ import { StyledLogo } from "../styled/header/StyledLogo";
 import { StyledHeader } from "../styled/header/StyledHeader";
 import { Burger } from "./HamburgerMenu/Burger";
 import { Menu } from "./HamburgerMenu/Menu";
+import { useState } from "react";
 
 export const Header = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <StyledHeader>
         <StyledLogo src={logo} alt="logga" />
         <NavBar></NavBar>
-        <Burger></Burger>
+        <Burger open={open} setOpen={setOpen}></Burger>
+        <Menu open={open} setOpen={setOpen}></Menu>
       </StyledHeader>
     </>
   );
