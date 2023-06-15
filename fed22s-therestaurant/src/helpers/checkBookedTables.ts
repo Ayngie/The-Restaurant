@@ -1,15 +1,10 @@
 import { IBooking } from "../models/IBooking";
 
-export const checkBookedTables = (
-  bookings: IBooking[],
-  guests: number,
-  time: string
-): number => {
-  let tables = {
+export const checkBookedTables = (bookings: IBooking[]): IBookedTables => {
+  let tables: IBookedTables = {
     tablesAtSix: 0,
     tablesAtNine: 0,
   };
-  let returnNum = 0;
 
   bookings.map((table) => {
     if (table.time === "18:00") {
@@ -19,13 +14,8 @@ export const checkBookedTables = (
       tables.tablesAtNine += Math.ceil(table.numberOfGuests / 6);
     }
   });
-  if (time === "18:00") {
-    returnNum = tables.tablesAtSix;
-  }
-  if (time === "21:00") {
-    returnNum = tables.tablesAtNine;
-  }
+
   console.log("Bord vid nio som är upptagna: ", tables.tablesAtNine);
   console.log("Bord vid sex som är upptagna: ", tables.tablesAtSix);
-  return returnNum;
+  return tables;
 };
