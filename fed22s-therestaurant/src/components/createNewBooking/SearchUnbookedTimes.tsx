@@ -26,9 +26,9 @@ export const SearchUnbookedTimes = ({
     time: "",
   });
 
-  const [restarantIsFullyBooked, setRestarantIsFullyBooked] =
+  const [IsFullyBookedAtSix, setIsFullyBookedAtSix] = useState<boolean>(false);
+  const [IsFullyBookedAtNine, setIsFullyBookedAtNine] =
     useState<boolean>(false);
-  // const [showError, setShowError] = useState<boolean>(false);
   const [msg, setMsg] = useState("");
 
   const getNumberOfGuests = (value: number) => {
@@ -60,39 +60,33 @@ export const SearchUnbookedTimes = ({
     } else {
       showLoader(true);
       showForm(false);
-      setRestarantIsFullyBooked(false);
+      setIsFullyBookedAtSix(false);
       let response = await getBookingsByDate(bookingInfo.date);
-      let bookedTables = checkBookedTables(
-        response,
-        bookingInfo.numberOfGuests,
-        bookingInfo.time
-      );
+      let bookedTables = checkBookedTables(response);
 
-      console.log("bookedTables", bookedTables);
       //om bookedTables == 15 -> säg att är fullt...
-      if (bookedTables == 15) {
-        setRestarantIsFullyBooked(true);
+      if (bookedTables.tablesAtSix == 15) {
+        setIsFullyBookedAtSix(true);
       }
+      if (bookedTables.tablesAtNine == 15) {
+        setIsFullyBookedAtNine(true);
+      }
+
       //annars - kolla antal bord som ska bokas
       let doWeHaveABooking = checkAvailableTables(
         bookingInfo.numberOfGuests,
-        bookedTables
+        bookedTables,
+        bookingInfo.time
       );
 
-      console.log("doWeHaveABooking", doWeHaveABooking);
       if (doWeHaveABooking === false) {
-        console.log("false......");
-
-        setRestarantIsFullyBooked(true);
-        //inte visas
+        setIsFullyBookedAtSix(true);
         showLoader(false);
         showForm(false);
       }
       if (doWeHaveABooking === true) {
-        console.log("dkldkldjd");
         sendDate(bookingInfo);
         showLoader(false);
-        //visa
         showForm(true);
       }
     }
@@ -115,9 +109,8 @@ export const SearchUnbookedTimes = ({
         </ColumnWrapper>
       </RowWrapper>
       <NormalButton onClick={handleSearch}>Sök</NormalButton>
-      {restarantIsFullyBooked && (
-        <p>Det är tyvärr fullt den tiden du valde. Prova igen!</p>
-      )}
+      {IsFullyBookedAtSix && <p>Det är tyvärr fullt vid sex. Prova igen!</p>}
+      {IsFullyBookedAtNine && <p>Det är tyvärr fullt vid nio. Prova igen!</p>}
     </>
   );
 };
