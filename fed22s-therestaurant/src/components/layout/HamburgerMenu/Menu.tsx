@@ -7,22 +7,41 @@ interface IMenuProps {
 }
 
 export const Menu = ({ open, setOpen }: IMenuProps) => {
+  const isHidden = open ? true : false;
+  const tabIndex = isHidden ? 0 : -1;
+
   const handleClick = () => {
     setOpen(false);
   };
   return (
     <>
-      <StyledMenu open={open}>
-        <Link to={"/"} onClick={handleClick}>
+      <StyledMenu open={open} aria-hidden={!isHidden}>
+        <Link
+          to={"/"}
+          onClick={handleClick}
+          tabIndex={tabIndex}
+          aria-hidden={true}>
           Hem
         </Link>
-        <Link to={"/menu"} onClick={handleClick}>
+        <Link
+          to={"/menu"}
+          onClick={handleClick}
+          tabIndex={tabIndex}
+          aria-hidden={true}>
           Meny
         </Link>
-        <Link to={"/booking"} onClick={handleClick}>
+        <Link
+          to={"/booking"}
+          onClick={handleClick}
+          tabIndex={tabIndex}
+          aria-hidden={true}>
           Boka
         </Link>
-        <Link to={"/contact"} onClick={handleClick}>
+        <Link
+          to={"/contact"}
+          onClick={handleClick}
+          tabIndex={tabIndex}
+          aria-hidden={true}>
           Kontakt
         </Link>
       </StyledMenu>

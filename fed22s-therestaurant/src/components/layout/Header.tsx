@@ -9,6 +9,7 @@ import { HamburgerMenuWrapper } from "../styled/Wrappers";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
+  const menuId = "main-menu";
 
   return (
     <>
@@ -16,7 +17,7 @@ export const Header = () => {
         <StyledLogo src={logo} alt="logga" />
         <NavBar></NavBar>
         <HamburgerMenuWrapper>
-          <Burger open={open} setOpen={setOpen}></Burger>
+          <Burger open={open} setOpen={setOpen} aria-controls={menuId}></Burger>
           <Menu open={open} setOpen={setOpen}></Menu>
         </HamburgerMenuWrapper>
       </StyledHeader>
