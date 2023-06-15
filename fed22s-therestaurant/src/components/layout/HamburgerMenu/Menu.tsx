@@ -7,13 +7,24 @@ interface IMenuProps {
 }
 
 export const Menu = ({ open, setOpen }: IMenuProps) => {
+  const handleClick = () => {
+    setOpen(false);
+  };
   return (
     <>
       <StyledMenu open={open}>
-        <Link to={"/"}>Hem</Link>
-        <Link to={"/menu"}>Meny</Link>
-        <Link to={"/booking"}>Boka</Link>
-        <Link to={"/contact"}>Kontakt</Link>
+        <Link to={"/"} onClick={handleClick}>
+          Hem
+        </Link>
+        <Link to={"/menu"} onClick={handleClick}>
+          Meny
+        </Link>
+        <Link to={"/booking"} onClick={handleClick}>
+          Boka
+        </Link>
+        <Link to={"/contact"} onClick={handleClick}>
+          Kontakt
+        </Link>
       </StyledMenu>
     </>
   );
