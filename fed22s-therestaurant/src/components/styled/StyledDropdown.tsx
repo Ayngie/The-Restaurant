@@ -1,16 +1,14 @@
 import styled from "styled-components";
 
 export const StyledDropdown = styled.section`
-  /* display: flex;
-  flex-direction: row; */
-  label {
-    width: 200px;
-  }
+  width: 100%;
 
+  label {
+    text-align: center;
+  }
   span {
     border: 2px solid #db7093;
   }
-
   .dropdown__control {
     width: 200px;
     color: #db7093;
@@ -20,9 +18,7 @@ export const StyledDropdown = styled.section`
   .dropdown__control--menu-is-open {
     border: 2px solid #db7093;
   }
-  .dropdown__placeholder {
-    color: #db7093;
-  }
+  .dropdown__placeholder,
   .dropdown__input-container,
   svg {
     color: #db7093;

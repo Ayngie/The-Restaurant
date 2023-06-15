@@ -110,6 +110,8 @@ export const SearchUnbookedTimes = ({
             <NumberOfGuests
               getNumberOfGuests={getNumberOfGuests}
             ></NumberOfGuests>
+          </StyledDropdown>
+          <StyledDropdown>
             <ChooseTime getChoosenTime={getChoosenTime}></ChooseTime>
           </StyledDropdown>
           {msg}

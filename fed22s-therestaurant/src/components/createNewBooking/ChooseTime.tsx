@@ -1,6 +1,6 @@
 import { Option } from "react-dropdown";
 import Select, { ActionMeta } from "react-select";
-import { RowWrapper } from "../styled/Wrappers";
+import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 
 interface IGetChoosenTime {
   getChoosenTime(userInput: string): void;
@@ -22,7 +22,7 @@ export const ChooseTime = ({ getChoosenTime }: IGetChoosenTime) => {
 
   return (
     <>
-      <RowWrapper>
+      <ColumnWrapper>
         <label>Välj tid</label>
         <Select
           classNamePrefix="dropdown"
@@ -30,7 +30,7 @@ export const ChooseTime = ({ getChoosenTime }: IGetChoosenTime) => {
           options={options}
           onChange={handleChange}
         />
-      </RowWrapper>
+      </ColumnWrapper>
     </>
   );
 };

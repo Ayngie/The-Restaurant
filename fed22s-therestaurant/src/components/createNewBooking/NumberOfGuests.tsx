@@ -1,6 +1,6 @@
 import { Option } from "react-dropdown";
 import Select, { ActionMeta } from "react-select";
-import { RowWrapper } from "../styled/Wrappers";
+import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 interface IGetNumberOfGuests {
   getNumberOfGuests(userInput: number): void;
 }
@@ -33,34 +33,16 @@ export const NumberOfGuests = ({ getNumberOfGuests }: IGetNumberOfGuests) => {
   };
   return (
     <>
-      <RowWrapper>
+      <ColumnWrapper>
         <label>Ange antal gäster</label>
         <Select
-          // styles={{control:(baseStyles, state) => {
-          //   ...baseStyles,
-          //   borderColor: State.isFocused? 'pink' : ''
-          // }}}
-
           classNamePrefix="dropdown"
           required={true}
           placeholder={"Ange antal"}
           options={numberOfGuests}
-          theme={(theme) => ({
-            ...theme,
-            // borderRadius: 0,
-            colors: {
-              ...theme.colors,
-              text: "#db7093",
-              font: "#a81d4b",
-              primary25: "#ee80be47",
-              primary: "#a81d4b",
-              neutral80: "#db7093",
-              color: "#a81d4b",
-            },
-          })}
           onChange={handleChange}
         />
-      </RowWrapper>
+      </ColumnWrapper>
     </>
   );
 };
