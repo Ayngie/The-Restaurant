@@ -6,7 +6,7 @@ import {
   StyledImg,
 } from "../styled/Wrappers";
 import { useEffect } from "react";
-import { StyledLink, StyledLinkText } from "../styled/TextStyles";
+import { StyledLink } from "../styled/TextStyles";
 
 export const Contact = () => {
   useEffect(() => {
