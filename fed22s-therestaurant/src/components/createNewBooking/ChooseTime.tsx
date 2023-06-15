@@ -1,6 +1,7 @@
 import { Option } from "react-dropdown";
 import Select, { ActionMeta } from "react-select";
-import { RowWrapper } from "../styled/Wrappers";
+import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
+import { StyledLabel } from "../styled/StyledLabel";
 
 interface IGetChoosenTime {
   getChoosenTime(userInput: string): void;
@@ -22,14 +23,24 @@ export const ChooseTime = ({ getChoosenTime }: IGetChoosenTime) => {
 
   return (
     <>
-      <RowWrapper>
-        <label>Välj tid</label>
+      <ColumnWrapper>
+        <StyledLabel>Välj tid</StyledLabel>
         <Select
+          classNamePrefix="dropdown"
           placeholder={"Välj tid"}
           options={options}
           onChange={handleChange}
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              text: "#db7093",
+              primary25: "pink",
+              primary: "#db7093",
+            },
+          })}
         />
-      </RowWrapper>
+      </ColumnWrapper>
     </>
   );
 };

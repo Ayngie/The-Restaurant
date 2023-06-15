@@ -26,7 +26,6 @@ export const ShowCalendar = ({ getDate }: IGetDate) => {
   return (
     <>
       <Calendar onChange={onClick} value={date} minDate={new Date()} />
-      <div>{date}</div>
     </>
   );
 };

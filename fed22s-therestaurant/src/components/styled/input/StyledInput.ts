@@ -33,3 +33,12 @@ export const StyledInput = styled.input`
     -webkit-text-fill-color: hotpink;
   }
 `;
+
+export const StyledCheckbox = styled.input.attrs({ type: "checkbox" })`
+  cursor: pointer;
+  accent-color: #db7093;
+  border-color: #db7093;
+  &--check {
+    accent-color: #db7093;
+  }
+`;
