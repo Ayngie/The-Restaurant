@@ -6,7 +6,12 @@ import {
   StyledCourseDescription,
   StyledPageHeader,
 } from "../styled/TextStyles";
-import { ColumnWrapper, RestaurantMenuWrapper } from "../styled/Wrappers";
+import {
+  ColumnWrapper,
+  ImageWrapper,
+  RestaurantMenuWrapper,
+  StyledImg,
+} from "../styled/Wrappers";
 import { useEffect } from "react";
 import { StyledSection } from "../styled/StyledSection";
 
@@ -55,20 +60,29 @@ export const Menu = () => {
     </RestaurantMenuWrapper>
   );
   return (
-    <StyledSection>
-      <ColumnWrapper>
-        <StyledPageHeader>Meny</StyledPageHeader>
-        <StyledMenuParagraph>
-          Dessa rätter kombinerar olika smaker och texturer för att skapa en
-          varierad och lockande meny för våra gäster. Vi anpassar menyvalet
-          efter säsong och tillgänglighet för att garantera de färskaste och
-          bästa ingredienserna. Smaklig måltid!
-        </StyledMenuParagraph>
-        {html}
+    <ColumnWrapper>
+      <StyledSection>
+        <ColumnWrapper>
+          <StyledPageHeader>Meny</StyledPageHeader>
+          <StyledMenuParagraph>
+            Dessa rätter kombinerar olika smaker och texturer för att skapa en
+            varierad och lockande meny för våra gäster. Vi anpassar menyvalet
+            efter säsong och tillgänglighet för att garantera de färskaste och
+            bästa ingredienserna. Smaklig måltid!
+          </StyledMenuParagraph>
+          {html}
+        </ColumnWrapper>
+        <ImageWrapper>
+          <StyledImg
+            src="https://images.pexels.com/photos/4551517/pexels-photo-4551517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="Lunch for two placed on table against window with plants."
+          />
+        </ImageWrapper>
+
         <Link to={"/booking"}>
           <NormalButton>Gå till bokningar</NormalButton>
         </Link>
-      </ColumnWrapper>
-    </StyledSection>
+      </StyledSection>
+    </ColumnWrapper>
   );
 };
