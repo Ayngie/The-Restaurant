@@ -118,11 +118,9 @@ export const SearchUnbookedTimes = ({
           {msg}
         </ColumnWrapper>
       </RowWrapper>
+      {IsFullyBookedAtSix && <p>Det är tyvärr fullt vid sex. Prova igen!</p>}
+      {IsFullyBookedAtNine && <p>Det är tyvärr fullt vid nio. Prova igen!</p>}
       <RowWrapper>
-        <NormalButton onClick={handleSearch}>Sök</NormalButton>
-        {IsFullyBookedAtSix && <p>Det är tyvärr fullt vid sex. Prova igen!</p>}
-        {IsFullyBookedAtNine && <p>Det är tyvärr fullt vid nio. Prova igen!</p>}
-
         <NormalButton onClick={handleSearch}>Sök</NormalButton>
         <WarningButton type="button" onClick={handleCancel}>
           Avbryt
