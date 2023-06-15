@@ -1,13 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const StyledH1 = styled.h1`
-  font-size: 2em;
+export const StyledPageHeader = styled.h1`
   color: white;
   text-shadow: 2px 2px hotpink;
   text-align: center;
-`;
-export const StyledPageHeader = styled(StyledH1)`
   font-size: 3em;
   margin-bottom: 10px;
 `;

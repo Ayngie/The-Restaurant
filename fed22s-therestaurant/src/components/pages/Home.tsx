@@ -5,11 +5,11 @@ import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import { StyledHero } from "../styled/StyledHero";
 import {
   StyledFirstWord,
-  StyledH1,
   StyledParagraphDesktop,
   StyledParagraphMobile,
 } from "../styled/TextStyles";
 import { useEffect } from "react";
+import { AnimatedH1 } from "../styled/SlideInText";
 
 export const Home = () => {
   useEffect(() => {
@@ -20,7 +20,7 @@ export const Home = () => {
     <>
       <ColumnWrapper>
         <StyledHero>
-          <StyledH1>Välkommen till Restaurangen!</StyledH1>
+          <AnimatedH1>Välkommen till Restaurangen!</AnimatedH1>
           <StyledParagraphDesktop>
             Välkommen till vår avslappnade och lyxiga restaurang, där fräsch mat
             och glädje står i fokus. Vi erbjuder en unik smakupplevelse som
