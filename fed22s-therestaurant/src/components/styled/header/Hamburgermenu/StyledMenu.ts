@@ -1,39 +1,45 @@
 import styled from "styled-components";
 
-export const StyledMenu = styled.nav`
+interface IStyledMenuProps {
+  open: boolean;
+}
+
+export const StyledMenu = styled.nav<IStyledMenuProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: ${({ theme }) => theme.primaryLight};
-  height: 100vh;
+  background: #ffeafc;
+  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
+  height: 1o0vh;
   text-align: left;
   padding: 2rem;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   transition: transform 0.3s ease-in-out;
 
-  @media (max-width: ${({ theme }) => theme.mobile}) {
+  @media (max-width: 768px) {
+    /* display: none; */
     width: 100%;
   }
 
-  a {
+  Link {
     font-size: 2rem;
     text-transform: uppercase;
     padding: 2rem 0;
     font-weight: bold;
     letter-spacing: 0.5rem;
-    color: ${({ theme }) => theme.primaryDark};
+    /* color: ${({ theme }) => theme.primaryDark}; */
     text-decoration: none;
     transition: color 0.3s linear;
 
-    @media (max-width: ${({ theme }) => theme.mobile}) {
+    @media (max-width: 768px) {
       font-size: 1.5rem;
       text-align: center;
     }
 
-    &:hover {
-      color: ${({ theme }) => theme.primaryHover};
-    }
+    /* &:hover {
+      color: hotpink;
+    } */
   }
 `;
