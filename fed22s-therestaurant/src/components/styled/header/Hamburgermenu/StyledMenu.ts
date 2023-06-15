@@ -25,6 +25,7 @@ export const StyledMenu = styled.nav<IStyledMenuProps>`
   a {
     text-decoration: none;
     letter-spacing: 0.1rem;
+    color: rebeccapurple;
 
     &:active {
       color: hotpink;
