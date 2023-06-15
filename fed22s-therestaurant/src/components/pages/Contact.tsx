@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import {
   ColumnWrapper,
   ImageWrapper,
-  RowWrapper,
   RowWrapperStatic,
   StyledImg,
 } from "../styled/Wrappers";

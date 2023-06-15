@@ -122,9 +122,9 @@ export const ImageWrapper = styled.div`
     width: 40vw;
   }
 `;
-
 export const StyledImg = styled.img`
   width: 100%;
+  border-radius: 10px;
 `;
 
 export const MenuWrapper = styled.section`
