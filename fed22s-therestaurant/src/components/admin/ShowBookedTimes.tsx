@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AdminContext } from "../../contexts/AdminContext";
 import { Link } from "react-router-dom";
 import { NormalButton } from "../styled/StyledButtons";
@@ -28,7 +28,7 @@ export const ShowBookedTimes = () => {
           </StyledTHead>
           <StyledTBody>
             {bookings.map((b, index) => (
-              <StyledTR key={index}>
+              <StyledTR key={b._id}>
                 <StyledTD>{b.guest.name}</StyledTD>
                 <StyledTD>{b.numberOfGuests}</StyledTD>
                 <StyledTD>{b.date.substring(5, 10)}</StyledTD>
