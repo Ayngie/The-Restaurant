@@ -8,6 +8,7 @@ import {
 } from "../styled/TextStyles";
 import { ColumnWrapper, RestaurantMenuWrapper } from "../styled/Wrappers";
 import { useEffect } from "react";
+import { StyledSection } from "../styled/StyledSection";
 
 export const Menu = () => {
   useEffect(() => {
@@ -54,18 +55,20 @@ export const Menu = () => {
     </RestaurantMenuWrapper>
   );
   return (
-    <ColumnWrapper>
-      <StyledH1>Meny</StyledH1>
-      <StyledMenuParagraph>
-        Dessa rätter kombinerar olika smaker och texturer för att skapa en
-        varierad och lockande meny för våra gäster. Vi anpassar menyvalet efter
-        säsong och tillgänglighet för att garantera de färskaste och bästa
-        ingredienserna. Smaklig måltid!
-      </StyledMenuParagraph>
-      {html}
-      <Link to={"/booking"}>
-        <NormalButton>Gå till bokningar</NormalButton>
-      </Link>
-    </ColumnWrapper>
+    <StyledSection>
+      <ColumnWrapper>
+        <StyledH1>Meny</StyledH1>
+        <StyledMenuParagraph>
+          Dessa rätter kombinerar olika smaker och texturer för att skapa en
+          varierad och lockande meny för våra gäster. Vi anpassar menyvalet
+          efter säsong och tillgänglighet för att garantera de färskaste och
+          bästa ingredienserna. Smaklig måltid!
+        </StyledMenuParagraph>
+        {html}
+        <Link to={"/booking"}>
+          <NormalButton>Gå till bokningar</NormalButton>
+        </Link>
+      </ColumnWrapper>
+    </StyledSection>
   );
 };

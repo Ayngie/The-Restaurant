@@ -7,6 +7,7 @@ import {
 } from "../styled/Wrappers";
 import { useEffect } from "react";
 import { StyledLink } from "../styled/TextStyles";
+import { StyledSection } from "../styled/StyledSection";
 
 export const Contact = () => {
   useEffect(() => {
@@ -14,7 +15,7 @@ export const Contact = () => {
   }, []);
 
   return (
-    <>
+    <StyledSection>
       <ColumnWrapper>
         <h2>Kontakta Restaurangen</h2>
         <RowWrapperStatic>
@@ -34,6 +35,6 @@ export const Contact = () => {
           />
         </ImageWrapper>
       </ColumnWrapper>
-    </>
+    </StyledSection>
   );
 };
