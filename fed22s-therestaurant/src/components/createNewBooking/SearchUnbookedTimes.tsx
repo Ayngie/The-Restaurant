@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { NumberOfGuests } from "./NumberOfGuests";
 import { ShowCalendar } from "./ShowCalendar";
-import {
-  CalendarWrapper,
-  ColumnWrapper,
-  RowWrapper,
-  SelectWrapper,
-} from "../styled/Wrappers";
-import "react-dropdown/style.css";
+import { CalendarWrapper, RowWrapper, SelectWrapper } from "../styled/Wrappers";
 import { NormalButton, WarningButton } from "../styled/StyledButtons";
 import { getBookingsByDate } from "../../services/bookingService";
 import { checkBookedTables } from "../../helpers/checkBookedTables";
@@ -42,8 +36,6 @@ export const SearchUnbookedTimes = ({
   const [msg, setMsg] = useState("");
 
   const getNumberOfGuests = (value: number) => {
-    console.log("NumberOfGuests", value);
-
     setBookingInfo({ ...bookingInfo, numberOfGuests: value });
   };
 
@@ -52,20 +44,15 @@ export const SearchUnbookedTimes = ({
   };
 
   const getChoosenTime = (value: string) => {
-    console.log("choosen time", value);
-
     setBookingInfo({ ...bookingInfo, time: value });
   };
 
   const handleSearch = async () => {
-    console.log("bookingInfo", bookingInfo);
-
     if (
       bookingInfo.numberOfGuests == 0 ||
       bookingInfo.time == "" ||
       bookingInfo.date == ""
     ) {
-      console.log("fyll i alla uppgifter");
       setMsg("Fyll i alla fält");
     } else {
       showLoader(true);
@@ -74,7 +61,6 @@ export const SearchUnbookedTimes = ({
       let response = await getBookingsByDate(bookingInfo.date);
       let bookedTables = checkBookedTables(response);
 
-      //om bookedTables == 15 -> säg att är fullt...
       if (bookedTables.tablesAtSix == 15) {
         setIsFullyBookedAtSix(true);
       }
@@ -82,7 +68,6 @@ export const SearchUnbookedTimes = ({
         setIsFullyBookedAtNine(true);
       }
 
-      //annars - kolla antal bord som ska bokas
       let doWeHaveABooking = checkAvailableTables(
         bookingInfo.numberOfGuests,
         bookedTables,
@@ -105,7 +90,6 @@ export const SearchUnbookedTimes = ({
   const handleCancel = () => {
     goBackToShowOptions(true);
     newBooking(false);
-    console.log("Avbryt");
   };
 
   return (

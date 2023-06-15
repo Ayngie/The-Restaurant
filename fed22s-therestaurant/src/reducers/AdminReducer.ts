@@ -36,7 +36,6 @@ export const AdminReducer = (bookings: IBooking[], action: IAction) => {
     }
     case ActionType.UPDATEBOOKING: {
       const getBooking: IBooking = JSON.parse(action.payload);
-      console.log(getBooking);
       return bookings.map((booking) => {
         if (booking._id === getBooking._id) {
           return {

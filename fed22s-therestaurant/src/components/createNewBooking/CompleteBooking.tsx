@@ -24,17 +24,13 @@ export const CompleteBooking = ({
 }: ICompleteBookingProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [checked, setChecked] = useState(false);
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<IGuest>();
-
-  const handleCheckboxChange = () => {
-    setChecked(true);
-  };
 
   const onSubmit: SubmitHandler<IGuest> = (data) => {
     setIsSubmitting(true);
@@ -45,8 +41,6 @@ export const CompleteBooking = ({
       phoneNumber: data.phoneNumber,
     };
     sendBooking(guest);
-
-    // reset();
   };
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -71,7 +65,6 @@ export const CompleteBooking = ({
     goBackToShowOptions(true);
     showUnbookedTimes(false);
     timeToFillOutForm(false);
-    console.log("Avbryt");
   };
 
   return (

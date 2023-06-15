@@ -33,7 +33,6 @@ export const ShowSingleBooking = ({
       payload: singleBooking._id || "",
     });
     bookingDeleted(true);
-    console.log("Delete");
   };
 
   return (

@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AdminContext } from "../../contexts/AdminContext";
 import { Link } from "react-router-dom";
-import { NormalButton } from "../styled/StyledButtons";
 import { StyledTable } from "../styled/table/StyledTable";
 import { StyledTHead } from "../styled/table/StyledTHead";
 import { StyledTR } from "../styled/table/StyledTR";

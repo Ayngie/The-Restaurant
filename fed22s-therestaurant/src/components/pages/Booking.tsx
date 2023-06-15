@@ -74,11 +74,8 @@ export const Booking = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    // här kan vi göra något efter bokningen är gjord.
     if (bookingSubmitted) {
       setClickedNewBooking(false);
-
       setTimeToFillOutForm(false);
     }
   }, [bookingSubmitted]);
@@ -89,7 +86,8 @@ export const Booking = () => {
         {showOptions && (
           <ChooseBooking
             createNewBooking={createNewBooking}
-            handleBooking={handleBooking}></ChooseBooking>
+            handleBooking={handleBooking}
+          ></ChooseBooking>
         )}
 
         {clickedHandleBooking && (
@@ -102,7 +100,8 @@ export const Booking = () => {
             showForm={setTimeToFillOutForm}
             showLoader={setShowLoader}
             goBackToShowOptions={setShowOptions}
-            newBooking={setClickedNewBooking}></SearchUnbookedTimes>
+            newBooking={setClickedNewBooking}
+          ></SearchUnbookedTimes>
         )}
         {showLoader && <Loader></Loader>}
         {timeToFillOutForm && (
@@ -118,7 +117,8 @@ export const Booking = () => {
               postBooking={postBooking}
               goBackToShowOptions={setShowOptions}
               showUnbookedTimes={setClickedNewBooking}
-              timeToFillOutForm={setTimeToFillOutForm}></CompleteBooking>
+              timeToFillOutForm={setTimeToFillOutForm}
+            ></CompleteBooking>
           </>
         )}
         {bookingSubmitted && (
