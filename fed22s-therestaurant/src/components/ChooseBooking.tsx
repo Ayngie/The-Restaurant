@@ -18,16 +18,14 @@ export const ChooseBooking = ({
   };
   return (
     <>
-      <ColumnWrapper>
-        <RowWrapper>
-          <NormalButton onClick={handleClickForCreateBooking}>
-            Ny bokning
-          </NormalButton>
-          <NormalButton onClick={handleClickForHandleBooking}>
-            Sök din bokning
-          </NormalButton>
-        </RowWrapper>
-      </ColumnWrapper>
+      <RowWrapper>
+        <NormalButton onClick={handleClickForCreateBooking}>
+          Ny bokning
+        </NormalButton>
+        <NormalButton onClick={handleClickForHandleBooking}>
+          Sök din bokning
+        </NormalButton>
+      </RowWrapper>
     </>
   );
 };

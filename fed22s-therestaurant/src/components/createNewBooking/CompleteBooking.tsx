@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { ColumnWrapper, RowWrapper } from ".././styled/Wrappers";
 import { NormalButton, WarningButton } from ".././styled/StyledButtons";
 import { IGuest } from "../../models/IGuest";
-import { StyledInput } from "../styled/input/StyledInput";
 import { StyledErrorParagraph } from "../styled/input/StyledErrorParagraph";
+import { StyledCheckbox, StyledInput } from "../styled/input/StyledInput";
+import { StyledLabel, StyledLabelSMall } from "../styled/StyledLabel";
 
 interface ICompleteBookingProps {
   sendBooking(guest: IGuest): void;
@@ -23,13 +24,17 @@ export const CompleteBooking = ({
 }: ICompleteBookingProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  const [checked, setChecked] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<IGuest>();
+
+  const handleCheckboxChange = () => {
+    setChecked(true);
+  };
 
   const onSubmit: SubmitHandler<IGuest> = (data) => {
     setIsSubmitting(true);
@@ -147,6 +152,12 @@ export const CompleteBooking = ({
               0705552222.
             </StyledErrorParagraph>
           )}
+          <RowWrapper>
+            <StyledLabelSMall>
+              <StyledCheckbox type="checkbox" required={true} />
+              Godkänn att vi sparar dina personuppgifter enligt GDPR
+            </StyledLabelSMall>
+          </RowWrapper>
 
           <RowWrapper>
             <NormalButton type="submit" disabled={isSubmitted}>
