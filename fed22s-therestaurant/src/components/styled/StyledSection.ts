@@ -8,4 +8,8 @@ export const StyledSection = styled.section`
   align-items: center;
   min-height: 50vh;
   padding-bottom: 10px;
+
+  @media screen and (min-width: 1200px) {
+    min-height: 25vh;
+  }
 `;
