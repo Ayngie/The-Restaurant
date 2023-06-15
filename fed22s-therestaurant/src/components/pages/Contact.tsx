@@ -6,6 +6,7 @@ import {
   StyledImg,
 } from "../styled/Wrappers";
 import { useEffect } from "react";
+import { StyledLink, StyledLinkText } from "../styled/TextStyles";
 
 export const Contact = () => {
   useEffect(() => {
@@ -18,13 +19,13 @@ export const Contact = () => {
         <h2>Kontakta Restaurangen</h2>
         <RowWrapperStatic>
           <h4>Telefon: </h4>
-          <Link to="tel:+4670123456">+4670123456</Link>
+          <StyledLink to="tel:+4670123456">+4670123456</StyledLink>
         </RowWrapperStatic>
         <RowWrapperStatic>
           <h4>Epost: </h4>
-          <Link to="mailto:info@MI.restaurangen.se">
+          <StyledLink to="mailto:info@MI.restaurangen.se">
             info@MI.restaurangen.se
-          </Link>
+          </StyledLink>
         </RowWrapperStatic>
         <ImageWrapper>
           <StyledImg

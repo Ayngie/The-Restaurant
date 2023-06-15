@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledH1 = styled.h1`
   color: white;
@@ -50,4 +51,19 @@ export const StyledCourseDescription = styled.span`
   display: block;
   font-size: 0.8em;
   font-style: italic;
+`;
+
+export const StyledLink = styled(Link)`
+  font-size: 1%.5;
+  color: rebeccapurple;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: blue;
+  }
+
+  &:active {
+    color: hotpink;
+  }
 `;
