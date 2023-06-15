@@ -137,15 +137,3 @@ export const HamburgerMenuWrapper = styled.section`
     display: none;
   }
 `;
-
-// export const StyledParagraphMobile = styled(StyledParagraph)`
-//   font-size: 1.5em;
-// `;
-
-// export const StyledParagraphDesktop = styled(StyledParagraph)`
-//   display: none;
-//   @media screen and (min-width: 1200px) {
-//     font-size: 1em;
-//     display: block;
-//   }
-// `;
