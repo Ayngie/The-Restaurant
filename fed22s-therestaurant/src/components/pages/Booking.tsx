@@ -87,8 +87,7 @@ export const Booking = () => {
         {showOptions && (
           <ChooseBooking
             createNewBooking={createNewBooking}
-            handleBooking={handleBooking}
-          ></ChooseBooking>
+            handleBooking={handleBooking}></ChooseBooking>
         )}
 
         {clickedHandleBooking && (
@@ -100,7 +99,8 @@ export const Booking = () => {
             sendDate={dateForBooking}
             showForm={setTimeToFillOutForm}
             showLoader={setShowLoader}
-          ></SearchUnbookedTimes>
+            goBackToShowOptions={setShowOptions}
+            newBooking={setClickedNewBooking}></SearchUnbookedTimes>
         )}
         {showLoader && <Loader></Loader>}
         {timeToFillOutForm && (
@@ -116,8 +116,7 @@ export const Booking = () => {
               postBooking={postBooking}
               goBackToShowOptions={setShowOptions}
               showUnbookedTimes={setClickedNewBooking}
-              timeToFillOutForm={setTimeToFillOutForm}
-            ></CompleteBooking>
+              timeToFillOutForm={setTimeToFillOutForm}></CompleteBooking>
           </>
         )}
         {bookingSubmitted && (
