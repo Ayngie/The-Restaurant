@@ -111,22 +111,23 @@ export const SearchUnbookedTimes = ({
         <ColumnWrapper>
           <RowWrapper>
             <NumberOfGuests
-              getNumberOfGuests={getNumberOfGuests}></NumberOfGuests>
+              getNumberOfGuests={getNumberOfGuests}
+            ></NumberOfGuests>
             <ChooseTime getChoosenTime={getChoosenTime}></ChooseTime>
           </RowWrapper>
           {msg}
         </ColumnWrapper>
       </RowWrapper>
       <RowWrapper>
-      <NormalButton onClick={handleSearch}>Sök</NormalButton>
-      <RowWrapper>
+        <NormalButton onClick={handleSearch}>Sök</NormalButton>
+        {IsFullyBookedAtSix && <p>Det är tyvärr fullt vid sex. Prova igen!</p>}
+        {IsFullyBookedAtNine && <p>Det är tyvärr fullt vid nio. Prova igen!</p>}
+
         <NormalButton onClick={handleSearch}>Sök</NormalButton>
         <WarningButton type="button" onClick={handleCancel}>
           Avbryt
         </WarningButton>
       </RowWrapper>
-      {IsFullyBookedAtSix && <p>Det är tyvärr fullt vid sex. Prova igen!</p>}
-      {IsFullyBookedAtNine && <p>Det är tyvärr fullt vid nio. Prova igen!</p>}
     </>
   );
 };
