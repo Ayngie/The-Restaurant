@@ -56,14 +56,4 @@ export const StyledCourseDescription = styled.span`
 export const StyledLink = styled(Link)`
   font-size: 1%.5;
   color: rebeccapurple;
-  text-decoration: none;
-
-  &:hover,
-  &:focus {
-    color: blue;
-  }
-
-  &:active {
-    color: hotpink;
-  }
 `;

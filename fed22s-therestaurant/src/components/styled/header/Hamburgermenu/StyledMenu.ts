@@ -9,13 +9,27 @@ export const StyledMenu = styled.nav<IStyledMenuProps>`
   flex-direction: column;
   justify-content: center;
   background: #ffeafc;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
-  text-align: left;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+
   padding: 2rem;
   position: absolute;
   top: 0;
   right: 0;
   transition: transform 0.3s ease-in-out;
+
+  a {
+    text-decoration: none;
+    letter-spacing: 0.1rem;
+
+    &:active {
+      color: hotpink;
+    }
+  }
 
   @media (max-width: 768px) {
     width: 100%;
