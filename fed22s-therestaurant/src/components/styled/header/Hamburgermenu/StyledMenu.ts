@@ -9,7 +9,7 @@ export const StyledMenu = styled.nav<IStyledMenuProps>`
   flex-direction: column;
   justify-content: center;
   background: #ffeafc;
-  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
+  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
   text-align: left;
   padding: 2rem;
   position: absolute;
