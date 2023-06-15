@@ -11,7 +11,6 @@ import { HandleBooking } from "../handleSingleBooking/HandleBooking";
 import { StyledPageHeader } from "../styled/TextStyles";
 import { StyledSection } from "../styled/StyledSection";
 
-
 export const Booking = () => {
   const [booking, setBooking] = useState<IBooking>(defaultBooking);
   const [timeToFillOutForm, setTimeToFillOutForm] = useState(false);
@@ -87,8 +86,6 @@ export const Booking = () => {
   return (
     <StyledSection>
       <ColumnWrapper>
-        <StyledPageHeader>Boka</StyledPageHeader>
-
         {showOptions && (
           <ChooseBooking
             createNewBooking={createNewBooking}
@@ -126,6 +123,7 @@ export const Booking = () => {
         )}
         {bookingSubmitted && (
           <div>
+            <StyledPageHeader>Bokningsbekräftelse:</StyledPageHeader>
             <div>
               <h3> Tack för din bokning {booking.guest.name}! </h3>
               <p>Antal gäster: {booking.numberOfGuests}</p>

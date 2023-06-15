@@ -1,4 +1,5 @@
 import { NormalButton } from "./styled/StyledButtons";
+import { StyledPageHeader } from "./styled/TextStyles";
 import {
   ColumnWrapper,
   ImageWrapper,
@@ -24,6 +25,8 @@ export const ChooseBooking = ({
   return (
     <>
       <ColumnWrapper>
+        <StyledPageHeader>Boka</StyledPageHeader>
+
         <ImageWrapper>
           <StyledImg
             src="https://images.pexels.com/photos/3184183/pexels-photo-3184183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
