@@ -6,7 +6,7 @@ import {
   StyledImg,
 } from "../styled/Wrappers";
 import { useEffect } from "react";
-import { StyledLink } from "../styled/TextStyles";
+import { StyledLink, StyledPageHeader } from "../styled/TextStyles";
 import { StyledSection } from "../styled/StyledSection";
 
 export const Contact = () => {
@@ -17,7 +17,7 @@ export const Contact = () => {
   return (
     <StyledSection>
       <ColumnWrapper>
-        <h2>Kontakta Restaurangen</h2>
+        <StyledPageHeader>Kontakta Restaurangen</StyledPageHeader>
         <RowWrapperStatic>
           <h4>Telefon: </h4>
           <StyledLink to="tel:+4670123456">+4670123456</StyledLink>

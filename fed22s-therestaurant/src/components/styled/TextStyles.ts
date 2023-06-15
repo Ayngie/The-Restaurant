@@ -7,8 +7,8 @@ export const StyledH1 = styled.h1`
   text-shadow: 2px 2px hotpink;
   text-align: center;
 `;
-export const StyledMenuHeader = styled(StyledH1)`
-  font-size: 4em;
+export const StyledPageHeader = styled(StyledH1)`
+  font-size: 3em;
   margin-bottom: 10px;
 `;
 

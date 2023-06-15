@@ -8,6 +8,8 @@ import { IGuest } from "../../models/IGuest";
 import { createBooking } from "../../services/bookingService";
 import { Loader } from "../styled/Loader";
 import { HandleBooking } from "../showSingleBooking/HandleBooking";
+import { StyledPageHeader } from "../styled/TextStyles";
+import { StyledSection } from "../styled/StyledSection";
 
 export const Booking = () => {
   const [booking, setBooking] = useState<IBooking>(defaultBooking);
@@ -82,8 +84,10 @@ export const Booking = () => {
   }, [bookingSubmitted]);
 
   return (
-    <>
+    <StyledSection>
       <ColumnWrapper>
+        <StyledPageHeader>Boka</StyledPageHeader>
+
         {showOptions && (
           <ChooseBooking
             createNewBooking={createNewBooking}
@@ -130,6 +134,6 @@ export const Booking = () => {
           </div>
         )}
       </ColumnWrapper>
-    </>
+    </StyledSection>
   );
 };

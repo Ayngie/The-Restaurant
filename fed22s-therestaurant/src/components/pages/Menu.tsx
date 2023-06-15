@@ -4,7 +4,7 @@ import {
   StyledMenuParagraph,
   StyledMenuListItem,
   StyledCourseDescription,
-  StyledMenuHeader,
+  StyledPageHeader,
 } from "../styled/TextStyles";
 import { ColumnWrapper, RestaurantMenuWrapper } from "../styled/Wrappers";
 import { useEffect } from "react";
@@ -57,7 +57,7 @@ export const Menu = () => {
   return (
     <StyledSection>
       <ColumnWrapper>
-        <StyledMenuHeader>Meny</StyledMenuHeader>
+        <StyledPageHeader>Meny</StyledPageHeader>
         <StyledMenuParagraph>
           Dessa rätter kombinerar olika smaker och texturer för att skapa en
           varierad och lockande meny för våra gäster. Vi anpassar menyvalet
