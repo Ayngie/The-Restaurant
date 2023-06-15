@@ -12,11 +12,6 @@ export const StyledParagraph = styled.p`
   text-align: center;
 `;
 
-export const StyledMenuParagraph = styled(StyledParagraph)`
-  color: white;
-  width: 50%;
-`;
-
 export const StyledParagraphMobile = styled(StyledParagraph)`
   font-size: 1.5em;
   display: auto;
@@ -36,4 +31,23 @@ export const StyledParagraphDesktop = styled(StyledParagraph)`
 export const StyledFirstWord = styled.span`
   font-size: 1.3em;
   letter-spacing: 1.5px;
+`;
+
+export const StyledMenuParagraph = styled(StyledParagraph)`
+  color: white;
+  width: 50%;
+`;
+
+export const StyledMenuListItem = styled.li`
+  font-size: 1.2em;
+  color: hotpink;
+  padding: 5px;
+`;
+
+export const StyledCourseDescription = styled.span`
+  padding-top: 3px;
+  padding-bottom: 5px;
+  display: block;
+  font-size: 0.8em;
+  font-style: italic;
 `;

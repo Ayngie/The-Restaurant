@@ -126,3 +126,7 @@ export const ImageWrapper = styled.div`
 export const StyledImg = styled.img`
   width: 100%;
 `;
+
+export const MenuWrapper = styled.section`
+  width: 90vw;
+`;
