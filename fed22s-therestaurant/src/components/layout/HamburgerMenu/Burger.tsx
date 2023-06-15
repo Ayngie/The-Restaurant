@@ -1,10 +1,9 @@
-import { StyledBurger } from "../styled/header/StyledHamburgerMeny";
+import { StyledBurger } from "../../styled/header/Hamburgermenu/StyledBurger";
 
-export const HamburgerMenu = () => {
+export const Burger = () => {
   return (
     <>
       <StyledBurger>
-        <div />
         <div />
         <div />
         <div />
