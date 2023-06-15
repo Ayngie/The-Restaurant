@@ -127,6 +127,13 @@ export const StyledImg = styled.img`
   border-radius: 10px;
 `;
 
-export const MenuWrapper = styled.section`
+export const RestaurantMenuWrapper = styled.section`
   width: 90vw;
+`;
+
+export const HamburgerMenuWrapper = styled.section`
+  display: auto;
+  @media screen and (min-width: 1200px) {
+    display: none;
+  }
 `;

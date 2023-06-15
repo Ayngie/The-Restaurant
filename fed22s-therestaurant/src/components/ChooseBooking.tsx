@@ -24,6 +24,13 @@ export const ChooseBooking = ({
   return (
     <>
       <ColumnWrapper>
+        <ImageWrapper>
+          <StyledImg
+            src="https://images.pexels.com/photos/3184183/pexels-photo-3184183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="Photo from above of dinner guests at set table with food on plates, the people are toasting."
+          />
+        </ImageWrapper>
+
         <RowWrapper>
           <NormalButton onClick={handleClickForCreateBooking}>
             Ny bokning
@@ -32,12 +39,6 @@ export const ChooseBooking = ({
             Sök din bokning
           </NormalButton>
         </RowWrapper>
-        <ImageWrapper>
-          <StyledImg
-            src="https://images.pexels.com/photos/3184183/pexels-photo-3184183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt="Photo from above of dinner guests at set table with food on plates, the people are toasting."
-          />
-        </ImageWrapper>
       </ColumnWrapper>
     </>
   );
