@@ -3,6 +3,7 @@ import { FindBooking } from "./FindBooking";
 import { ShowBooking } from "./ShowBooking";
 import { IBooking, defaultBooking } from "../../models/IBooking";
 import { deleteBooking, getBookingById } from "../../services/bookingService";
+import { WarningButton } from "../styled/StyledButtons";
 
 interface IHandleBookingProps {
   cancel(): void;
@@ -19,7 +20,6 @@ export const HandleBooking = ({ cancel }: IHandleBookingProps) => {
 
   const removeBooking = async (id: string) => {
     const response = await deleteBooking(id);
-    console.log(response);
   };
 
   const cancelSearch = () => {
@@ -30,10 +30,12 @@ export const HandleBooking = ({ cancel }: IHandleBookingProps) => {
   return (
     <>
       {!showBooking ? (
-        <FindBooking
-          searchBooking={searchIdForBooking}
-          cancelSearch={cancelSearch}
-        ></FindBooking>
+        <>
+          <FindBooking searchBooking={searchIdForBooking}></FindBooking>
+          <WarningButton type="button" onClick={cancelSearch}>
+            Tillbaka
+          </WarningButton>
+        </>
       ) : (
         <ShowBooking
           cancelSearch={cancelSearch}
