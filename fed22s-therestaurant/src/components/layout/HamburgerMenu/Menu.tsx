@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import { StyledMenu } from "../../styled/header/Hamburgermenu/StyledMenu";
 
-export const Menu = () => {
+interface IMenuProps {
+  open: boolean;
+  setOpen(show: boolean): void;
+}
+
+export const Menu = ({ open, setOpen }: IMenuProps) => {
   return (
     <>
-      <StyledMenu>
+      <StyledMenu open={open}>
         <Link to={"/"}>Hem</Link>
         <Link to={"/menu"}>Meny</Link>
         <Link to={"/booking"}>Boka</Link>
