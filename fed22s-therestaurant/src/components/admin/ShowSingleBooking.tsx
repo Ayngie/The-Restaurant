@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 import { NormalButton, WarningButton } from "../styled/StyledButtons";
 import {
@@ -8,6 +8,7 @@ import {
 } from "../styled/Wrappers";
 import { IBooking } from "../../models/IBooking";
 import { ActionType } from "../../reducers/AdminReducer";
+import { Link } from "react-router-dom";
 
 interface IShowSingleBooking {
   singleBooking: IBooking;
@@ -21,12 +22,11 @@ export const ShowSingleBooking = ({
   bookingDeleted,
 }: IShowSingleBooking) => {
   const dispatch = useContext(AdminDispatchContext);
+  const [showButtons, setShowButtons] = useState(true);
 
   const updateBooking = () => {
     showUpdateForm(true);
-    console.log("Update");
   };
-  //delete booking
   const deleteBooking = () => {
     dispatch({
       type: ActionType.REMOVEBOOKING,
@@ -34,13 +34,6 @@ export const ShowSingleBooking = ({
     });
     bookingDeleted(true);
     console.log("Delete");
-  };
-
-  //Avbryt
-  const handleCancel = () => {
-    //skapa lifting state up till admin som döljer AdminHandleBooking komponenten?
-    //Eller bara re-directa url:en till /admin ??
-    console.log("Avbryt");
   };
 
   return (
@@ -64,9 +57,10 @@ export const ShowSingleBooking = ({
           <WarningButton type="button" onClick={deleteBooking}>
             Radera bokning
           </WarningButton>
-          <WarningButton type="button" onClick={handleCancel}>
-            Avbryt
-          </WarningButton>
+
+          <Link to={"/admin"}>
+            <WarningButton type="button">Tillbaka</WarningButton>
+          </Link>
         </RowWrapper>
       </ColumnWrapper>
     </>
