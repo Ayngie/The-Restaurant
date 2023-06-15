@@ -32,12 +32,6 @@ Group project building a booking app for a restaurant with frontend & backend.
 
 ---
 
-## Wireframes:
-![Wireframe - GuestView](./fed22s-therestaurant/src/assets/Wireframe-GuestView.jpg?raw=true "Wirefram GuestView - Group Restaurant Project")
-![Wireframe - AdminView](./fed22s-therestaurant/src/assets/Wireframe-AdminView.jpg?raw=true "Wirefram AdminView - Group Restaurant Project")
-
----
-
 
 ## Run locally:
 
