@@ -6,7 +6,7 @@ import {
   StyledMenuListItem,
   StyledCourseDescription,
 } from "../styled/TextStyles";
-import { ColumnWrapper, MenuWrapper } from "../styled/Wrappers";
+import { ColumnWrapper, RestaurantMenuWrapper } from "../styled/Wrappers";
 import { useEffect } from "react";
 
 export const Menu = () => {
@@ -40,7 +40,7 @@ export const Menu = () => {
   ];
 
   const html = (
-    <MenuWrapper>
+    <RestaurantMenuWrapper>
       <ol>
         {menuList.map((course, index) => (
           <StyledMenuListItem key={index}>
@@ -51,7 +51,7 @@ export const Menu = () => {
           </StyledMenuListItem>
         ))}
       </ol>
-    </MenuWrapper>
+    </RestaurantMenuWrapper>
   );
   return (
     <ColumnWrapper>
