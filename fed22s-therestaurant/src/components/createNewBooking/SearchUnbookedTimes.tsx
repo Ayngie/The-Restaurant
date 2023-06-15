@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { NumberOfGuests } from "./NumberOfGuests";
 import { ShowCalendar } from "./ShowCalendar";
-import { CalendarWrapper, ColumnWrapper, RowWrapper } from "../styled/Wrappers";
+import {
+  CalendarWrapper,
+  ColumnWrapper,
+  RowWrapper,
+  SelectWrapper,
+} from "../styled/Wrappers";
 import "react-dropdown/style.css";
 import { NormalButton, WarningButton } from "../styled/StyledButtons";
 import { getBookingsByDate } from "../../services/bookingService";
@@ -109,7 +114,7 @@ export const SearchUnbookedTimes = ({
         <CalendarWrapper>
           <ShowCalendar getDate={getDate}></ShowCalendar>
         </CalendarWrapper>
-        <ColumnWrapper>
+        <SelectWrapper>
           <StyledDropdown>
             <NumberOfGuests
               getNumberOfGuests={getNumberOfGuests}
@@ -119,7 +124,7 @@ export const SearchUnbookedTimes = ({
             <ChooseTime getChoosenTime={getChoosenTime}></ChooseTime>
           </StyledDropdown>
           {msg}
-        </ColumnWrapper>
+        </SelectWrapper>
       </RowWrapper>
       {IsFullyBookedAtSix && <p>Det är tyvärr fullt vid sex. Prova igen!</p>}
       {IsFullyBookedAtNine && <p>Det är tyvärr fullt vid nio. Prova igen!</p>}

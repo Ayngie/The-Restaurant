@@ -9,6 +9,7 @@ import { ActionType } from "../../reducers/AdminReducer";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 import { updateBooking } from "../../services/adminService";
 import { useParams } from "react-router";
+import { StyledSelect } from "../styled/StyledSelect";
 
 interface IBookingProps {
   booking: IBooking;
@@ -147,7 +148,7 @@ export const UpdateBooking = ({
               Datum ska skrivas YYYY-MM-DD
             </StyledErrorParagraph>
           )}
-          <select
+          <StyledSelect
             placeholder="Välj antal gäster"
             required={true}
             {...register("time")}
@@ -156,7 +157,7 @@ export const UpdateBooking = ({
           >
             <option value={"18:00"}>18:00</option>
             <option value={"21:00"}>21:00</option>
-          </select>
+          </StyledSelect>
           <StyledInput
             type="text"
             placeholder="Namn (för- och efternamn):"

@@ -18,7 +18,6 @@ export const RowWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  /* *************** */
   width: 100%;
 
   @media screen and (min-width: 1200px) {
@@ -42,10 +41,16 @@ export const ColumnWrapper = styled.div`
   width: 100%;
   gap: 10px;
 `;
+export const SelectWrapper = styled(ColumnWrapper)`
+  width: 30%;
+`;
 
 export const CalendarWrapper = styled.div`
   padding: 5%;
-  width: 80%;
+  width: 80vw;
+  @media screen and (min-width: 1200px) {
+    width: 40vw;
+  }
 
   button {
     background-color: white;

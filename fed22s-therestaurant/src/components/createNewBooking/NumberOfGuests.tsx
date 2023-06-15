@@ -35,11 +35,11 @@ export const NumberOfGuests = ({ getNumberOfGuests }: IGetNumberOfGuests) => {
   return (
     <>
       <ColumnWrapper>
-        <StyledLabel>Ange antal gäster</StyledLabel>
+        <StyledLabel>Välj antal gäster</StyledLabel>
         <Select
           classNamePrefix="dropdown"
           required={true}
-          placeholder={"Ange antal"}
+          placeholder={"Välj antal"}
           options={numberOfGuests}
           onChange={handleChange}
           theme={(theme) => ({
