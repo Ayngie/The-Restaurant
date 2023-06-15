@@ -23,7 +23,7 @@ export const StyledBurger = styled.button<IStyledMenuProps>`
     outline: none;
   }
 
-  div {
+  span {
     width: 2rem;
     height: 0.25rem;
     background: white;

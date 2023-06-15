@@ -7,15 +7,16 @@ interface IBurgerProps {
 
 export const Burger = ({ open, setOpen }: IBurgerProps) => {
   const isExpanded = open ? true : false;
+
   return (
     <StyledBurger
       aria-label="Toggle menu"
       aria-expanded={isExpanded}
       open={open}
       onClick={() => setOpen(!open)}>
-      <div />
-      <div />
-      <div />
+      <span />
+      <span />
+      <span />
     </StyledBurger>
   );
 };
