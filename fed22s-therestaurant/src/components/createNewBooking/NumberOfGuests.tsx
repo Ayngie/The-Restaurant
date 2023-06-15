@@ -1,6 +1,7 @@
 import { Option } from "react-dropdown";
 import Select, { ActionMeta } from "react-select";
 import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
+import { StyledLabel } from "../styled/StyledLabel";
 interface IGetNumberOfGuests {
   getNumberOfGuests(userInput: number): void;
 }
@@ -34,13 +35,22 @@ export const NumberOfGuests = ({ getNumberOfGuests }: IGetNumberOfGuests) => {
   return (
     <>
       <ColumnWrapper>
-        <label>Ange antal gäster</label>
+        <StyledLabel>Ange antal gäster</StyledLabel>
         <Select
           classNamePrefix="dropdown"
           required={true}
           placeholder={"Ange antal"}
           options={numberOfGuests}
           onChange={handleChange}
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              text: "#db7093",
+              primary25: "pink",
+              primary: "#db7093",
+            },
+          })}
         />
       </ColumnWrapper>
     </>

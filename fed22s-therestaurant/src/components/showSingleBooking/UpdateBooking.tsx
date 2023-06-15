@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { ActionType } from "../../reducers/AdminReducer";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
 import { updateBooking } from "../../services/adminService";
+import { StyledSelect } from "../styled/StyledSelect";
 
 interface IBookingProps {
   booking: IBooking;
@@ -78,7 +79,8 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
               max: maxGuests + booking.numberOfGuests,
             })}
             aria-invalid={errors.numberOfGuests ? "true" : "false"}
-          />
+          />{" "}
+          {}
           {errors.numberOfGuests?.type === "required" && (
             <StyledErrorParagraph role="alert">
               Du måste ange antal gäster
@@ -115,15 +117,15 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
               Datum ska skrivas YYYY-MM-DD
             </StyledErrorParagraph>
           )}
-          <select
-            placeholder="Välj antal gäster"
+          <StyledSelect
+            placeholder="Ange tid"
             required={true}
             {...register("time")}
             defaultValue={booking.time}
           >
             <option value={"18:00"}>18:00</option>
             <option value={"21:00"}>21:00</option>
-          </select>
+          </StyledSelect>
           <StyledInput
             type="text"
             placeholder="Namn (för- och efternamn):"
@@ -141,7 +143,6 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
               Du måste ange namn
             </StyledErrorParagraph>
           )}
-
           {errors.guest?.name?.type === "maxLength" && (
             <StyledErrorParagraph role="alert">
               Namn får max vara 150 tecken.
@@ -153,7 +154,6 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
               otillåtna karaktärer).
             </StyledErrorParagraph>
           )}
-
           <StyledInput
             type="email"
             placeholder="E-post:"
@@ -175,7 +175,6 @@ export const UpdateBooking = ({ booking, guestAbleToBook }: IBookingProps) => {
               Felaktigt epost-format.
             </StyledErrorParagraph>
           )}
-
           <StyledInput
             type="tel"
             placeholder="Telefonnummer:"
