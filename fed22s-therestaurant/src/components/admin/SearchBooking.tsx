@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { FindBooking } from "../showSingleBooking/FindBooking";
+import { FindBooking } from "../handleSingleBooking/FindBooking";
 import { ColumnWrapper, RowWrapper } from "../styled/Wrappers";
 import { SearchBookedTimes } from "./SearchBookedTimes";
 import { AdminDispatchContext } from "../../contexts/AdminDispatchContext";
