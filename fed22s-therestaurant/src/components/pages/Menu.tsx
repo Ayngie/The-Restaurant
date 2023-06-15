@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { NormalButton } from "../styled/StyledButtons";
 import {
-  StyledH1,
   StyledMenuParagraph,
   StyledMenuListItem,
   StyledCourseDescription,
+  StyledMenuHeader,
 } from "../styled/TextStyles";
 import { ColumnWrapper, RestaurantMenuWrapper } from "../styled/Wrappers";
 import { useEffect } from "react";
@@ -57,7 +57,7 @@ export const Menu = () => {
   return (
     <StyledSection>
       <ColumnWrapper>
-        <StyledH1>Meny</StyledH1>
+        <StyledMenuHeader>Meny</StyledMenuHeader>
         <StyledMenuParagraph>
           Dessa rätter kombinerar olika smaker och texturer för att skapa en
           varierad och lockande meny för våra gäster. Vi anpassar menyvalet

@@ -2,9 +2,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const StyledH1 = styled.h1`
+  font-size: 2em;
   color: white;
   text-shadow: 2px 2px hotpink;
   text-align: center;
+`;
+export const StyledMenuHeader = styled(StyledH1)`
+  font-size: 4em;
+  margin-bottom: 10px;
 `;
 
 export const StyledParagraph = styled.p`
@@ -42,7 +47,7 @@ export const StyledMenuParagraph = styled(StyledParagraph)`
 export const StyledMenuListItem = styled.li`
   font-size: 1.2em;
   color: hotpink;
-  padding: 5px;
+  padding: 10px;
 `;
 
 export const StyledCourseDescription = styled.span`
