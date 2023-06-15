@@ -25,6 +25,7 @@ export const ChooseTime = ({ getChoosenTime }: IGetChoosenTime) => {
       <RowWrapper>
         <label>Välj tid</label>
         <Select
+          classNamePrefix="dropdown"
           placeholder={"Välj tid"}
           options={options}
           onChange={handleChange}

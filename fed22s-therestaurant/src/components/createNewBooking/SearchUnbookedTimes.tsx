@@ -8,6 +8,7 @@ import { getBookingsByDate } from "../../services/bookingService";
 import { checkBookedTables } from "../../helpers/checkBookedTables";
 import { checkAvailableTables } from "../../helpers/checkAvailableTables";
 import { ChooseTime } from "./ChooseTime";
+import { StyledDropdown } from "../styled/StyledDropdown";
 
 interface ISendBookingProps {
   sendDate(booking: object): void;
@@ -105,12 +106,12 @@ export const SearchUnbookedTimes = ({
           <ShowCalendar getDate={getDate}></ShowCalendar>
         </CalendarWrapper>
         <ColumnWrapper>
-          <RowWrapper>
+          <StyledDropdown>
             <NumberOfGuests
               getNumberOfGuests={getNumberOfGuests}
             ></NumberOfGuests>
             <ChooseTime getChoosenTime={getChoosenTime}></ChooseTime>
-          </RowWrapper>
+          </StyledDropdown>
           {msg}
         </ColumnWrapper>
       </RowWrapper>
