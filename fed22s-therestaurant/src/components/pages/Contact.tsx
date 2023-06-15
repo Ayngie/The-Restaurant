@@ -6,7 +6,12 @@ import {
   StyledImg,
 } from "../styled/Wrappers";
 import { useEffect } from "react";
-import { StyledLink, StyledPageHeader } from "../styled/TextStyles";
+import {
+  StyledLink,
+  StyledPageHeader,
+  StyledParagraph,
+  StyledParagraphNarrow,
+} from "../styled/TextStyles";
 import { StyledSection } from "../styled/StyledSection";
 
 export const Contact = () => {
@@ -18,14 +23,20 @@ export const Contact = () => {
     <StyledSection>
       <ColumnWrapper>
         <StyledPageHeader>Kontakta Restaurangen</StyledPageHeader>
+        <StyledParagraphNarrow>
+          Om du som kund önskar kontakta vår restaurang för att boka bord för
+          större sällskap eller informera oss om eventuella allergier, är du
+          varmt välkommen att ringa eller mejla oss. Vi ser fram emot att höra
+          från dig och vara en del av din gastronomiska resa
+        </StyledParagraphNarrow>
         <RowWrapperStatic>
           <h4>Telefon: </h4>
-          <StyledLink to="tel:+4670123456">+4670123456</StyledLink>
+          <StyledLink to="tel:070123456">070123456</StyledLink>
         </RowWrapperStatic>
         <RowWrapperStatic>
           <h4>Epost: </h4>
-          <StyledLink to="mailto:info@MI.restaurangen.se">
-            info@MI.restaurangen.se
+          <StyledLink to="mailto:info@restaurangen.se">
+            info@restaurangen.se
           </StyledLink>
         </RowWrapperStatic>
         <ImageWrapper>

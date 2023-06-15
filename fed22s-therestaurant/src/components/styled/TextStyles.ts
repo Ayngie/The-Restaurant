@@ -15,6 +15,13 @@ export const StyledParagraph = styled.p`
   text-align: center;
 `;
 
+export const StyledParagraphNarrow = styled(StyledParagraph)`
+  width: 70%;
+  @media screen and (min-width: 1200px) {
+    width: 50%;
+  }
+`;
+
 export const StyledParagraphMobile = styled(StyledParagraph)`
   font-size: 1.5em;
   display: auto;
