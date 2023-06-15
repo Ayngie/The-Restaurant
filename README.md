@@ -28,7 +28,7 @@ Group project building a booking app for a restaurant with frontend & backend.
 ---
 
 ## Screenshot of project:
-![Demonstration of project](./src/assets/Xxx.jpg?raw=true "Restaurant - group project")
+![Demonstration of project](./src/assets/Restaurant.jpg?raw=true "Restaurant - screenshot of group project")
 
 ---
 
