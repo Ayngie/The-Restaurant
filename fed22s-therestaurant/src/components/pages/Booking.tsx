@@ -7,7 +7,7 @@ import { IBooking, defaultBooking } from "../../models/IBooking";
 import { IGuest } from "../../models/IGuest";
 import { createBooking } from "../../services/bookingService";
 import { Loader } from "../styled/Loader";
-import { HandleBooking } from "../showSingleBooking/HandleBooking";
+import { HandleBooking } from "../handleSingleBooking/HandleBooking";
 
 export const Booking = () => {
   const [booking, setBooking] = useState<IBooking>(defaultBooking);
