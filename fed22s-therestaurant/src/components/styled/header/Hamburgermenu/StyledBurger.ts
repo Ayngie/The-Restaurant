@@ -46,7 +46,7 @@ export const StyledBurger = styled.button<IStyledMenuProps>`
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1200px) {
     display: none;
   }
 `;
