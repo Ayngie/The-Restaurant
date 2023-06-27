@@ -6,6 +6,7 @@ import { Burger } from "./HamburgerMenu/Burger";
 import { Menu } from "./HamburgerMenu/Menu";
 import { useState } from "react";
 import { HamburgerMenuWrapper } from "../styled/Wrappers";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
@@ -14,7 +15,9 @@ export const Header = () => {
   return (
     <>
       <StyledHeader>
-        <StyledLogo src={logo} alt="logga" />
+        <Link to="/">
+          <StyledLogo src={logo} alt="logga" />
+        </Link>
         <NavBar></NavBar>
         <HamburgerMenuWrapper>
           <Burger open={open} setOpen={setOpen} aria-controls={menuId}></Burger>
