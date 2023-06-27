@@ -15,7 +15,7 @@ export const Header = () => {
   return (
     <>
       <StyledHeader>
-        <Link to="/">
+        <Link to="/" onClick={() => window.location.reload()}>
           <StyledLogo src={logo} alt="logga" />
         </Link>
         <NavBar></NavBar>
