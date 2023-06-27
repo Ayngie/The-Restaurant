@@ -74,11 +74,19 @@ Install dependencies:
 ```terminal
   npm i
 ```
+
+Create .env file + contents:
+```
+Don't forget to create your own .env file in the root of the fed22s-backend folder, containing:
+
+CONNECTION_STRING = <your mongoDb connection string>
+PORT = 5000
+```
+
 Start back-end server:
 ```terminal
   npm run dev
 ```
-(Don't forget to create your own .env file in the root of the fed22s-backend folder, containing `CONNECTION_STRING = <your mongoDb connection string>`, and you can also add `PORT = 5000`)...
 
 ### Front-end
 Go to front-end directory
